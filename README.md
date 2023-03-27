@@ -47,3 +47,34 @@ const routes = [
 
 ```
 
+To run the project, do the following
+
+If you don't have yarn, install it with `npm install -g yarn`
+
+Then, install Android Studio.
+
+Once you have installed both yarn and Android Studio, run the following commands:
+
+```bash
+git clone git@github.com:LUMS-SE-Project/cs360-frontend.git
+cd cs360-frontend
+yarn install
+```
+
+To run Metro, run the following command:
+
+```bash
+yarn start
+```
+
+To run the app on an emulator, run the following command:
+
+```bash
+yarn android
+```
+
+or 
+
+```bash
+yarn ios
+```
