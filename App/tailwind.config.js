@@ -8,7 +8,12 @@ module.exports = {
         'Questrial' : ['Questrial', 'sans-serif'],
       },
       colors : {
-        'primary' : 'background: linear-gradient(180.11deg, #3D63FF 0.1%, #6B85F1 14.21%)'
+        'CTA-primary' : '#6B85F1',
+        'CTA-secondary' : '#039E00',
+        'CTA-tertiary' : '#9C9C9C',
+        'CTA-additional' : '#F13737'
+
+
       }
     },
   },
