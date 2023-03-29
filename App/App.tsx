@@ -5,30 +5,63 @@
  * @format
  */
 
-import React from 'react';
+import {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   Text,
   View,
+  StatusBar,
+  Platform,
 } from 'react-native';
+import { 
+  Button 
+} from 'react-native-elements';
+import {
+  NavigationContainer
+} from '@react-navigation/native';
+import { 
+  createNativeStackNavigator 
+} from '@react-navigation/native-stack';
+
+import LandingPage from './src/screens/LandingPage';
+import LoginPage from './src/screens/LoginPage';
 
 
+const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
+
+
   return (
-    <SafeAreaView className=''>
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        className=''>
+    <NavigationContainer>
+      
+      <SafeAreaView className='min-h-screen min-w-screen flex justify-center align-middle'>
+        <StatusBar backgroundColor='transparent'/>
 
-        <View className='min-h-screen min-w-screen flex justify-center align-middle bg-CTA-primary'>
-          <Text className='text-4xl font-Montserrat text-center text-white'>Welcome to InGate</Text>
-        </View>
+        <Stack.Navigator initialRouteName='LandingPage'>
+          <Stack.Screen 
+            name="LandingPage" 
+            component={LandingPage}
+            options={{
+              headerShown: false,
+            }}
+            />
 
-      </ScrollView>
-    </SafeAreaView>
+          <Stack.Screen
+            name="LoginPage" 
+            component={LoginPage} 
+            options = {{
+              headerShown: false,
+            }}
+            />
+        </Stack.Navigator>
+      
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
+
+
 
 export default App;
