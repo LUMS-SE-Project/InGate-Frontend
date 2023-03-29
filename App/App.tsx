@@ -5,7 +5,10 @@
  * @format
  */
 
-import {useState} from 'react';
+import {
+  useState,
+  Component
+} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -13,6 +16,8 @@ import {
   View,
   StatusBar,
   Platform,
+  StyleSheet,
+  AppRegistry,
 } from 'react-native';
 import { 
   Button 
@@ -30,15 +35,16 @@ import LoginPage from './src/screens/LoginPage';
 
 const Stack = createNativeStackNavigator();
 
-function App(): JSX.Element {
 
+
+function App(): JSX.Element {
+  
 
   return (
     <NavigationContainer>
+      <SafeAreaView className='bg-[#3D63FF]' />
+      <SafeAreaView className='min-h-screen min-w-screen flex justify-center align-middle bg-white'>
       
-      <SafeAreaView className='min-h-screen min-w-screen flex justify-center align-middle'>
-        <StatusBar backgroundColor='transparent'/>
-
         <Stack.Navigator initialRouteName='LandingPage'>
           <Stack.Screen 
             name="LandingPage" 

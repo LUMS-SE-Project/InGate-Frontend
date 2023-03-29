@@ -13,7 +13,7 @@ module.exports = {
         'CTA-tertiary' : '#9C9C9C',
         'CTA-additional' : '#F13737',
         'main-top' : '#6B85F1',
-        'main-bottom' : '#6B85F1 opacity 75'
+        'main-bottom' : '#6B85F1'
       },
       backgroundImage: {
         'landing' : "url('./assets/images/GradientBackground.svg')",
