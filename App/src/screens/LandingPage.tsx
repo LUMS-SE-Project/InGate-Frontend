@@ -16,8 +16,7 @@ const LandingPage = ({ navigation }) : JSX.Element=> {
 
         <View className='min-h-screen min-w-screen flex justify-center align-center'>
             <ImageBackground source={require("../images/GradientBackground.png")} resizeMode='stretch' className='min-h-screen min-w-screen flex justify-center align-middle' >
-              <Text className='text-8xl font-Montserrat text-center text-white '>InGate</Text>
-
+              <Text className='text-8xl font-Montserrat text-center text-white mt-[-100px]'>InGate</Text>
             </ImageBackground>
         </View>
     
