@@ -22,6 +22,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import LandingPage from './src/screens/LandingPage';
 import LoginPage from './src/screens/LoginPage';
+import SignUp1 from './src/screens/SignUp1';
+import SignUp2 from './src/screens/SignUp2';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,10 +32,24 @@ function App(): JSX.Element {
     <NavigationContainer>
       <SafeAreaView className="bg-[#3D63FF]" />
       <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-        <Stack.Navigator initialRouteName="LandingPage">
+        <Stack.Navigator initialRouteName="SignUpPage">
           <Stack.Screen
             name="LandingPage"
             component={LandingPage}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SignUpPage"
+            component={SignUp1}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SignUpPage2"
+            component={SignUp2}
             options={{
               headerShown: false,
             }}

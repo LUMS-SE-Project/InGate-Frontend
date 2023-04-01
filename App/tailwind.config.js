@@ -7,6 +7,7 @@ module.exports = {
         Montserrat: ['Montserrat', 'sans-serif'],
         Questrial: ['Questrial', 'sans-serif'],
       },
+
       colors: {
         'CTA-primary': '#6B85F1',
         'CTA-secondary': '#039E00',

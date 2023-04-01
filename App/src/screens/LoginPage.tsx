@@ -10,8 +10,8 @@ const LoginPage = () => {
   };
 
   const onPressSubmit = () => {
-    console.log("email:", email);
-    console.log("password:", password);
+    console.log('email:', email);
+    console.log('password:', password);
   };
   return (
     <View className="min-h-screen min-w-screen flex justify-center align-middle">
@@ -56,11 +56,14 @@ const LoginPage = () => {
             </Text>
           </TouchableOpacity>
 
+          <View className="h-10">
+            <></>
+          </View>
           <TouchableOpacity
             onPress={onPressSubmit}
             className="mt-10 shadow-2xl">
             <View
-              className="bg-CTA-primary h-12 mx-28 rounded-2xl mt-20 shadow-2xl"
+              className="bg-CTA-primary h-12 mx-28 rounded-2xl mt-5 shadow-2xl"
               shadow-2xl>
               <Text className="text-xl font-Questrial text-center mt-2 text-white">
                 Login
