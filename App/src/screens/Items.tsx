@@ -9,7 +9,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import KhareedarButton from "../components/KhareedarButton";
-
+import KhareedarDostBottomButtons from "../components/KhareedarDostBottomButtons";
 const ItemsPage = ({ navigation }) => {
   const handleButtonPress = () => {
     console.log("Button pressed");
@@ -44,14 +44,18 @@ const ItemsPage = ({ navigation }) => {
             />
           ))}
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 0, marginTop: 20, position: 'absolute', bottom: 0, width: '100%' }}>
+          {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 0, marginTop: 20, position: 'absolute', bottom: 0, width: '100%' }}>
             <TouchableOpacity onPress={() => console.log('Khareedar button pressed')} style={{ width: '50%', height: 50, backgroundColor: '#6B85F1', borderRadius: 0, alignItems: 'center', justifyContent: 'center' }}>
               <Text style={{ color: 'white', fontSize: 18 }}>Khareedar</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => console.log('Dost button pressed')} style={{ width: '50%', height: 50, backgroundColor: 'white', borderRadius: 0, alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: '#6B85F1', borderLeftWidth: 0 }}>
               <Text style={{ color: '#6B85F1', fontSize: 18 }}>Dost</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
+          <KhareedarDostBottomButtons
+            onKhareedarPress={() => console.log('Khareedar button pressed')}
+            onDostPress={() => console.log('Dost button pressed')}
+          />
         </View>
       </ImageBackground>
     </View>

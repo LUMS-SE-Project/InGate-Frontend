@@ -9,8 +9,8 @@ import {
 const LandingPage = ({ navigation }) : JSX.Element=> {
     
     setTimeout(()=>{
-        navigation.navigate('LoginPage')
-        // navigation.navigate('ItemsPage')
+        // navigation.navigate('LoginPage')
+        navigation.navigate('ItemsPage')
     }, 2000)
 
     return(
