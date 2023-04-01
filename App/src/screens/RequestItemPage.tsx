@@ -61,7 +61,6 @@ const RequestItem = () => {
               </Text>
             </View>
           </TouchableOpacity>
-          <Footer></Footer>
         </View>
       </ImageBackground>
     </View>
