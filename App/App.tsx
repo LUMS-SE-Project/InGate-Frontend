@@ -31,7 +31,7 @@ import {
 
 import LandingPage from './src/screens/LandingPage';
 import LoginPage from './src/screens/LoginPage';
-
+import ItemsPage from './src/screens/Items';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +57,14 @@ function App(): JSX.Element {
           <Stack.Screen
             name="LoginPage" 
             component={LoginPage} 
+            options = {{
+              headerShown: false,
+            }}
+            />
+
+          <Stack.Screen
+            name="ItemsPage" 
+            component={ItemsPage} 
             options = {{
               headerShown: false,
             }}

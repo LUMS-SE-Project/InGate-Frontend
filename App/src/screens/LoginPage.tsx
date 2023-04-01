@@ -5,7 +5,7 @@ import {
     View,
     ImageBackground,
 } from "react-native";
-
+import PrimaryCTA from "../components/PrimaryCTA";
 
 const LoginPage = () => {
     return (
@@ -15,7 +15,7 @@ const LoginPage = () => {
                     Login
                 </Text>
                 <View className="h-4/5 bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
-
+                <PrimaryCTA />
 
                 </View>
             </ImageBackground>
