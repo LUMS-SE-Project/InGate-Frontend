@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {SafeAreaView, Text, View, ImageBackground} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native';
-import Footer from '../components/Footer';
-
+import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 const RequestItem = () => {
   const [itemName, setItemName] = useState('');
   const [location, setLocation] = useState('');
@@ -54,7 +53,7 @@ const RequestItem = () => {
             onPress={onPressSubmit}
             className="mt-10 shadow-2xl">
             <View
-              className="bg-CTA-secondary h-12 mx-28 rounded-2xl mt-5 shadow-2xl"
+              className="h-12 mx-28 rounded-2xl mt-5 shadow-2xl"
               shadow-2xl>
               <Text className="text-xl font-Questrial text-center mt-2 text-white">
                 Request Item
@@ -62,6 +61,10 @@ const RequestItem = () => {
             </View>
           </TouchableOpacity>
         </View>
+        <KhareedarDostBottomButtons
+            onKhareedarPress={() => console.log('Khareedar button pressed')}
+            onDostPress={() => console.log('Dost button pressed')}
+          />
       </ImageBackground>
     </View>
   );
