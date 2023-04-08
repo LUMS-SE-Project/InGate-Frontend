@@ -8,9 +8,9 @@ const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}) => {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 0,
-        marginTop: 20,
-        position: 'absolute',
         bottom: 0,
+        left: 0,
+        right: 0,
         width: '100%',
       }}>
       <TouchableOpacity

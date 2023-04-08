@@ -1,6 +1,17 @@
 import React, {useState} from 'react';
 import {SafeAreaView, Text, View, ImageBackground} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faLock,
+  faAirFreshener,
+  faAnchor,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faAdobe,
+  faApple,
+  faMicrosoft,
+} from '@fortawesome/free-brands-svg-icons';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -39,6 +50,7 @@ const LoginPage = () => {
             <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-9 mb-2">
               Password
             </Text>
+            {/* <FontAwesomeIcon icon={faLock} size={40} color={'blue'} /> */}
             <TextInput
               secureTextEntry={true}
               className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12 "
