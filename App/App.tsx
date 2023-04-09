@@ -1,23 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import {SafeAreaView} from 'react-native';
 
-import {useState, Component} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-  StatusBar,
-  Platform,
-  StyleSheet,
-  AppRegistry,
-} from 'react-native';
-
-import {Button} from 'react-native-elements';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -29,7 +11,7 @@ import KhareedarOrderDetails1 from './src/screens/KhareedarOrderDetails1';
 import KhareedarOrderDetails2 from './src/screens/KhareedarOrderDetails2';
 import RequestItem from './src/screens/RequestItemPage';
 import ItemsPage from './src/screens/Items';
-import PartialOrder from './src/screens/PartialOrder';
+// import PartialOrder from './src/screens/PartialOrder';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,7 +20,7 @@ function App(): JSX.Element {
     <NavigationContainer>
       <SafeAreaView className="bg-[#3D63FF]" />
       <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-        <Stack.Navigator initialRouteName="SignUpPage">
+        <Stack.Navigator initialRouteName="LoginPage">
           <Stack.Screen
             name="LandingPage"
             component={LandingPage}
