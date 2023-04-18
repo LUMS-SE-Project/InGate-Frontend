@@ -2,16 +2,29 @@ import React, {useState} from 'react';
 import {SafeAreaView, Text, View, ImageBackground} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native';
 
+import instance from '../api/api';
+
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   const onPressForgotPassword = () => {
     console.log('forgot password');
   };
 
   const onPressSubmit = () => {
-    console.log('email:', email);
+    console.log('username:', username);
     console.log('password:', password);
+
+    instance.post('/user/login', {
+      username: username,
+      password: password,
+    }).then(response => {
+      console.log(response.data);
+    }).catch(error => {
+      console.log(error);
+    })
+
   };
   return (
     <View className="min-h-screen min-w-screen flex justify-center align-middle">
@@ -31,14 +44,15 @@ const LoginPage = () => {
               keyboardType="email-address"
               className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12 placeholder-slate-900"
               placeholder="Enter your Email Address"
-              value={email}
-              onChangeText={inputEmail => setEmail(inputEmail)}
+              value={username}
+              onChangeText={inputEmail => setUsername(inputEmail)}
             />
           </View>
           <View>
             <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-9 mb-2">
               Password
             </Text>
+            {/* <FontAwesomeIcon icon={faLock} size={40} color={'blue'} /> */}
             <TextInput
               secureTextEntry={true}
               className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12 "

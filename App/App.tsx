@@ -1,23 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import {SafeAreaView} from 'react-native';
 
-import {useState, Component} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-  StatusBar,
-  Platform,
-  StyleSheet,
-  AppRegistry,
-} from 'react-native';
-
-import {Button} from 'react-native-elements';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -25,16 +7,20 @@ import LandingPage from './src/screens/LandingPage';
 import LoginPage from './src/screens/LoginPage';
 import SignUp1 from './src/screens/SignUp1';
 import SignUp2 from './src/screens/SignUp2';
-
+import KhareedarOrderDetails1 from './src/screens/KhareedarOrderDetails1';
+import KhareedarOrderDetails2 from './src/screens/KhareedarOrderDetails2';
 import RequestItem from './src/screens/RequestItemPage';
 import ItemsPage from './src/screens/Items';
-import PartialOrder from './src/screens/PartialOrder';
+
+// import PartialOrder from './src/screens/PartialOrder';
 import DostFeedback from './src/screens/DostFeedback';
 import KhareedarFeedback from './src/screens/KhareedarFeedback';
 import OrderPlaced from './src/screens/OrderPlaced';
 import AdminPortal from './src/screens/AdminPortal';
 import InvalidAccess from './src/screens/InvalidAccess';
 import SignUpSuccessful from './src/screens/SignUpSuccess';
+
+// import PartialOrder from './src/screens/PartialOrder';
 
 const Stack = createNativeStackNavigator();
 
@@ -91,8 +77,8 @@ function App(): JSX.Element {
           />
 
           <Stack.Screen
-            name="PartialOrder"
-            component={PartialOrder}
+            name="KhareedarOrderDetails1"
+            component={KhareedarOrderDetails1}
             options={{
               headerShown: false,
             }}
@@ -109,6 +95,22 @@ function App(): JSX.Element {
           <Stack.Screen
             name="KhareedarFeedback"
             component={KhareedarFeedback}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          {/* <Stack.Screen
+            name="PartialOrder"
+            component={PartialOrder}
+            options={{
+              headerShown: false,
+            }}
+          /> */}
+
+          <Stack.Screen
+            name="KhareedarOrderDetails2"
+            component={KhareedarOrderDetails2}
             options={{
               headerShown: false,
             }}
@@ -143,7 +145,6 @@ function App(): JSX.Element {
               headerShown: false,
             }}
           />
-
         </Stack.Navigator>
       </SafeAreaView>
     </NavigationContainer>

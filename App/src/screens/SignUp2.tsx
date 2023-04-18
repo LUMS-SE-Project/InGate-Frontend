@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {SafeAreaView, Text, View, ImageBackground} from 'react-native';
 import {TextInput, TouchableOpacity, ScrollView} from 'react-native';
-import ImagePicker from 'react-native-image-picker';
 
 const SignUp2 = () => {
   const [rollNumber, setrollNumber] = useState('');
