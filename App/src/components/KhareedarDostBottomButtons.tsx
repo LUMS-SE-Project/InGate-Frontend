@@ -1,5 +1,20 @@
 import React from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {
+  faLock,
+  faAirFreshener,
+  faAnchor,
+  faSolid,
+  faCircleXmark,
+  faSharp,
+  fas,
+  faCircle,
+  faCartShopping,
+  faCircleUser,
+  faLight,
+  faMagnifyingGlass,
+} from '@fortawesome/free-solid-svg-icons';
 
 const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}) => {
   return (

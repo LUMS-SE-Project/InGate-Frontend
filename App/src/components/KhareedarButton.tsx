@@ -14,6 +14,7 @@ const KhareedarButton = ({onPress, name, typeAndMoney}) => {
         alignItems: 'flex-start',
         marginHorizontal: '5%',
         marginBottom: 10,
+        marginTop: 15,
       }}>
       <Text style={{fontSize: 24, paddingLeft: 10, paddingTop: 20}}>
         {name}
