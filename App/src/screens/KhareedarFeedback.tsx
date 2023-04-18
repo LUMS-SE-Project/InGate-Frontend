@@ -110,7 +110,7 @@ const KhareedarFeedback = () => {
                 <View
                   style={{
                     width: '100%',
-                    backgroundColor: blockDeets == '' ? '#039E00' : '#9C9C9C',
+                    backgroundColor: blockDeets == '' ? '#6B85F1' : '#9C9C9C',
                   }}
                   className="h-12 mx-9 rounded-2xl mt-5 shadow-2xl px-4"
                   shadow-2xl>
