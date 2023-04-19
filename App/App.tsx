@@ -36,7 +36,7 @@ function App(): JSX.Element {
     <NavigationContainer>
       <SafeAreaView className="bg-[#3D63FF]" />
       <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-        <Stack.Navigator initialRouteName="DostOrders2">
+        <Stack.Navigator initialRouteName="KhareedarOrderDetails2">
           <Stack.Screen
             name="LandingPage"
             component={LandingPage}

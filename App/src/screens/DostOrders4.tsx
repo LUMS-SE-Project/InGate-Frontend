@@ -131,9 +131,7 @@ const DostOrders4 = () => {
                                     </View>
                                 </View>
                             </View>
-                        )
-
-                    })}
+                        )})}
               </View>
             )
           })}            
