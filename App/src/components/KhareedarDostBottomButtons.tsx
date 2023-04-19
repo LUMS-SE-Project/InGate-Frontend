@@ -1,9 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBagShopping, faMotorcycle} from '@fortawesome/free-solid-svg-icons';
+import { act } from 'react-test-renderer';
 
-const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}) => {
+
+const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}:any) => {
+
+  const [khareedarColour, setKhareedarColour] = useState('white')
+  const [dostColour, setDostColour] = useState('#6B85F1')
+  
+  const activateKhareedar = () => {
+    onKhareedarPress()
+    setKhareedarColour('white')
+    setDostColour('#6B85F1')
+  };
+  const activateDost = () => {
+    onDostPress()
+    setDostColour('white')
+    setKhareedarColour('#6B85F1')
+  };
   return (
     <View
       style={{
@@ -18,11 +34,11 @@ const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}) => {
       
 
       <TouchableOpacity
-        onPress={onDostPress}
+        onPress={activateDost}
         style={{
           width: '50%',
           height: 50,
-          backgroundColor: '#6B85F1',
+          backgroundColor: dostColour,
           borderRadius: 0,
           borderWidth: 1,
           borderColor: '#6B85F1',
@@ -33,17 +49,17 @@ const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}) => {
         }}>
         <View className="flex-row">
           <View className="mt-3 px-1">
-            <FontAwesomeIcon icon={faMotorcycle} size={27} color={'white'} />
+            <FontAwesomeIcon icon={faMotorcycle} size={27} color={khareedarColour} />
           </View>
-          <Text className="color-white text-2xl m-2">Dost</Text>
+          <Text style={{color:khareedarColour}} className="text-2xl m-2">Dost</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={onKhareedarPress}
+        onPress={activateKhareedar}
         style={{
           width: '50%',
           height: 50,
-          backgroundColor: 'white',
+          backgroundColor: khareedarColour,
           borderRadius: 0,
           borderWidth: 1,
           alignItems: 'center',
@@ -52,9 +68,9 @@ const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}) => {
         }}>
         <View className="flex-row">
           <View className="mt-3 px-1">
-            <FontAwesomeIcon icon={faBagShopping} size={27} color={'#6B85F1'} />
+            <FontAwesomeIcon icon={faBagShopping} size={27} color={dostColour} />
           </View>
-          <Text className="color-CTA-primary text-2xl m-2">Khareedar</Text>
+          <Text style={{color: dostColour}}className="text-2xl m-2">Khareedar</Text>
         </View>
       </TouchableOpacity>
     </View>

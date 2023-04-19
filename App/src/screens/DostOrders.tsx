@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -32,6 +32,8 @@ import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons
 // import Bar from '../components/ProgressBar';
 
 const DostOrdersPage = ({navigation}) => {
+
+  const [colourChange, setColourChange] = useState(true) 
   const handleButtonPress = () => {
     console.log('Button pressed');
   };

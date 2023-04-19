@@ -11,6 +11,8 @@ import KhareedarOrderDetails1 from './src/screens/KhareedarOrderDetails1';
 import KhareedarOrderDetails2 from './src/screens/KhareedarOrderDetails2';
 import RequestItem from './src/screens/RequestItemPage';
 import ItemsPage from './src/screens/Items';
+import AdminAccountActivation from './src/screens/AdminAccountActivation';
+import AdminBlockAccount from './src/screens/AdminBlockAccount';
 
 // import PartialOrder from './src/screens/PartialOrder';
 import DostFeedback from './src/screens/DostFeedback';
@@ -19,6 +21,8 @@ import OrderPlaced from './src/screens/OrderPlaced';
 import AdminPortal from './src/screens/AdminPortal';
 import InvalidAccess from './src/screens/InvalidAccess';
 import SignUpSuccessful from './src/screens/SignUpSuccess';
+import DostOrdersPage from './src/screens/DostOrders';
+import AdminItemRequest from './src/screens/AdminItemRequest';
 
 // import PartialOrder from './src/screens/PartialOrder';
 
@@ -29,7 +33,7 @@ function App(): JSX.Element {
     <NavigationContainer>
       <SafeAreaView className="bg-[#3D63FF]" />
       <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-        <Stack.Navigator initialRouteName="SignUpPage">
+        <Stack.Navigator initialRouteName="AdminItemRequest">
           <Stack.Screen
             name="LandingPage"
             component={LandingPage}
@@ -99,6 +103,27 @@ function App(): JSX.Element {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="AdminAccountActivation"
+            component={AdminAccountActivation}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="AdminItemRequest"
+            component={AdminItemRequest}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="AdminBlockAccount"
+            component={AdminBlockAccount}
+            options={{
+              headerShown: false,
+            }}
+          />
 
           {/* <Stack.Screen
             name="PartialOrder"
@@ -141,6 +166,13 @@ function App(): JSX.Element {
           <Stack.Screen
             name="SignUpSuccessful"
             component={SignUpSuccessful}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="DostOrdersPage"
+            component={DostOrdersPage}
             options={{
               headerShown: false,
             }}
