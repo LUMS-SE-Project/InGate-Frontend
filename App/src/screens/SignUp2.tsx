@@ -2,13 +2,21 @@ import React, {useState} from 'react';
 import {SafeAreaView, Text, View, ImageBackground} from 'react-native';
 import {TextInput, TouchableOpacity, ScrollView} from 'react-native';
 
-const SignUp2 = () => {
-  const [rollNumber, setrollNumber] = useState('');
-  const [email, setEmail] = useState('');
+export interface SignUp2Props {
+  rollNumber: string;
+  image : string,
+  setrollNumber: (rollNumber: string) => void;
+  setImage: (image: string) => void;
+  setPage: (page: number) => void;
+}
+
+
+const SignUp2 = (props : SignUp2Props) => {
+
+  const { rollNumber, image, setrollNumber, setImage, setPage } = props;
 
   const onPressNext = () => {
-    console.log('email:', email);
-    console.log('password:', password);
+    setPage(1);
   };
   return (
     <ScrollView
@@ -33,21 +41,21 @@ const SignUp2 = () => {
                 className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12 placeholder-slate-900"
                 placeholder="Enter your roll number"
                 value={rollNumber}
-                onChangeText={inputRollnumber => setrollNumber(inputROllnumber)}
+                onChangeText={inputRollnumber => setrollNumber(inputRollnumber)}
               />
             </View>
 
             {/* Input box for Smart Card */}
             <View>
               <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-6 mb-2">
-                Email
+                Your Smart Card
               </Text>
               <TextInput
                 keyboardType="email-address"
                 className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12"
                 placeholder="Enter your Email Address"
-                value={email}
-                onChangeText={inputEmail => setEmail(inputEmail)}
+                value={image}
+                onChangeText={inputImage => setImage(inputImage)}
               />
             </View>
 

@@ -1,0 +1,45 @@
+import {useState, useEffect} from 'react';
+
+import SignUp1 from './SignUp1';
+import SignUp2 from './SignUp2';
+
+export default function SignUpPage(): JSX.Element {
+  const [page, setPage] = useState(1);
+
+    //   page 1 props
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
+
+// page 2 props
+    const [rollNumber, setrollNumber] = useState('');
+    const [image, setImage] = useState('');
+
+    useEffect(()=>{
+        console.log(`Information from page ${page}: ${name} ${email} ${password} ${rePassword}`)
+        console.log(`Information from page ${page}: ${rollNumber} ${image}`) 
+    }, [page])
+
+  return page === 1 ? (
+    <SignUp1
+      setPage={setPage}
+      name={name}
+      email={email}
+      password={password}
+      rePassword={rePassword}
+      setName={setName}
+      setEmail={setEmail}
+      setPassword={setPassword}
+      setRePassword={setRePassword}
+    />
+  ) : (
+    <SignUp2 
+        setPage={setPage}
+        rollNumber={rollNumber}
+        image={image}
+        setrollNumber={setrollNumber}
+        setImage={setImage}
+    />
+  );
+}

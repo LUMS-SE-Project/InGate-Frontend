@@ -19,6 +19,7 @@ import OrderPlaced from './src/screens/OrderPlaced';
 import AdminPortal from './src/screens/AdminPortal';
 import InvalidAccess from './src/screens/InvalidAccess';
 import SignUpSuccessful from './src/screens/SignUpSuccess';
+import SignUpPage from './src/screens/SignUpPage';
 
 
 import {AuthContext, AuthProvider} from './src/context/AuthContext';
@@ -41,7 +42,7 @@ function App(): JSX.Element {
             />
             <Stack.Screen
               name="SignUpPage"
-              component={SignUp1}
+              component={SignUpPage}
               options={{
                 headerShown: false,
               }}
