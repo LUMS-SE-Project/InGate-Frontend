@@ -36,7 +36,7 @@ const KhareedarFeedback = () => {
             Khareedar Feedback
           </Text>
 
-          <View className="h-auto bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
+          <View className="h-auto rounded-tr-3xl rounded-tl-3xl w-max bg-white">
             <View>
               <Text className="text-2xl font-Questrial text-CTA-primary pl-8 mt-10 mb-2">
                 Khareedar Details
@@ -65,9 +65,8 @@ const KhareedarFeedback = () => {
                   placeholder="Enter your roll number"
                   multiline
                   value={blockDeets}
-                  onChangeText={blockDeets =>
-                    setBlockDeets(blockDeets)
-                  }></TextInput>
+                  onChangeText={blockDeets => setBlockDeets(blockDeets)}
+                />
               </View>
             </View>
 
@@ -82,9 +81,8 @@ const KhareedarFeedback = () => {
                   placeholder="Enter your roll number"
                   multiline
                   value={addComments}
-                  onChangeText={addComments =>
-                    setAddComments(addComments)
-                  }></TextInput>
+                  onChangeText={addComments => setAddComments(addComments)}
+                />
               </View>
             </View>
             <View style={{flexDirection: 'row'}}>
