@@ -15,6 +15,8 @@ export interface contextInterface {
   user : User,
   loading : boolean,
   setLoading : (loading : boolean) => void;
+  setUser : (user : User) => void;
+  setToken : (token : string | null) => void;
 }
 
 export const AuthContext = createContext<contextInterface>({
@@ -27,7 +29,9 @@ export const AuthContext = createContext<contextInterface>({
     isAdmin : false,
   },
   loading: true,
-  setLoading: (loading : boolean) => {}
+  setLoading: (loading : boolean) => {},
+  setUser: (user : User) => {},
+  setToken: (token : string | null) => {},
 });
 
 export interface AuthProviderProps {
@@ -54,16 +58,30 @@ export const AuthProvider = (props : AuthProviderProps) => {
       token,
       user,
       loading,
-      setLoading
+      setLoading,
+      setUser, 
+      setToken
     };
   }, [isAuthenticated, token, user, loading]);
 
   useEffect(() => {
     const checkAuth = async () => {
       const token = await AsyncStorage.getItem('token');
+      const username = await AsyncStorage.getItem('username');
+      const name = await AsyncStorage.getItem('name');
+      const email = await AsyncStorage.getItem('email');
+      const isAdmin = await AsyncStorage.getItem('isAdmin');
       if (token) {
         setToken(token);
         setIsAuthenticated(true);
+      }
+      if (username && name && email && isAdmin) {
+        setUser({
+          username,
+          name,
+          email,
+          isAdmin : isAdmin === 'true' ? true : false,
+        });
       }
     }
     checkAuth();
@@ -84,7 +102,6 @@ export const AuthProvider = (props : AuthProviderProps) => {
     }
 
   }, [])
-
 
   return (
     <AuthContext.Provider value={ProviderValue}>

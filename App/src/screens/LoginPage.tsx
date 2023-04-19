@@ -8,18 +8,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import instance from '../api/api';
 
 const LoginPage = () => {
-  const [token, setToken] = useState<string | null>(null);
-  const [user, setUser] = useState<{
-    username: string;
-    name: string;
-    email: string;
-    isAdmin: boolean;
-  }>({
-    username: '',
-    name: '',
-    email: '',
-    isAdmin: false,
-  });
+
+  const {setToken, setUser} = useContext(AuthContext);
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
