@@ -13,6 +13,7 @@ const KhareedarButton = ({onPress, name, typeAndMoney}) => {
         justifyContent: 'center',
         alignItems: 'flex-start',
         marginHorizontal: '5%',
+        marginVertical: '5%',
         marginBottom: 10,
       }}>
       <Text style={{fontSize: 24, paddingLeft: 10, paddingTop: 20}}>
