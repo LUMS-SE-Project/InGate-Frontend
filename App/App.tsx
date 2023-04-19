@@ -20,69 +20,71 @@ import AdminPortal from './src/screens/AdminPortal';
 import InvalidAccess from './src/screens/InvalidAccess';
 import SignUpSuccessful from './src/screens/SignUpSuccess';
 
-// import PartialOrder from './src/screens/PartialOrder';
+
+import {AuthContext, AuthProvider} from './src/context/AuthContext';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <SafeAreaView className="bg-[#3D63FF]" />
-      <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-        <Stack.Navigator initialRouteName="SignUpPage">
-          <Stack.Screen
-            name="LandingPage"
-            component={LandingPage}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="SignUpPage"
-            component={SignUp1}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="SignUpPage2"
-            component={SignUp2}
-            options={{
-              headerShown: false,
-            }}
-          />
+    <AuthProvider>
+      <NavigationContainer>
+        <SafeAreaView className="bg-[#3D63FF]" />
+        <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
+          <Stack.Navigator initialRouteName="SignUpPage">
+            <Stack.Screen
+              name="LandingPage"
+              component={LandingPage}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="SignUpPage"
+              component={SignUp1}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="SignUpPage2"
+              component={SignUp2}
+              options={{
+                headerShown: false,
+              }}
+            />
 
-          <Stack.Screen
-            name="LoginPage"
-            component={LoginPage}
-            options={{
-              headerShown: false,
-            }}
-          />
+            <Stack.Screen
+              name="LoginPage"
+              component={LoginPage}
+              options={{
+                headerShown: false,
+              }}
+            />
 
-          <Stack.Screen
-            name="RequestItem"
-            component={RequestItem}
-            options={{
-              headerShown: false,
-            }}
-          />
+            <Stack.Screen
+              name="RequestItem"
+              component={RequestItem}
+              options={{
+                headerShown: false,
+              }}
+            />
 
-          <Stack.Screen
-            name="ItemsPage"
-            component={ItemsPage}
-            options={{
-              headerShown: false,
-            }}
-          />
+            <Stack.Screen
+              name="ItemsPage"
+              component={ItemsPage}
+              options={{
+                headerShown: false,
+              }}
+            />
 
-          <Stack.Screen
-            name="KhareedarOrderDetails1"
-            component={KhareedarOrderDetails1}
-            options={{
-              headerShown: false,
-            }}
-          />
+            <Stack.Screen
+              name="KhareedarOrderDetails1"
+              component={KhareedarOrderDetails1}
+              options={{
+                headerShown: false,
+              }}
+            />
 
           <Stack.Screen
             name="DostFeedback"
@@ -100,22 +102,22 @@ function App(): JSX.Element {
             }}
           />
 
-          {/* <Stack.Screen
-            name="PartialOrder"
-            component={PartialOrder}
-            options={{
-              headerShown: false,
-            }}
-          /> */}
+            {/* <Stack.Screen
+              name="PartialOrder"
+              component={PartialOrder}
+              options={{
+                headerShown: false,
+              }}
+            /> */}
 
-          <Stack.Screen
-            name="KhareedarOrderDetails2"
-            component={KhareedarOrderDetails2}
-            options={{
-              headerShown: false,
-            }}
-          />
-
+            <Stack.Screen
+              name="KhareedarOrderDetails2"
+              component={KhareedarOrderDetails2}
+              options={{
+                headerShown: false,
+              }}
+            />
+  
           <Stack.Screen
             name="OrderPlaced"
             component={OrderPlaced}
@@ -146,8 +148,9 @@ function App(): JSX.Element {
             }}
           />
         </Stack.Navigator>
-      </SafeAreaView>
-    </NavigationContainer>
+        </SafeAreaView>
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 

@@ -1,10 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {SafeAreaView, Text, View, ImageBackground} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native';
+import {AuthContext} from '../context/AuthContext';
+import Axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import instance from '../api/api';
 
 const LoginPage = () => {
+
+  const {setToken, setUser} = useContext(AuthContext);
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -13,18 +19,40 @@ const LoginPage = () => {
   };
 
   const onPressSubmit = () => {
-    console.log('username:', username);
-    console.log('password:', password);
-
-    instance.post('/user/login', {
-      username: username,
-      password: password,
-    }).then(response => {
-      console.log(response.data);
-    }).catch(error => {
-      console.log(error);
+    // create form data to send to the server
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    formData.append('grant_type', 'password');
+    Axios({
+      method: 'post',
+      url: 'http://localhost:8000/login',
+      data: formData,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
     })
+      .then(async res => {
+        // store token in local storage
+        await AsyncStorage.setItem('token', res.data.access_token);
+        await AsyncStorage.setItem('username', res.data.username);
+        await AsyncStorage.setItem('name', res.data.name);
+        await AsyncStorage.setItem('email', res.data.email);
+        await AsyncStorage.setItem('isAdmin', res.data.isAdmin.toString());
 
+        // set token in context
+        setToken(res.data.access_token);
+        // set user in context
+        setUser({
+          username: res.data.username,
+          name: res.data.name,
+          email: res.data.email,
+          isAdmin: res.data.isAdmin,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   return (
     <View className="min-h-screen min-w-screen flex justify-center align-middle">
