@@ -12,6 +12,15 @@ import KhareedarOrderDetails2 from './src/screens/KhareedarOrderDetails2';
 import RequestItem from './src/screens/RequestItemPage';
 import ItemsPage from './src/screens/Items';
 
+// import PartialOrder from './src/screens/PartialOrder';
+import DostFeedback from './src/screens/DostFeedback';
+import KhareedarFeedback from './src/screens/KhareedarFeedback';
+import OrderPlaced from './src/screens/OrderPlaced';
+import AdminPortal from './src/screens/AdminPortal';
+import InvalidAccess from './src/screens/InvalidAccess';
+import SignUpSuccessful from './src/screens/SignUpSuccess';
+
+
 import {AuthContext, AuthProvider} from './src/context/AuthContext';
 
 const Stack = createNativeStackNavigator();
@@ -22,7 +31,7 @@ function App(): JSX.Element {
       <NavigationContainer>
         <SafeAreaView className="bg-[#3D63FF]" />
         <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-          <Stack.Navigator initialRouteName="LoginPage">
+          <Stack.Navigator initialRouteName="SignUpPage">
             <Stack.Screen
               name="LandingPage"
               component={LandingPage}
@@ -77,6 +86,22 @@ function App(): JSX.Element {
               }}
             />
 
+          <Stack.Screen
+            name="DostFeedback"
+            component={DostFeedback}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="KhareedarFeedback"
+            component={KhareedarFeedback}
+            options={{
+              headerShown: false,
+            }}
+          />
+
             {/* <Stack.Screen
               name="PartialOrder"
               component={PartialOrder}
@@ -92,7 +117,37 @@ function App(): JSX.Element {
                 headerShown: false,
               }}
             />
-          </Stack.Navigator>
+  
+          <Stack.Screen
+            name="OrderPlaced"
+            component={OrderPlaced}
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          <Stack.Screen
+            name="AdminPortal"
+            component={AdminPortal}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="InvalidAccess"
+            component={InvalidAccess}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="SignUpSuccessful"
+            component={SignUpSuccessful}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
         </SafeAreaView>
       </NavigationContainer>
     </AuthProvider>

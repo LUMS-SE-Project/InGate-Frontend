@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Text, View, ImageBackground} from 'react-native';
+import {
+  SafeAreaView,
+  Text,
+  View,
+  ImageBackground,
+  KeyboardAvoidingView,
+} from 'react-native';
 import {TextInput, TouchableOpacity, ScrollView} from 'react-native';
 
 const SignUp1 = () => {
@@ -13,20 +19,18 @@ const SignUp1 = () => {
     console.log('password:', password);
   };
   return (
-    <ScrollView
-      style={{flex: 1}}
-      showsVerticalScrollIndicator={true} // add this prop
-    >
-      <View className="min-h-screen min-w-screen flex justify-center align-middle">
-        <ImageBackground
-          source={require('../images/GradientBackground.png')}
-          resizeMode="stretch"
-          className="min-h-screen min-w-screen flex justify-center align-middle">
-          <Text className="text-5xl font-Montserrat text-center text-white pb-8 pt-8">
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flex: 1}}>
+      <ScrollView
+        style={{flex: 1}}
+        showsVerticalScrollIndicator={true} // add this prop
+      >
+        <View className=" flex justify-center align-middle bg-CTA-primary">
+          <Text className="text-5xl font-Montserrat text-center text-white mt-3 pb-8 pt-8">
             Sign Up
           </Text>
-          <View className="h-4/5 bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
-            {/* Input box for Name */}
+          <View className="h-auto mt-2 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
             <View>
               <Text className="text-2xl font-Questrial  text-CTA-primary pt-3 pl-8 mt-8 mb-2">
                 Name
@@ -86,17 +90,20 @@ const SignUp1 = () => {
             {/* button for password going to the next page*/}
             <TouchableOpacity onPress={onPressNext} className=" shadow-2xl">
               <View
-                className="bg-CTA-primary h-12 mx-28 rounded-2xl mt-5 shadow-2xl"
+                className="bg-CTA-primary h-12 mx-28 rounded-2xl mt-5 shadow-2xl mb-10"
                 shadow-2xl>
                 <Text className="text-xl font-Questrial text-center mt-2 text-white">
                   Next
                 </Text>
               </View>
             </TouchableOpacity>
+            <View className="p-16">
+              <></>
+            </View>
           </View>
-        </ImageBackground>
-      </View>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
