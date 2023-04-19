@@ -23,12 +23,6 @@ const AdminItemRequest = () => {
   const data:any =[
     {name:'sarim', email:"blabla@bla.com", ItemName:"Biscuits", location:"Nothing"},
     {name:'sarim', email:"blabla@bla.com", ItemName:"Biscuits", location:"MY NAME IS SARIM AND I LIKE TO PARTY"},
-    // {name:'sarim', email:"blabla@bla.com", ItemName:"Biscuits", location:"MY NAME IS SARIM AND I LIKE TO PARTY"},
-    // {name:'sarim', email:"blabla@bla.com", ItemName:"Biscuits", location:"MY NAME IS SARIM AND I LIKE TO PARTY"},
-    // {name:'sarim', email:"blabla@bla.com", ItemName:"Biscuits", location:"MY NAME IS SARIM AND I LIKE TO PARTY"},
-    // {name:'sarim', email:"blabla@bla.com", ItemName:"Biscuits", location:"MY NAME IS SARIM AND I LIKE TO PARTY"},
-    // {name:'sarim', email:"blabla@bla.com", ItemName:"Biscuits", location:"MY NAME IS SARIM AND I LIKE TO PARTY"},
-    
   ]
 
   const onPressSubmit = () => {

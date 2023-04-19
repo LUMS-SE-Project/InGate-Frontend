@@ -23,6 +23,9 @@ import InvalidAccess from './src/screens/InvalidAccess';
 import SignUpSuccessful from './src/screens/SignUpSuccess';
 import DostOrdersPage from './src/screens/DostOrders';
 import AdminItemRequest from './src/screens/AdminItemRequest';
+import DostOrders2 from './src/screens/DostOrders2';
+import DostOrders3 from './src/screens/DostOrders3';
+import DostOrders4 from './src/screens/DostOrders4';
 
 // import PartialOrder from './src/screens/PartialOrder';
 
@@ -33,7 +36,7 @@ function App(): JSX.Element {
     <NavigationContainer>
       <SafeAreaView className="bg-[#3D63FF]" />
       <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-        <Stack.Navigator initialRouteName="AdminItemRequest">
+        <Stack.Navigator initialRouteName="DostOrders2">
           <Stack.Screen
             name="LandingPage"
             component={LandingPage}
@@ -136,6 +139,27 @@ function App(): JSX.Element {
           <Stack.Screen
             name="KhareedarOrderDetails2"
             component={KhareedarOrderDetails2}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="DostOrders2"
+            component={DostOrders2}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="DostOrders3"
+            component={DostOrders3}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="DostOrders4"
+            component={DostOrders4}
             options={{
               headerShown: false,
             }}
