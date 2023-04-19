@@ -29,7 +29,7 @@ function App(): JSX.Element {
     <NavigationContainer>
       <SafeAreaView className="bg-[#3D63FF]" />
       <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-        <Stack.Navigator initialRouteName="ItemsPage">
+        <Stack.Navigator initialRouteName="SignUpPage">
           <Stack.Screen
             name="LandingPage"
             component={LandingPage}

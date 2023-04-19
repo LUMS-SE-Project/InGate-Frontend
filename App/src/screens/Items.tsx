@@ -13,15 +13,6 @@ import {
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
-  faLock,
-  faAirFreshener,
-  faAnchor,
-  faSolid,
-  faCircleXmark,
-  faSharp,
-  fas,
-  faCircle,
-  faCartShopping,
   faCircleUser,
   faLight,
   faMagnifyingGlass,
