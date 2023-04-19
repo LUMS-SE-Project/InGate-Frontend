@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import ImagePicker from 'react-native-image-picker';
 import {SafeAreaView, Text, View, ImageBackground} from 'react-native';
 import {TextInput, TouchableOpacity, ScrollView} from 'react-native';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 const SignUp2 = () => {
   const [rollNumber, setrollNumber] = useState('');
@@ -51,9 +53,21 @@ const SignUp2 = () => {
               />
             </View>
 
-            <View className="h-10">
-              <></>
-            </View>
+            <TouchableOpacity
+              onPress={() => {
+                ImagePickerIOS.launchImageLibrary(
+                  {
+                    mediaType: 'photo',
+                    includeBase64: false,
+                    maxHeight: 200,
+                    maxWidth: 200,
+                  },
+                  response => {
+                    console.log(response.assets[0].uri);
+                    this.setState({resourcePath: response.assets[0].uri});
+                  },
+                );
+              }}></TouchableOpacity>
             {/* button for password going to the next page*/}
             <TouchableOpacity onPress={onPressNext} className=" shadow-2xl">
               <View

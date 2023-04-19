@@ -19,6 +19,7 @@ import OrderPlaced from './src/screens/OrderPlaced';
 import AdminPortal from './src/screens/AdminPortal';
 import InvalidAccess from './src/screens/InvalidAccess';
 import SignUpSuccessful from './src/screens/SignUpSuccess';
+import ImagePickerComp from './src/screens/ImagePicker';
 
 // import PartialOrder from './src/screens/PartialOrder';
 
@@ -29,7 +30,7 @@ function App(): JSX.Element {
     <NavigationContainer>
       <SafeAreaView className="bg-[#3D63FF]" />
       <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-        <Stack.Navigator initialRouteName="SignUpPage">
+        <Stack.Navigator initialRouteName="ImagePicker">
           <Stack.Screen
             name="LandingPage"
             component={LandingPage}
@@ -40,6 +41,13 @@ function App(): JSX.Element {
           <Stack.Screen
             name="SignUpPage"
             component={SignUp1}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="ImagePicker"
+            component={ImagePickerComp}
             options={{
               headerShown: false,
             }}
