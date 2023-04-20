@@ -28,7 +28,7 @@ const LoginPage = ({navigation, route}) => {
     formData.append('grant_type', 'password');
     Axios({
       method: 'POST',
-      url: 'http://143.110.182.190:80/login',
+      url: 'http://143.110.182.190/login',
       data: formData,
       headers: {
         Accept: 'application/json',
