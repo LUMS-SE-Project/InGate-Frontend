@@ -1,34 +1,29 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {useContext} from 'react';
+import {LoggedOutNavigate} from './LoggedOutNavigate';
+import {AdminNavigate} from './AdminNavigate';
+import {UserNavigate} from './UserNavigate';
 
+import {AuthContext} from '../context/AuthContext';
 import LandingPage from '../screens/LandingPage';
-import LoginPage from '../screens/LoginPage';
-import ItemsPage from '../screens/Items';
-import PartialOrder from '../screens/PartialOrder';
-
-
-const LoggedOutStack = createStackNavigator();
-LoggedOutStack.Navigator.defaultProps = {
-    screenOptions: {
-        headerShown: false,
-    },
-}
-
 
 const Navigate = () => {
-    return (
-        <NavigationContainer>
-            <LoggedOutStack.Navigator>
-                <LoggedOutStack.Screen name="LandingPage" component={LandingPage} />
-                <LoggedOutStack.Screen name="LoginPage" component={LoginPage} />
-                <LoggedOutStack.Screen name="ItemsPage" component={ItemsPage} />
-                <LoggedOutStack.Screen name="ItemsPage" component={ItemsPage} />
+  const {
+    isAuthenticated,
+    user: {isAdmin},
+    loading,
+  } = useContext(AuthContext);
 
-            </LoggedOutStack.Navigator>
-        </NavigationContainer>
-    );
-
+  return loading ? (
+    <LandingPage />
+  ) : isAuthenticated ? (
+    isAdmin ? (
+      <AdminNavigate />
+    ) : (
+      <UserNavigate />
+    )
+  ) : (
+    <LoggedOutNavigate />
+  );
 };
 
 export default Navigate;

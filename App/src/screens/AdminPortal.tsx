@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
+
 const AdminPortal = () => {
   const [blockDeets, setBlockDeets] = useState('');
 
