@@ -2,7 +2,6 @@ import {SafeAreaView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {AuthProvider} from './src/context/AuthContext';
 import Navigate from './src/navigate/Navigate';
-function App(): JSX.Element {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import LandingPage from './src/screens/LandingPage';
@@ -28,20 +27,17 @@ import DostOrders2 from './src/screens/DostOrders2';
 import DostOrders3 from './src/screens/DostOrders3';
 import DostOrders4 from './src/screens/DostOrders4';
 import React from 'react';
-import {AuthContext, AuthProvider} from './src/context/AuthContext';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
-
   return (
     <AuthProvider>
       <NavigationContainer>
         <SafeAreaView className="bg-[#3D63FF]" />
         <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
           <Navigate />
-          <Stack.Navigator initialRouteName="AdminPortal">
-
+          {/* <Stack.Navigator initialRouteName="AdminPortal">
             <Stack.Screen
               name="LandingPage"
               component={LandingPage}
@@ -206,7 +202,7 @@ function App() {
                 headerShown: false,
               }}
             />
-          </Stack.Navigator>
+          </Stack.Navigator> */}
         </SafeAreaView>
       </NavigationContainer>
     </AuthProvider>
