@@ -1,3 +1,4 @@
+import React from 'react';
 import {createContext, useState, useEffect, useMemo} from 'react';
 import instance from '../api/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';

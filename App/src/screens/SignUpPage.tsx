@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState, useEffect} from 'react';
 import Axios from 'axios';
 
@@ -38,7 +39,7 @@ export default function SignUpPage({navigate}): JSX.Element {
                 "password" : password,
                 "alumnus" : false,
             },
-            url: `http://localhost:8000/signup`,
+            url: `http://143.110.182.190/signup`,
         }).then((res) => console.log(res.data)).catch((err)=>{})
     }
 

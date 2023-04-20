@@ -26,7 +26,7 @@ const LoginPage = () => {
     formData.append('grant_type', 'password');
     Axios({
       method: 'POST',
-      url: 'http://ec2-52-36-169-69.us-west-2.compute.amazonaws.com:80/login',
+      url: 'http://143.110.182.190/login',
       data: formData,
       headers: {
         'Accept' : 'application/json',
