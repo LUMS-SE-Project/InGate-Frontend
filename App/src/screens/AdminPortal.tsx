@@ -1,15 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-  ImageBackground,
-  TextInput,
-  TouchableOpacity,
-  Button,
-} from 'react-native';
-import {Picker} from '@react-native-picker/picker';
-import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
+import React, {useEffect, useState} from 'react';
+import {Text, View, TouchableOpacity} from 'react-native';
 
 const AdminPortal = () => {
   const [blockDeets, setBlockDeets] = useState('');

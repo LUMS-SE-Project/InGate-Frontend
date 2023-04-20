@@ -33,8 +33,97 @@ const SignUp1 = (props: SignUp1Props) => {
     setPage,
   } = props;
 
+  const [eError, setEmailError] = useState(false);
+  const [pError, setPasswordError] = useState(false);
+  const [rpError, setRePasswordError] = useState(false);
+  const [nError, setNameError] = useState(false);
+
+  const NameError = () => {
+    return (
+      <View className="flex flex-row justify-center items-center">
+        <Text className="text-red-500 font-Montserrat text-base">
+          Please enter a valid name
+        </Text>
+      </View>
+    );
+  };
+
+  const EmailError = () => {
+    return (
+      <View className="flex flex-row justify-center items-center">
+        <Text className="text-red-500 font-Montserrat text-base">
+          Please enter a valid email
+        </Text>
+      </View>
+    );
+  };
+
+  const PasswordError = () => {
+    return (
+      <View className="flex flex-row justify-center items-center">
+        <Text className="text-red-500 font-Montserrat text-base">
+          Password should be between 8 and 16 characters
+        </Text>
+      </View>
+    );
+  };
+
+  const RePasswordError = () => {
+    return (
+      <View className="flex flex-row justify-center items-center">
+        <Text className="text-red-500 font-Montserrat text-base">
+          Passwords do not match
+        </Text>
+      </View>
+    );
+  };
+
+  const handleName = (text: string) => {
+    setName(text);
+    if (text.length > 0) {
+      setNameError(false);
+    } else {
+      setNameError(true);
+    }
+  }
+
+  const handleEmail = (text: string) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@lums.edu.pk/;
+    if (emailRegex.test(text.toLowerCase())) {
+      setEmailError(false);
+    } else {
+      setEmailError(true);
+    }
+    setEmail(text);
+  }
+
+  const handlePassword = (text: string) => {
+    if (text.length >= 8 && text.length <= 16) {
+      setPasswordError(false);
+    } else {
+      setPasswordError(true);
+    }
+    setPassword(text);
+  }
+
+  const handleValidatePassword = (text: string) => {
+    if (password === text) {
+      setRePasswordError(false);
+    } else {
+      setRePasswordError(true);
+    }
+    setRePassword(text);
+  };
+
   const onPressNext = () => {
-    setPage(2);
+
+    if (eError || pError || rpError || nError) {
+      return;
+    } else {
+      setPage(2);
+    }
+
+
   };
   return (
     <KeyboardAvoidingView
@@ -53,69 +142,67 @@ const SignUp1 = (props: SignUp1Props) => {
               Sign Up
             </Text>
             <View className="h-auto mt-2 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
-              <View>
+              <View className='bg-white rounded-tr-3xl rounded-tl-3xl'>
                 <Text className="text-2xl font-Questrial  text-CTA-primary pt-3 pl-8 mt-8 mb-2">
                   Name
                 </Text>
                 <TextInput
-                  className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12 placeholder-slate-900"
+                  className="drop-shadow-3xl mx-8 rounded-xl bg-gray-100 px-4 h-12 placeholder-slate-900"
                   placeholder="Enter your name"
                   value={name}
-                  onChangeText={inputName => setName(inputName)}
+                  onChangeText={handleName}
                 />
               </View>
-
+              <View className='h-7'>{ nError ? <NameError /> : <></> }</View>
               {/* Input box for email address */}
-              <View>
-                <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-6 mb-2">
+              <View className='bg-white'>
+                <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mb-2">
                   Email
                 </Text>
                 <TextInput
                   keyboardType="email-address"
-                  className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12"
-                  placeholder="Enter your Email Address"
+                  className="drop-shadow-3xl mx-8 rounded-xl bg-gray-100 px-4 h-12"
+                  placeholder="Enter your LUMS email address"
                   value={email}
-                  onChangeText={inputEmail => setEmail(inputEmail)}
+                  onChangeText={handleEmail}
                 />
               </View>
+              <View className='h-5'>{ eError ? <EmailError /> : <></> }</View>
 
               {/* Input box for password */}
-              <View>
-                <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-6 mb-2">
+              <View className='bg-white'>
+                <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-3 mb-2">
                   Password
                 </Text>
                 <TextInput
                   secureTextEntry={true}
-                  className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12 "
+                  className="drop-shadow-3xl mx-8 rounded-xl bg-gray-100 px-4 h-12 "
                   placeholder="Enter your Password"
                   value={password}
-                  onChangeText={inputPassword => setPassword(inputPassword)}
+                  onChangeText={handlePassword}
                 />
               </View>
+              <View className='h-5'>{ pError ? <PasswordError /> : <></> }</View>
 
               {/* Input box for password re-checking*/}
               <View>
-                <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-6 mb-2">
+                <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-3 mb-2">
                   Confirm Password
                 </Text>
                 <TextInput
                   secureTextEntry={true}
-                  className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12 "
+                  className="drop-shadow-3xl mx-8 rounded-xl bg-gray-100 px-4 h-12 "
                   placeholder="Re-enter your password"
                   value={rePassword}
-                  onChangeText={inputRePassword =>
-                    setRePassword(inputRePassword)
-                  }
+                  onChangeText={handleValidatePassword}
                 />
               </View>
-              <View className="h-10">
-                <></>
-              </View>
+              <View className='h-10'>{ rpError ? <RePasswordError /> : <></> }</View>
               {/* button for password going to the next page*/}
-              <TouchableOpacity onPress={onPressNext} className=" shadow-2xl">
+              <TouchableOpacity onPress={onPressNext} className=" drop-shadow-3xl bg-white">
                 <View
-                  className="bg-CTA-primary h-12 mx-28 rounded-2xl mt-5 shadow-2xl mb-10"
-                  shadow-2xl>
+                  className="bg-CTA-primary h-12 mx-28 rounded-2xl mt-5 drop-shadow-3xl mb-10"
+                  >
                   <Text className="text-xl font-Questrial text-center mt-2 text-white">
                     Next
                   </Text>

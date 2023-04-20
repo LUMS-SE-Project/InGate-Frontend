@@ -8,8 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import instance from '../api/api';
 
 const LoginPage = () => {
-
-  const {setToken, setUser} = useContext(AuthContext);
+  // set authenticated as true
+  const {setToken, setUser, setIsAuthenticated} = useContext(AuthContext);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,14 +25,16 @@ const LoginPage = () => {
     formData.append('password', password);
     formData.append('grant_type', 'password');
     Axios({
-      method: 'post',
-      url: 'http://localhost:8000/login',
+      method: 'POST',
+      url: 'http://ec2-52-36-169-69.us-west-2.compute.amazonaws.com:80/login',
       data: formData,
       headers: {
+        'Accept' : 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     })
       .then(async res => {
+        console.log(res.data)
         // store token in local storage
         await AsyncStorage.setItem('token', res.data.access_token);
         await AsyncStorage.setItem('username', res.data.username);
@@ -49,10 +51,12 @@ const LoginPage = () => {
           email: res.data.email,
           isAdmin: res.data.isAdmin,
         });
+        setIsAuthenticated(true);
       })
       .catch(err => {
         console.log(err);
       });
+      console.log("Sending Request")
   };
   return (
     <View className="min-h-screen min-w-screen flex justify-center align-middle">

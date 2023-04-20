@@ -1,26 +1,28 @@
 import {useContext} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {LoggedOutNavigate} from './LoggedOutNavigate';
 import {AdminNavigate} from './AdminNavigate';
 import {UserNavigate} from './UserNavigate';
 
 import {AuthContext} from '../context/AuthContext';
+import LandingPage from '../screens/LandingPage';
 
 const Navigate = () => {
-  const {isAuthenticated, user} = useContext(AuthContext);
+  const {
+    isAuthenticated,
+    user: {isAdmin},
+    loading,
+  } = useContext(AuthContext);
 
-  return (
-    <NavigationContainer>
-      {isAuthenticated ? (
-        user.isAdmin ? (
-          <AdminNavigate />
-        ) : (
-          <UserNavigate />
-        )
-      ) : (
-        <LoggedOutNavigate />
-      )}
-    </NavigationContainer>
+  return loading ? (
+    <LandingPage />
+  ) : isAuthenticated ? (
+    isAdmin ? (
+      <AdminNavigate />
+    ) : (
+      <UserNavigate />
+    )
+  ) : (
+    <LoggedOutNavigate />
   );
 };
 

@@ -5,6 +5,7 @@ import AdminPortal from '../screens/AdminPortal';
 
 export const AdminNavigate = () => {
 
+    console.log("AdminNavigate")
     const Stack = createNativeStackNavigator();
     Stack.Navigator.defaultProps = {
         screenOptions: {
