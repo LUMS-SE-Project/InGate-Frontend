@@ -15,6 +15,7 @@ import {
   faBurger,
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
+import DostButton from '../components/DostButton';
 // import Bar from '../components/ProgressBar';
 
 const DostOrdersPage = ({navigation}) => {

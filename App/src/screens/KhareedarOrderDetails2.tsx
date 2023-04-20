@@ -365,26 +365,9 @@ const KhareedarOrderDetails2 = () => {
         contentContainerStyle={{flexGrow: 1}}
         style={{backgroundColor: '#fff'}}>
         <View className="bg-CTA-primary">
-          <View className="flex-row">
-            <View className="flex-row ml-3  mb-9  mt-12 w-10/12 h-10 bg-gray-200 rounded-xl">
-              <View className="mx-3 mt-2">
-                <FontAwesomeIcon
-                  icon={faMagnifyingGlass}
-                  size={27}
-                  color={'white'}
-                />
-              </View>
-              <TextInput
-                className=" w-9/12 h-10 bg-gray-200"
-                placeholder="Search a location"
-              />
-            </View>
-            <View className="ml-3 mr-1 mb-9 mt-12 pt-1 rounded-xl">
-              <FontAwesomeIcon icon={faCircleUser} size={30} color={'white'} />
-            </View>
-          </View>
-          {/* INSERT A BACK BUTTON HERE */}
-          {/* INSERT A PROFILE BUTTON HERE */}
+          <Text className="text-4xl font-Montserrat text-center text-white pb-6 pt-10">
+            Order Details
+          </Text>
 
           <View className="h-auto bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white pt-3">
             {data.map((element: any) => {

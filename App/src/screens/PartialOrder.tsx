@@ -18,7 +18,7 @@ import {
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import {FlatList} from 'react-native-gesture-handler';
 
-const PartialOrder = () => {
+const PartialOrder = ({navigation}) => {
   const [selectGender, setSelectGender] = useState('None');
   const [selectPartial, setSelectPartial] = useState('None');
   const [isClicked, setIsClicked] = useState(true);
@@ -31,6 +31,7 @@ const PartialOrder = () => {
   };
   const onPressSubmit = () => {
     console.log('Order Placed');
+    navigation.navigate('OrderPlaced');
   };
   const options = [
     {id: 1, name: 'Yes'},
@@ -190,7 +191,7 @@ const PartialOrder = () => {
                   className="bg-CTA-primary h-14 mx-24 rounded-3xl  shadow-2xl"
                   shadow-2xl>
                   <Text className="text-3xl font-Questrial text-center mt-3 text-white">
-                    Continue
+                    Place Order
                   </Text>
                 </View>
               </TouchableOpacity>
