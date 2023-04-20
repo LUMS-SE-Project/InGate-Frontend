@@ -26,15 +26,15 @@ const LoginPage = () => {
     formData.append('grant_type', 'password');
     Axios({
       method: 'POST',
-      url: 'http://143.110.182.190/login',
+      url: 'http://143.110.182.190:80/login',
       data: formData,
       headers: {
-        'Accept' : 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     })
       .then(async res => {
-        console.log(res.data)
+        console.log(res.data);
         // store token in local storage
         await AsyncStorage.setItem('token', res.data.access_token);
         await AsyncStorage.setItem('username', res.data.username);
@@ -56,7 +56,7 @@ const LoginPage = () => {
       .catch(err => {
         console.log(err);
       });
-      console.log("Sending Request")
+    console.log('Sending Request');
   };
   return (
     <View className="min-h-screen min-w-screen flex justify-center align-middle">
@@ -67,7 +67,7 @@ const LoginPage = () => {
         <Text className="text-5xl font-Montserrat text-center text-white pb-8 pt-8">
           Login
         </Text>
-        <View className="h-4/5 bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
+        <View className="h-4/5 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
           <View>
             <Text className="text-2xl font-Questrial  text-CTA-primary pt-10 pl-8 mt-10 mb-2">
               Email
