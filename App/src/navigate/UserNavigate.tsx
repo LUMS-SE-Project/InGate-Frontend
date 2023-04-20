@@ -1,8 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import Items from '../screens/Items';
+import RestaurantMenu from '../screens/RestaurantMenu';
 
-import DostOrders from '../screens/DostOrders';
 
 
 export const UserNavigate = () => {
@@ -15,8 +14,8 @@ export const UserNavigate = () => {
   };
 
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Items" component={Items} />
+    <Stack.Navigator initialRouteName='Restaurant'>
+      <Stack.Screen name="Restaurant" component={RestaurantMenu} />
     </Stack.Navigator>
   );
 };
