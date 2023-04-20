@@ -14,7 +14,17 @@ const Navigate = () => {
     loading,
   } = useContext(AuthContext);
 
-  return <DostNavigate />;
+  return loading ? (
+    <LandingPage />
+  ) : isAuthenticated ? (
+    isAdmin ? (
+      <AdminNavigate />
+    ) : (
+      <UserNavigate />
+    )
+  ) : (
+    <LoggedOutNavigate />
+  );
   // <UserNavigate />;
 };
 

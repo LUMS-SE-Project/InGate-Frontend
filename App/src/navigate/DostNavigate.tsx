@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
+import React from 'react';
 import DostOrdersPage from '../screens/DostOrders';
-import DostOrders3 from '../screens/DostOrders3;
+import DostOrders3 from '../screens/DostOrders3';
 import AdminItemRequest from '../screens/DostOrders2';
 import DostOrders4 from '../screens/DostOrders4';
 

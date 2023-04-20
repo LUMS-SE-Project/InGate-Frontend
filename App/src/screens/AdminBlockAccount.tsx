@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {
+  Platform,
   Text,
   View,
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircleUser, faLeftLong} from '@fortawesome/free-solid-svg-icons';
 import AdminFooter from '../components/AdminFooter';
-const AdminBlockAccount = () => {
+const AdminBlockAccount = ({navigation} : any) => {
   const [blockDeets, setBlockDeets] = useState('');
   const [addComments, setAddComments] = useState('');
 
@@ -70,7 +70,7 @@ const AdminBlockAccount = () => {
     console.log('Profile button pressed');
   };
   const onPressBack = () => {
-    console.log('back Button pressed');
+    navigation.navigate('AdminPortal');
   };
 
   return (
@@ -159,8 +159,8 @@ const AdminBlockAccount = () => {
             bottom: 25,
           }}>
           <AdminFooter
-            onReportsPress={() => console.log('Reports button pressed')}
-            onActivationsPress={() => console.log('Activation button pressed')}
+            onReportsPress={() => navigation.navigate('AdminBlockAccount')}
+            onActivationsPress={() => navigation.navigate('AdminAccountActivation')}
           />
         </View>
       </ScrollView>
