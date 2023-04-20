@@ -6,14 +6,22 @@ import {
   ImageBackground,
   TextInput,
 } from 'react-native';
+import instance from '../api/api';
+
+import {useContext} from 'react';
+import {AuthContext} from '../context/AuthContext';
 
 export default function ForgetPassword({navigation}) {
+  const {token} = useContext(AuthContext);
+  
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [rePassword, setRePassword] = React.useState('');
   const [emailError, setEmailError] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState(false);
   const [rePasswordError, setRePasswordError] = React.useState(false);
+
+
 
   const EmailError = () => {
     return (
@@ -79,7 +87,26 @@ export default function ForgetPassword({navigation}) {
 
   const onPressSubmit = () => {
     if (!emailError && !passwordError && !rePasswordError) {
-      console.log('Submit Pressed');
+      console.log(`Email: ${email} Password: ${password} RePassword: ${rePassword}`);
+      instance.post(
+        '/forgot-password',
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+
+          },
+        }
+      ).then((response)=>{
+        console.log(response.data);
+      }).catch((err)=>{
+        console.log(err)
+      })
+      navigation.navigate('LoginPage');
     }
   };
 
@@ -135,7 +162,7 @@ export default function ForgetPassword({navigation}) {
             />
           </View>
             {rePasswordError ? <RePasswordError /> : null} 
-          <TouchableOpacity onPress={onPressLogin} className="mb-10">
+          <TouchableOpacity onPress={onPressLogin} className="mt-10 mb-10">
             <Text className="text-lg font-Questrial text-center text-CTA-primary">
               Back to Login
             </Text>
@@ -144,7 +171,7 @@ export default function ForgetPassword({navigation}) {
           <View>
             <TouchableOpacity
               onPress={onPressSubmit}
-              className="mt-[-10] shadow-2xl">
+              className="mt-[-30] shadow-2xl">
               <View
                 className="bg-CTA-primary h-12 mx-28 rounded-2xl mt-5 shadow-2xl"
                 shadow-2xl>

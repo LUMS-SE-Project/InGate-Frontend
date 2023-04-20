@@ -17,10 +17,14 @@ export interface SignUp1Props {
   email: string;
   password: string;
   rePassword: string;
+  phoneNumber: string;
+  gender: string;
   setName: (name: string) => void;
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
   setRePassword: (rePassword: string) => void;
+  setPhoneNumber: (phoneNumber: string) => void;
+  setGender: (gender: string) => void;
   setPage: (page: number) => void;
 }
 
@@ -30,10 +34,14 @@ const SignUp1 = (props: SignUp1Props) => {
     email,
     password,
     rePassword,
+    phoneNumber,
+    gender,
     setName,
     setEmail,
     setPassword,
     setRePassword,
+    setPhoneNumber,
+    setGender,
     setPage,
   } = props;
 
@@ -41,8 +49,6 @@ const SignUp1 = (props: SignUp1Props) => {
   const [pError, setPasswordError] = useState(false);
   const [rpError, setRePasswordError] = useState(false);
   const [nError, setNameError] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [selectGender, setSelectGender] = useState('None');
   const [isClicked, setIsClicked] = useState(true);
   const options = [
     {id: 1, name: 'Male'},
@@ -205,12 +211,15 @@ const SignUp1 = (props: SignUp1Props) => {
                   onChangeText={handleValidatePassword}
                 />
               </View>
+              <View className="h-fit">
+                {rpError ? <RePasswordError /> : <></>}
+              </View>
               <View>
                 <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-6 mb-2">
                   Phone Number
                 </Text>
                 <TextInput
-                  secureTextEntry={true}
+                  secureTextEntry={false}
                   className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12 "
                   placeholder="Re-enter your password"
                   value={phoneNumber}
@@ -221,14 +230,14 @@ const SignUp1 = (props: SignUp1Props) => {
                 Gender Preference
               </Text>
               <View className="items-center">
-                <View className=" rounded-lg w-4/5 h-48">
+                <View className=" rounded-lg w-4/5 h-fit">
                   <TouchableOpacity
                     onPress={() => {
                       setIsClicked(!isClicked);
                     }}>
                     <View className="bg-gray-200 flex-row rounded-lg">
                       <Text className="text-xl py-3 px-3 w-64 text-black">
-                        {selectGender}
+                        {gender}
                       </Text>
                       <View className="ml-4 mt-3">
                         {isClicked ? (
@@ -257,7 +266,8 @@ const SignUp1 = (props: SignUp1Props) => {
                           <View className="mt-3 bg-gray-200 rounded-lg text-2xl ">
                             <TouchableOpacity
                               onPress={() => {
-                                setSelectGender(item.name);
+                                console.log(item.name);
+                                setGender(item.name);
                                 setIsClicked(true);
                               }}>
                               <Text className="text-xl py-3 px-3 w-64 text-black ">
@@ -271,14 +281,11 @@ const SignUp1 = (props: SignUp1Props) => {
                   )}
                 </View>
               </View>
-              <View className="h-10">
-                {rpError ? <RePasswordError /> : <></>}
-              </View>
               {/* button for password going to the next page*/}
               <TouchableOpacity
                 onPress={onPressNext}
                 className=" drop-shadow-3xl bg-white">
-                <View className="bg-CTA-primary h-12 mx-28 rounded-2xl mt-5 drop-shadow-3xl mb-10">
+                <View className="bg-CTA-primary h-12 mx-28 rounded-2xl mt-5 drop-shadow-3xl">
                   <Text className="text-xl font-Questrial text-center mt-2 text-white">
                     Next
                   </Text>

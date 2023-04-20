@@ -5,9 +5,9 @@ import Axios from 'axios';
 import SignUp1 from './SignUp1';
 import SignUp2 from './SignUp2';
 
-export default function SignUpPage({navigate}): JSX.Element {
+import instance from '../api/api';
 
-  
+export default function SignUpPage({navigation}): JSX.Element {
   const [page, setPage] = useState(1);
 
   //   page 1 props
@@ -15,34 +15,38 @@ export default function SignUpPage({navigate}): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [gender, setGender] = useState('');
 
   // page 2 props
   const [rollNumber, setrollNumber] = useState('');
   const [image, setImage] = useState('');
 
   useEffect(() => {
-    if (page === 1) {
-        console.log(
-          `Information from page ${page}: ${name} ${email} ${password} ${rePassword}`,
-        );
-    } else {
-        console.log(`Information from page ${page}: ${rollNumber} ${image}`);
-    }
+    console.log(
+      `Info: Name: ${name} Email:${email} Password: ${password} Confirm: ${rePassword} PhoneNum : ${phoneNumber} Gender : ${gender} RollNum : ${rollNumber} Image : ${image}`,
+    );
 
     if (page === 3) {
-        Axios({
-            method: 'POST',
-            data: {
-                "username" : rollNumber,
-                "name" : name,
-                "email" : email,
-                "password" : password,
-                "alumnus" : false,
-            },
-            url: `http://143.110.182.190/signup`,
-        }).then((res) => console.log(res.data)).catch((err)=>{})
+      console.log('Info: Signing up');
+      instance
+        .post('/signup', {
+          username: rollNumber,
+          name: name,
+          email: email,
+          password: password,
+          alumnus: false,
+          number: phoneNumber,
+          gender : gender,
+        })
+        .then(res => {
+          console.log(res.data);
+          navigation.navigate('LoginPage');
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
-
   }, [page]);
 
   return page === 1 ? (
@@ -52,10 +56,14 @@ export default function SignUpPage({navigate}): JSX.Element {
       email={email}
       password={password}
       rePassword={rePassword}
+      phoneNumber={phoneNumber}
+      gender={gender}
       setName={setName}
       setEmail={setEmail}
       setPassword={setPassword}
       setRePassword={setRePassword}
+      setPhoneNumber={setPhoneNumber}
+      setGender={setGender}
     />
   ) : (
     <SignUp2
