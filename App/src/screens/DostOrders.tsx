@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import {
-  SafeAreaView,
-  Text,
   View,
-  ImageBackground,
   TextInput,
   Button,
   TouchableOpacity,
@@ -13,18 +10,9 @@ import {
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
-  faLock,
-  faAirFreshener,
-  faAnchor,
-  faSolid,
-  faCircleXmark,
-  faSharp,
-  fas,
-  faCircleCheck,
-  faCartShopping,
   faCircleUser,
-  faLight,
   faMagnifyingGlass,
+  faBurger,
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 // import Bar from '../components/ProgressBar';

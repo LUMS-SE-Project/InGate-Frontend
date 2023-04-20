@@ -9,9 +9,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from 'react-native';
-// import {Picker} from '@react-native-picker/picker';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
-
+import KhareedarButton from '../components/KhareedarButton';
 const DostFeedback = () => {
   const [blockDeets, setBlockDeets] = useState('');
   const [addComments, setAddComments] = useState('');
@@ -34,7 +33,7 @@ const DostFeedback = () => {
           <Text className="text-4xl font-Montserrat text-center text-white pb-6 pt-10">
             Dost Feedback
           </Text>
-          <View className="h-auto bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
+          <View className="h-auto rounded-tr-3xl rounded-tl-3xl w-max bg-white">
             <View>
               <Text className="text-2xl font-Questrial text-CTA-primary pl-8 mt-10 mb-2">
                 Dost Details
@@ -63,9 +62,8 @@ const DostFeedback = () => {
                   placeholder="Enter text here..."
                   multiline
                   value={blockDeets}
-                  onChangeText={blockDeets =>
-                    setBlockDeets(blockDeets)
-                  }></TextInput>
+                  onChangeText={blockDeets => setBlockDeets(blockDeets)}
+                />
               </View>
             </View>
 

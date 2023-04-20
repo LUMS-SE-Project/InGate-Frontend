@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-  ImageBackground,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {Text, View, KeyboardAvoidingView, FlatList} from 'react-native';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faAngleDown, faAngleUp} from '@fortawesome/free-solid-svg-icons';
 import {TextInput, TouchableOpacity, ScrollView} from 'react-native';
 
 const SignUp1 = () => {
@@ -13,6 +9,13 @@ const SignUp1 = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [selectGender, setSelectGender] = useState('None');
+  const [isClicked, setIsClicked] = useState(true);
+  const options = [
+    {id: 1, name: 'Male'},
+    {id: 2, name: 'Female'},
+  ];
 
   const onPressNext = () => {
     console.log('email:', email);
@@ -83,6 +86,72 @@ const SignUp1 = () => {
                 value={rePassword}
                 onChangeText={inputRePassword => setRePassword(inputRePassword)}
               />
+            </View>
+            <View>
+              <Text className="text-2xl font-Questrial  text-CTA-primary  pl-8 mt-6 mb-2">
+                Phone Number
+              </Text>
+              <TextInput
+                secureTextEntry={true}
+                className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-12 "
+                placeholder="Re-enter your password"
+                value={phoneNumber}
+                onChangeText={inputNumber => setPhoneNumber(inputNumber)}
+              />
+            </View>
+            <Text className="text-CTA-primary ml-10  mt-6 text-2xl mb-2">
+              Gender Preference
+            </Text>
+            <View className="items-center">
+              <View className=" rounded-lg w-4/5 h-48">
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsClicked(!isClicked);
+                  }}>
+                  <View className="bg-gray-200 flex-row rounded-lg">
+                    <Text className="text-xl py-3 px-3 w-64 text-black">
+                      {selectGender}
+                    </Text>
+                    <View className="ml-4 mt-3">
+                      {isClicked ? (
+                        <FontAwesomeIcon
+                          icon={faAngleDown}
+                          size={30}
+                          color="#6B85F1"
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={faAngleUp}
+                          size={30}
+                          color="#6B85F1"
+                        />
+                      )}
+                    </View>
+                  </View>
+                </TouchableOpacity>
+                {isClicked ? (
+                  []
+                ) : (
+                  <FlatList
+                    data={options}
+                    renderItem={({item, index}) => {
+                      return (
+                        <View className="mt-3 bg-gray-200 rounded-lg text-2xl ">
+                          <TouchableOpacity
+                            onPress={() => {
+                              setSelectGender(item.name);
+                              setIsClicked(true);
+                            }}>
+                            <Text className="text-xl py-3 px-3 w-64 text-black ">
+                              {item.name}
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                      );
+                    }}
+                  />
+                )}
+              </View>
             </View>
             <View className="h-10">
               <></>
