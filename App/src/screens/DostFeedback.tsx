@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import KhareedarButton from '../components/KhareedarButton';
-const DostFeedback = () => {
+const DostFeedback = ({navigation}) => {
   const [blockDeets, setBlockDeets] = useState('');
   const [addComments, setAddComments] = useState('');
 
@@ -120,8 +120,8 @@ const DostFeedback = () => {
 
             <View>
               <KhareedarDostBottomButtons
-                onKhareedarPress={() => console.log('Khareedar button pressed')}
-                onDostPress={() => console.log('Dost button pressed')}
+                onKhareedarPress={() => navigation.navigate('Items')}
+                onDostPress={() => navigation.navigate('DostOrdersPage')}
               />
             </View>
           </View>

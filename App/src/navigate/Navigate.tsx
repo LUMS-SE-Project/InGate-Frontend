@@ -14,8 +14,7 @@ const Navigate = () => {
     loading,
   } = useContext(AuthContext);
 
-  return <DostNavigate />;
-  // <UserNavigate />;
+  return <UserNavigate />;
 };
 
 export default Navigate;

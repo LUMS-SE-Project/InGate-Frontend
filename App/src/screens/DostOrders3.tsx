@@ -20,16 +20,12 @@ import {
   faSharp,
   fas,
   faBurger,
-  faCircleCheck,
-  faCartShopping,
-  faCircleUser,
-  faLight,
-  faMagnifyingGlass,
+  faLeftLong,
 } from '@fortawesome/free-solid-svg-icons';
 // import {Picker} from '@react-native-picker/picker';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
-const DostOrders3 = () => {
+const DostOrders3 = ({navigation}) => {
   const [blockDeets, setBlockDeets] = useState('');
   const [addComments, setAddComments] = useState('');
   // const [bgColor, setBgColor] = useState('');
@@ -58,8 +54,9 @@ const DostOrders3 = () => {
     },
   ];
 
-  const onPressSubmit = () => {
-    console.log('Block Details: ', blockDeets);
+  const onPressBack = () => {
+    console.log('back Button pressed');
+    navigation.navigate('DostOrdersPage');
   };
 
   return (
@@ -70,31 +67,19 @@ const DostOrders3 = () => {
         contentContainerStyle={{flexGrow: 1}}
         style={{backgroundColor: '#fff'}}>
         <View className="bg-CTA-primary">
-          <View className="flex-row">
-            <View className="flex-row ml-3  mb-9  mt-12 w-10/12 h-10 bg-gray-200 rounded-xl">
-              <View className="mx-3 mt-2">
-                <FontAwesomeIcon
-                  icon={faMagnifyingGlass}
-                  size={27}
-                  color={'white'}
-                />
-              </View>
-              <TextInput
-                className=" w-9/12 h-10 bg-gray-200"
-                placeholder="Search a location"
-              />
-            </View>
-            <View className="ml-3 mr-1 mb-9 mt-12 pt-1 rounded-xl">
-              <FontAwesomeIcon icon={faCircleUser} size={30} color={'white'} />
-            </View>
+          <View className="flex-row ">
+            <TouchableOpacity className="mt-12 ml-7 w-16" onPress={onPressBack}>
+              <FontAwesomeIcon icon={faLeftLong} size={27} color={'white'} />
+            </TouchableOpacity>
+            <Text className="text-4xl font-Montserrat text-center text-white pb-6 ml-1 pt-10">
+              Order Details
+            </Text>
           </View>
-          {/* INSERT A BACK BUTTON HERE */}
-          {/* INSERT A PROFILE BUTTON HERE */}
 
           <View className="h-auto bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white pt-3">
             {data.map((element: any) => {
               return (
-                <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-auto placeholder-slate-900 mt-5 pb-8">
+                <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 mb-5 px-4 h-auto placeholder-slate-900 mt-5 pb-8">
                   <View
                     className=""
                     style={{display: 'flex', flexDirection: 'row'}}>
@@ -176,46 +161,11 @@ const DostOrders3 = () => {
             })}
           </View>
         </View>
-        <View
-          style={{flexDirection: 'row', justifyContent: 'center'}}
-          className="pt-2 mb-2">
-          <TouchableOpacity
-            onPress={onPressSubmit}
-            className="mb-4 shadow-2xl ml-1">
-            <View
-              style={{
-                // width: "100%",
-                backgroundColor: '#F13737',
-              }}
-              className="h-20 w-40 rounded-2xl mt-5 shadow-2xl px-8"
-              shadow-2xl>
-              <Text className="text-lg font-Questrial text-center mt-2 text-white">
-                Couldn't{'\n'}Complete
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={onPressSubmit}
-            className="mb-4 shadow-2xl ml-7">
-            <View
-              style={{
-                // width: '100%',
-                backgroundColor: '#6B85F1',
-              }}
-              className="h-20 w-40 rounded-2xl mt-5 shadow-2xl px-8"
-              shadow-2xl>
-              <Text className="text-lg font-Questrial text-center mt-2 text-white">
-                Update{'\n'} Checkpoint
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
 
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => console.log('Khareedar button pressed')}
-            onDostPress={() => console.log('Dost button pressed')}
+            onKhareedarPress={() => navigation.navigate('Items')}
+            onDostPress={() => navigation.navigate('DostOrdersPage')}
           />
         </View>
       </ScrollView>

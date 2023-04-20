@@ -12,7 +12,7 @@ import {
 // import {Picker} from '@react-native-picker/picker';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
-const KhareedarFeedback = () => {
+const KhareedarFeedback = ({navigation}) => {
   const [blockDeets, setBlockDeets] = useState('');
   const [addComments, setAddComments] = useState('');
   // const [bgColor, setBgColor] = useState('');
@@ -22,6 +22,9 @@ const KhareedarFeedback = () => {
 
   const onPressSubmit = () => {
     console.log('Block Details: ', blockDeets);
+  };
+  const onPressContinue = () => {
+    navigation.navigate('DostOrdersPage');
   };
 
   return (
@@ -103,7 +106,7 @@ const KhareedarFeedback = () => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={blockDeets == '' ? onPressSubmit : () => {}}
+                onPress={blockDeets == '' ? onPressContinue : () => {}}
                 className="mt-10  mb-10 shadow-2xl px-4">
                 <View
                   style={{
@@ -122,8 +125,8 @@ const KhareedarFeedback = () => {
         </View>
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => console.log('Khareedar button pressed')}
-            onDostPress={() => console.log('Dost button pressed')}
+            onKhareedarPress={() => navigation.navigate('Items')}
+            onDostPress={() => navigation.navigate('DostOrdersPage')}
           />
         </View>
       </ScrollView>
