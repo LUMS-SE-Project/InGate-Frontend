@@ -31,15 +31,10 @@ const RestaurantMenu = (props: any) => {
 
   // Dummy data for testing purposes
   const data = [
-    {id: 1, name: 'Item name A', typeAndMoney: 'Food Type 1, $10'},
-    {id: 2, name: 'Restaurant B', typeAndMoney: 'Food Type 2, $15'},
-    {id: 3, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 4, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 5, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 6, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 7, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 8, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 9, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
+    {id: 1, name: 'Chicken Tikka', typeAndMoney: 'Rs 230'},
+    {id: 2, name: 'Chicken Roll', typeAndMoney: 'Rs 300'},
+    {id: 3, name: 'Malai Boti', typeAndMoney: 'Rs 400'},
+
     // {id: 10, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
     // {id: 11, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
     // {id: 12, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},

@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import RestaurantMenu from '../screens/RestaurantMenu';
 
-
+import React from 'react';
 import RequestItem from '../screens/RequestItemPage';
 import PartialOrder from '../screens/PartialOrder';
 import KhareedarOrderDetails1 from '../screens/KhareedarOrderDetails1';
@@ -25,7 +25,7 @@ export const UserNavigate = () => {
   };
 
   return (
-    <Stack.Navigator initialRouteName="DostOrders4">
+    <Stack.Navigator initialRouteName="Items">
       <Stack.Screen name="Restaurant" component={RestaurantMenu} />
       <Stack.Screen name="Items" component={ItemsPage} />
       <Stack.Screen name="RequestItem" component={RequestItem} />

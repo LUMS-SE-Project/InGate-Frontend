@@ -120,6 +120,7 @@ export const AuthProvider = (props : AuthProviderProps) => {
         }
         getUser();
       }
+      // clearStorage();
   }, [])
 
   useEffect(()=>{

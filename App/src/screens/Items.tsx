@@ -20,25 +20,24 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import SideBar from '../components/SideBar';
 
-export interface ItemsProps {
-  navigation: NativeStackScreenProps<any, any>;
-}
 
-const ItemsPage = (props: ItemsProps) => {
+
+const ItemsPage = (props : any) => {
   const {navigation} = props;
   const [sideBar, setSideBar] = useState(false);
 
   const handleButtonPress = () => {
     console.log('Button pressed');
+    navigation.navigate('Restaurant');
   };
 
   // Dummy data for testing purposes
   const data = [
-    {id: 1, name: 'Restaurant A', typeAndMoney: 'Food Type 1, $10'},
-    {id: 2, name: 'Restaurant B', typeAndMoney: 'Food Type 2, $15'},
-    {id: 3, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 4, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 5, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
+    {id: 1, name: 'Zakir', typeAndMoney: 'Desi'},
+    {id: 2, name: 'Fusion Cafe', typeAndMoney: 'Continental'},
+    {id: 3, name: 'PDC', typeAndMoney: 'Desi'},
+    // {id: 4, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
+    // {id: 5, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
     // {id: 6, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
     // {id: 7, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
     // {id: 8, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},

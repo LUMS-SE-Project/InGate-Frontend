@@ -22,15 +22,12 @@ const DostOrdersPage = ({navigation}) => {
   const [colourChange, setColourChange] = useState(true);
   const handleButtonPress = () => {
     console.log('Button pressed');
+    navigation.navigate('DostOrders3');
   };
 
   // Dummy data for testing purposes
   const data = [
-    {id: 1, name: 'Restaurant A', typeAndMoney: 'Food Type 1, $10'},
-    {id: 2, name: 'Restaurant B', typeAndMoney: 'Food Type 2, $15'},
-    {id: 3, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 4, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 5, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
+    {id: 1, name: 'Zakir', typeAndMoney: 'Rs 1030'},
   ];
 
   return (
@@ -73,7 +70,7 @@ const DostOrdersPage = ({navigation}) => {
                     onPress={handleButtonPress}
                     name={item.name}
                     typeAndMoney={item.typeAndMoney}
-                    handleCheckBoxClick={() => console.log('check box clicked')}
+                    handleCheckBoxClick={navigation.navigate('DostOrders4')}
                   />
                 ))}
               </View>

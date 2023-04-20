@@ -25,14 +25,9 @@ const KhareedarOrderDetails1 = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('03210239865');
   const [email, setEmail] = useState('sarim.khan@gmail.com');
   const items: any = [
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
-    {name: 'Drinks', quantity: '2', price: '20$'},
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
-    {name: 'Drinks', quantity: '2', price: '20$'},
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
+    {name: 'Malai Boti', quantity: '2', price: 'Rs 800'},
+    {name: 'Chicken Tikka', quantity: '1', price: 'Rs 230'},
+
   ];
   const data: any = [
     {
@@ -98,10 +93,10 @@ const KhareedarOrderDetails1 = ({navigation}) => {
                     </Text>
                     <View>
                       <Text className="20 text-base font-Questrial mt-2 ml-1">
-                        Customer Name
+                        Customer Name : Jazlan
                       </Text>
                       <Text className="text-base font-Questrial mt-2 ml-1">
-                        Customer Address
+                        Customer Address : SSE
                       </Text>
                       <Text className="text-base font-Questrial mt-2 ml-1">
                         Partial Order
@@ -178,7 +173,7 @@ const KhareedarOrderDetails1 = ({navigation}) => {
                       </View>
                       <View>
                         <Text className="text-lg text-CTA-primary font-Questrial mt-4 ml-20">
-                          Total Price
+                          1030
                         </Text>
                       </View>
                     </View>

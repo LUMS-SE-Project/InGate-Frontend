@@ -31,7 +31,7 @@ const DostButton = ({onPress, name, typeAndMoney, handleCheckBoxClick}) => {
           paddingLeft: 10,
           paddingTop: 5,
           paddingBottom: 20,
-          left: -145,
+          left: -65,
           top: 22,
         }}>
         {typeAndMoney}

@@ -13,20 +13,17 @@ const Navigate = () => {
     loading,
   } = useContext(AuthContext);
 
-  return <AdminNavigate />;
-  // loading ? (
-  //   <LandingPage />
-  // ) : isAuthenticated ? (
-  //   isAdmin ? (
-  //     <AdminNavigate />
-  //   ) : (
-  //     <UserNavigate />
-  //   )
-  // ) : (
-  //   <LoggedOutNavigate />
-  // );
-  // <UserNavigate />;
-  return <UserNavigate />;
+  return loading ? (
+    <LandingPage />
+  ) : isAuthenticated ? (
+    isAdmin ? (
+      <AdminNavigate />
+    ) : (
+      <UserNavigate />
+    )
+  ) : (
+    <LoggedOutNavigate />
+  );;
 };
 
 export default Navigate;

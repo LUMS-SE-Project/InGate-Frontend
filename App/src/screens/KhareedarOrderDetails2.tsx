@@ -333,14 +333,9 @@ const KhareedarOrderDetails2 = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState('03210239865');
   const [email, setEmail] = useState('sarim.khan@gmail.com');
   const items: any = [
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
-    {name: 'Drinks', quantity: '2', price: '20$'},
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
-    {name: 'Drinks', quantity: '2', price: '20$'},
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
+    {name: 'Malai Boti', quantity: '2', price: 'Rs 800'},
+    {name: 'Chicken Tikka', quantity: '1', price: 'Rs 230'},
+
   ];
   const data: any = [
     {
@@ -373,28 +368,25 @@ const KhareedarOrderDetails2 = ({navigation}) => {
             {data.map((element: any) => {
               return (
                 <View>
-                  <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-auto placeholder-slate-900 mt-5 pb-4">
-                    <Text className="text-2xl text-CTA-primary font-Questrial mt-4 mb-2 ml-1">
-                      Delivery Details
+                <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-auto placeholder-slate-900 mt-5 pb-4">
+                  <Text className="text-2xl text-CTA-primary font-Questrial mt-4 mb-2 ml-1">
+                    Delivery Details
+                  </Text>
+                  <View>
+                    <Text className="20 text-base font-Questrial mt-2 ml-1">
+                      Customer Name : Jazlan
                     </Text>
-                    <View>
-                      <Text className="20 text-base font-Questrial mt-2 ml-1">
-                        Delivery Status
-                      </Text>
-                      <Text className="text-base font-Questrial mt-2 ml-1">
-                        Delivery Time
-                      </Text>
-                      <Text className="text-base font-Questrial mt-2 ml-1">
-                        Cusomter Address
-                      </Text>
-                      <Text className="text-base font-Questrial mt-2 ml-1">
-                        Dost Name
-                      </Text>
-                      <Text className="text-base font-Questrial mt-2 ml-1">
-                        Dost Phone Number
-                      </Text>
-                    </View>
+                    <Text className="text-base font-Questrial mt-2 ml-1">
+                      Customer Address : SSE
+                    </Text>
+                    <Text className="text-base font-Questrial mt-2 ml-1">
+                      Partial Order : Yes
+                    </Text>
+                    <Text className="text-base font-Questrial mt-2 ml-1">
+                      Gender Preference : Yes
+                    </Text>
                   </View>
+                </View>
 
                   <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-auto placeholder-slate-900 mt-5 pb-8">
                     <Text className="text-2xl text-CTA-primary font-Questrial mt-4 ml-1">
@@ -462,7 +454,7 @@ const KhareedarOrderDetails2 = ({navigation}) => {
                       </View>
                       <View>
                         <Text className="text-lg text-CTA-primary font-Questrial mt-4 ml-20">
-                          Total Price
+                          1030
                         </Text>
                       </View>
                     </View>
