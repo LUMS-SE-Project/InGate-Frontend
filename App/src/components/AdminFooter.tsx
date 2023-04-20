@@ -2,23 +2,20 @@ import React, {useState} from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBagShopping, faMotorcycle} from '@fortawesome/free-solid-svg-icons';
-import { act } from 'react-test-renderer';
 
+const AdminFooter = ({onReportsPress, onActivationsPress}: any) => {
+  const [ReportsColour, setReportsColour] = useState('white');
+  const [activationColour, setactivationColour] = useState('#6B85F1');
 
-const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}:any) => {
-
-  const [khareedarColour, setKhareedarColour] = useState('white')
-  const [dostColour, setDostColour] = useState('#6B85F1')
-  
-  const activateKhareedar = () => {
-    onKhareedarPress()
-    setKhareedarColour('white')
-    setDostColour('#6B85F1')
+  const activateReports = () => {
+    onReportsPress();
+    setReportsColour('white');
+    setactivationColour('#6B85F1');
   };
   const activateDost = () => {
-    onDostPress()
-    setDostColour('white')
-    setKhareedarColour('#6B85F1')
+    onActivationsPress();
+    setactivationColour('white');
+    setReportsColour('#6B85F1');
   };
   return (
     <View
@@ -31,14 +28,12 @@ const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}:any) => {
         right: 0,
         width: '100%',
       }}>
-      
-
       <TouchableOpacity
         onPress={activateDost}
         style={{
           width: '50%',
           height: 50,
-          backgroundColor: dostColour,
+          backgroundColor: activationColour,
           borderRadius: 0,
           borderWidth: 1,
           borderColor: '#6B85F1',
@@ -49,17 +44,23 @@ const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}:any) => {
         }}>
         <View className="flex-row">
           <View className="mt-3 px-1">
-            <FontAwesomeIcon icon={faMotorcycle} size={27} color={khareedarColour} />
+            <FontAwesomeIcon
+              icon={faMotorcycle}
+              size={27}
+              color={ReportsColour}
+            />
           </View>
-          <Text style={{color:khareedarColour}} className="text-2xl m-2">Dost</Text>
+          <Text style={{color: ReportsColour}} className="text-2xl m-2">
+            Activations
+          </Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={activateKhareedar}
+        onPress={activateReports}
         style={{
           width: '50%',
           height: 50,
-          backgroundColor: khareedarColour,
+          backgroundColor: ReportsColour,
           borderRadius: 0,
           borderWidth: 1,
           alignItems: 'center',
@@ -68,13 +69,19 @@ const KhareedarDostBottomButtons = ({onKhareedarPress, onDostPress}:any) => {
         }}>
         <View className="flex-row">
           <View className="mt-3 px-1">
-            <FontAwesomeIcon icon={faBagShopping} size={27} color={dostColour} />
+            <FontAwesomeIcon
+              icon={faBagShopping}
+              size={27}
+              color={activationColour}
+            />
           </View>
-          <Text style={{color: dostColour}}className="text-2xl m-2">Khareedar</Text>
+          <Text style={{color: activationColour}} className="text-2xl m-2">
+            Reports
+          </Text>
         </View>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default KhareedarDostBottomButtons;
+export default AdminFooter;

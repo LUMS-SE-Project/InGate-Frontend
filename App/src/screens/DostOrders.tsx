@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -16,12 +16,11 @@ import {
   faCircleUser,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
-import KhareedarButton from '../components/KhareedarButton';
-import DostButton from '../components/DostButton';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 // import Bar from '../components/ProgressBar';
 
 const DostOrdersPage = ({navigation}) => {
+  const [colourChange, setColourChange] = useState(true);
   const handleButtonPress = () => {
     console.log('Button pressed');
   };
@@ -33,7 +32,6 @@ const DostOrdersPage = ({navigation}) => {
     {id: 3, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
     {id: 4, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
     {id: 5, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-
   ];
 
   return (
@@ -60,12 +58,10 @@ const DostOrdersPage = ({navigation}) => {
                 />
               </View>
               <View className="ml-3 mr-1 mb-9 mt-12 pt-1 rounded-xl">
-                
                 <FontAwesomeIcon
                   icon={faCircleUser}
                   size={30}
                   color={'white'}
-                  
                 />
               </View>
             </View>
@@ -73,15 +69,13 @@ const DostOrdersPage = ({navigation}) => {
             <View className=" min-h-screen  rounded-tr-3xl rounded-tl-3xl w-max   bg-white flex  ">
               <View>
                 {data.map(item => (
-
                   <DostButton
                     key={item.id}
                     onPress={handleButtonPress}
                     name={item.name}
                     typeAndMoney={item.typeAndMoney}
-                    handleCheckBoxClick={()=>console.log("check box clicked")}
+                    handleCheckBoxClick={() => console.log('check box clicked')}
                   />
-
                 ))}
               </View>
             </View>
