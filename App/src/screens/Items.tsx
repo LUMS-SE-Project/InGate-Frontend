@@ -11,6 +11,7 @@ import {
   faCircleUser,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
+import KhareedarButton from '../components/KhareedarButton';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 

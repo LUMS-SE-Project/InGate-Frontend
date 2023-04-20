@@ -41,6 +41,7 @@ function App() {
         <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
           <Navigate />
           <Stack.Navigator initialRouteName="AdminPortal">
+
             <Stack.Screen
               name="LandingPage"
               component={LandingPage}
