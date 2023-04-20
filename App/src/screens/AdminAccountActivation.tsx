@@ -8,15 +8,11 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {
-  faCircleUser,
-  faLeftLong,
-} from '@fortawesome/free-solid-svg-icons';
+import {faCircleUser, faLeftLong} from '@fortawesome/free-solid-svg-icons';
 
 import AdminFooter from '../components/AdminFooter';
 
-const AdminAccountActivation = ({navigation} : any) => {
-
+const AdminAccountActivation = ({navigation}: any) => {
   const [blockDeets, setBlockDeets] = useState('');
   const [addComments, setAddComments] = useState('');
 
@@ -125,7 +121,9 @@ const AdminAccountActivation = ({navigation} : any) => {
           }}>
           <AdminFooter
             onReportsPress={() => navigation.navigate('AdminBlockAccount')}
-            onActivationsPress={() => navigation.navigate('AdminAccountActivation')}
+            onActivationsPress={() =>
+              navigation.navigate('AdminAccountActivation')
+            }
           />
         </View>
       </ScrollView>

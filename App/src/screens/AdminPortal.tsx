@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
-
-const AdminPortal = ({navigation} : any) => {
+const AdminPortal = ({navigation}: any) => {
   const [blockDeets, setBlockDeets] = useState('');
 
   const onPressSubmit = () => {
@@ -11,8 +10,11 @@ const AdminPortal = ({navigation} : any) => {
   };
 
   const onPressAccountManagement = () => {
+    console.log('here');
+
     navigation.navigate('AdminAccountActivation');
-  }
+  };
+  
 
   return (
     <View className="min-h-screen min-w-screen flex pt-16 bg-white items-center">
@@ -21,7 +23,9 @@ const AdminPortal = ({navigation} : any) => {
       </Text>
 
       <View style={{flexDirection: 'column'}} className="pt-28">
-        <TouchableOpacity onPress={onPressAccountManagement} className="mt-10 shadow-2xl">
+        <TouchableOpacity
+          onPress={onPressAccountManagement}
+          className="mt-10 shadow-2xl">
           <View
             style={{width: '100%'}}
             className="bg-CTA-primary h-24 rounded-2xl mt-5 shadow-2xl px-16 align-middle justify-center"

@@ -8,8 +8,10 @@ import {
 } from 'react-native';
 // import {Picker} from '@react-native-picker/picker';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faCircleUser, faLeftLong} from '@fortawesome/free-solid-svg-icons';
 import AdminFooter from '../components/AdminFooter';
-const AdminItemRequest = () => {
+const AdminItemRequest = ({navigation}) => {
   const [blockDeets, setBlockDeets] = useState('');
   const [addComments, setAddComments] = useState('');
   // const [bgColor, setBgColor] = useState('');
@@ -35,6 +37,12 @@ const AdminItemRequest = () => {
   const onPressSubmit = () => {
     console.log('Block Details: ', blockDeets);
   };
+  const onPressBack = () => {
+    navigation.navigate('AdminPortal');
+  };
+  const onPressProfile = () => {
+    console.log('Profile button pressed');
+  };
 
   return (
     <KeyboardAvoidingView
@@ -44,11 +52,19 @@ const AdminItemRequest = () => {
         contentContainerStyle={{flexGrow: 1}}
         style={{backgroundColor: '#fff'}}>
         <View className="bg-CTA-primary">
-          {/* INSERT A BACK BUTTON HERE */}
-          <Text className="text-4xl font-Montserrat text-center text-white pb-6 pt-10">
-            Item Request
-          </Text>
-          {/* INSERT A PROFILE BUTTON HERE */}
+          <View className="flex-row">
+            <TouchableOpacity className="mt-10 ml-5" onPress={onPressBack}>
+              <FontAwesomeIcon icon={faLeftLong} size={27} color={'white'} />
+            </TouchableOpacity>
+            <Text className="text-3xl font-Montserrat w-64 text-center text-white pb-6 pt-9 ml-5">
+              Items Request
+            </Text>
+            <TouchableOpacity
+              className="ml-5  mb-9 mt-9 pt-1 rounded-xl"
+              onPress={onPressProfile}>
+              <FontAwesomeIcon icon={faCircleUser} size={30} color={'white'} />
+            </TouchableOpacity>
+          </View>
 
           <View className="min-h-screen h-auto rounded-tr-3xl rounded-tl-3xl w-max bg-white pt-3">
             {data.map((element: any) => {
@@ -93,7 +109,7 @@ const AdminItemRequest = () => {
 
                     <TouchableOpacity
                       onPress={onPressSubmit}
-                      className="mb-4 shadow-2xl ml-7">
+                      className="mb-4 shadow-2xl ml-4">
                       <View
                         style={{
                           width: '100%',
@@ -120,8 +136,10 @@ const AdminItemRequest = () => {
             bottom: 25,
           }}>
           <AdminFooter
-            onReportsPress={() => console.log('Reports button pressed')}
-            onActivationsPress={() => console.log('Activation button pressed')}
+            onReportsPress={() => navigation.navigate('AdminBlockAccount')}
+            onActivationsPress={() =>
+              navigation.navigate('AdminAccountActivation')
+            }
           />
         </View>
       </ScrollView>
