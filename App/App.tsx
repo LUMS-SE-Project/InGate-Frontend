@@ -10,7 +10,9 @@ function App() {
       <NavigationContainer>
         <SafeAreaView className="bg-[#3D63FF]" />
         <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
+
           <Navigate />
+
         </SafeAreaView>
       </NavigationContainer>
     </AuthProvider>

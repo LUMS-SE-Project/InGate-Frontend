@@ -1,28 +1,33 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {
   Platform,
   View,
   TextInput,
   ScrollView,
   KeyboardAvoidingView,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faCircleUser,
   faMagnifyingGlass,
+  faBars,
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarButton from '../components/KhareedarButton';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import React from 'react';
+import SideBar from '../components/SideBar';
 
 export interface ItemsProps {
   navigation: NativeStackScreenProps<any, any>;
 }
 
-const ItemsPage = (props : ItemsProps) => {
-
+const ItemsPage = (props: ItemsProps) => {
   const {navigation} = props;
-  
+  const [sideBar, setSideBar] = useState(false);
+
   const handleButtonPress = () => {
     console.log('Button pressed');
   };
@@ -50,6 +55,12 @@ const ItemsPage = (props : ItemsProps) => {
     // {id: 19, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
     // {id: 120, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
   ];
+  const onPressSideBar = () => {
+    console.log('here');
+
+    setSideBar(true);
+    console.log(sideBar);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -74,13 +85,14 @@ const ItemsPage = (props : ItemsProps) => {
                   placeholder="Search a location"
                 />
               </View>
-              <View className="ml-3 mr-1 mb-9 mt-12 pt-1 rounded-xl">
-                <FontAwesomeIcon
-                  icon={faCircleUser}
-                  size={30}
-                  color={'white'}
-                />
-              </View>
+              <TouchableOpacity
+                onPress={() => {
+                  setSideBar(true);
+                }}>
+                <View className="ml-3 mr-1 mb-9 mt-12 pt-1 rounded-xl">
+                  <FontAwesomeIcon icon={faBars} size={30} color={'white'} />
+                </View>
+              </TouchableOpacity>
             </View>
 
             <View className=" min-h-screen  rounded-tr-3xl rounded-tl-3xl w-max   bg-white flex  ">
@@ -95,9 +107,15 @@ const ItemsPage = (props : ItemsProps) => {
                 ))}
               </View>
             </View>
-            {/* <View className='h-7 bg-white'>
-              <></>
-            </View> */}
+            {sideBar ? (
+              <SideBar
+                onClosePress={() => {
+                  setSideBar(false);
+                }}
+              />
+            ) : (
+              []
+            )}
             <KhareedarDostBottomButtons
               onKhareedarPress={() => console.log('Khareedar button pressed')}
               onDostPress={() => console.log('Dost button pressed')}
