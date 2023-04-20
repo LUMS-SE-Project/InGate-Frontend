@@ -8,16 +8,18 @@ import {
 } from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
-const RequestItem = () => {
+const RequestItem = (props: any) => {
+  const {navigation} = props;
   const [itemName, setItemName] = useState('');
   const [location, setLocation] = useState('');
-  const onPressForgotPassword = () => {
-    console.log('forgot password');
-  };
 
   const onPressSubmit = () => {
     console.log('Item Name:', itemName);
     console.log('Item Location:', location);
+  };
+  const onPressRequestItem = () => {
+    console.log('pressed');
+    navigation.navigate('Restaurant');
   };
   return (
     <KeyboardAvoidingView
@@ -58,13 +60,12 @@ const RequestItem = () => {
               <View className="h-10">
                 <></>
               </View>
+              
               <TouchableOpacity
-                onPress={onPressSubmit}
-                className="mt-10 shadow-2xl">
-                <View
-                  className="h-12 mx-28 rounded-2xl mt-5 shadow-2xl"
-                  shadow-2xl>
-                  <Text className="text-xl font-Questrial text-center mt-2 text-white">
+                onPress={onPressRequestItem}
+                className="mt-10 shadow-2xl bg-CTA-primary mx-10  rounded-xl">
+                <View className="h-16 mx-28 rounded-2xl shadow-2xl ">
+                  <Text className="text-xl font-Questrial text-center  text-black">
                     Request Item
                   </Text>
                 </View>
