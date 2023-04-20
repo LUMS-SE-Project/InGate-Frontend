@@ -1,13 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {SafeAreaView, Text, View, ImageBackground} from 'react-native';
+import {Text, View, ImageBackground} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native';
 import {AuthContext} from '../context/AuthContext';
 import Axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import instance from '../api/api';
-
-const LoginPage = () => {
+const LoginPage = ({navigation, route}) => {
   // set authenticated as true
   const {setToken, setUser, setIsAuthenticated} = useContext(AuthContext);
 
@@ -15,8 +13,12 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
 
   const onPressForgotPassword = () => {
-    console.log('forgot password');
+    navigation.navigate('ForgetPassword');
   };
+
+  const onPressSignUp = () => {
+    navigation.navigate('SignUpPage');
+  }
 
   const onPressSubmit = () => {
     // create form data to send to the server
@@ -96,13 +98,20 @@ const LoginPage = () => {
 
           <TouchableOpacity
             onPress={onPressForgotPassword}
-            className="mt-10 mb-10">
+            className="mt-10 mb-5">
             <Text className="text-lg font-Questrial text-center text-CTA-primary">
               Forgot Password?
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={onPressSignUp}
+            className="mb-10">
+            <Text className="text-lg font-Questrial text-center text-CTA-primary">
+              Don't have an account?
+            </Text>
+          </TouchableOpacity>
 
-          <View className="h-10">
+          <View className="">
             <></>
           </View>
           <TouchableOpacity
