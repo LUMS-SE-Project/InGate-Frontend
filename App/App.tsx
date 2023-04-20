@@ -13,7 +13,8 @@ function App() {
       <NavigationContainer>
         <SafeAreaView className="bg-[#3D63FF]" />
         <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-          <Stack.Navigator initialRouteName="ItemsPage">
+          <Navigate />
+          {/* <Stack.Navigator initialRouteName="ItemsPage">
             <Stack.Screen
               name="ItemsPage"
               component={ItemsPage}
@@ -21,7 +22,7 @@ function App() {
                 headerShown: false,
               }}
             />
-          </Stack.Navigator>
+          </Stack.Navigator> */}
         </SafeAreaView>
       </NavigationContainer>
     </AuthProvider>
