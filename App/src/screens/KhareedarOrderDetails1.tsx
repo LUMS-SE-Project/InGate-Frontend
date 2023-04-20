@@ -205,8 +205,8 @@ const KhareedarOrderDetails1 = ({navigation}) => {
         </View>
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => console.log('Khareedar button pressed')}
-            onDostPress={() => console.log('Dost button pressed')}
+            onKhareedarPress={() => navigation.navigate('Items')}
+            onDostPress={() => navigation.navigate('DostOrdersPage')}
           />
         </View>
       </ScrollView>

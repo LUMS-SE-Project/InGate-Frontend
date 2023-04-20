@@ -204,8 +204,8 @@ const PartialOrder = ({navigation}) => {
               marginBottom: 25,
             }}>
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => console.log('Khareedar button pressed')}
-              onDostPress={() => console.log('Dost button pressed')}
+              onKhareedarPress={() => navigation.navigate('Items')}
+              onDostPress={() => navigation.navigate('DostOrdersPage')}
             />
           </View>
         </View>

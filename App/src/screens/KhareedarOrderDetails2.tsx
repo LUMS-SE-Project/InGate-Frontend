@@ -324,7 +324,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
-const KhareedarOrderDetails2 = () => {
+const KhareedarOrderDetails2 = ({navigation}) => {
   const [blockDeets, setBlockDeets] = useState('');
   const [addComments, setAddComments] = useState('');
   // const [bgColor, setBgColor] = useState('');
@@ -489,8 +489,8 @@ const KhareedarOrderDetails2 = () => {
         </View>
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => console.log('Khareedar button pressed')}
-            onDostPress={() => console.log('Dost button pressed')}
+            onKhareedarPress={() => navigation.navigate('Items')}
+            onDostPress={() => navigation.navigate('DostOrdersPage')}
           />
         </View>
       </ScrollView>
