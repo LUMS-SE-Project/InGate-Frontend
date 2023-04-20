@@ -1,14 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-  ImageBackground,
-  TextInput,
-  TouchableOpacity,
-  Button,
-} from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import {Text, View, TouchableOpacity} from 'react-native';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
 const AdminPortal = () => {

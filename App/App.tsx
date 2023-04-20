@@ -26,7 +26,7 @@ import AdminItemRequest from './src/screens/AdminItemRequest';
 import DostOrders2 from './src/screens/DostOrders2';
 import DostOrders3 from './src/screens/DostOrders3';
 import DostOrders4 from './src/screens/DostOrders4';
-
+import React from 'react';
 import {AuthContext, AuthProvider} from './src/context/AuthContext';
 
 const Stack = createNativeStackNavigator();
@@ -37,7 +37,7 @@ function App() {
       <NavigationContainer>
         <SafeAreaView className="bg-[#3D63FF]" />
         <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
-          <Stack.Navigator initialRouteName="PartialOrder">
+          <Stack.Navigator initialRouteName="AdminPortal">
             <Stack.Screen
               name="LandingPage"
               component={LandingPage}

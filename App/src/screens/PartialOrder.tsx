@@ -1,14 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
-  SafeAreaView,
   Text,
   View,
-  ImageBackground,
   TextInput,
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
-  Vibration,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -20,14 +17,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import {FlatList} from 'react-native-gesture-handler';
-import PrimaryCTA from '../components/PrimaryCTA';
 
 const PartialOrder = () => {
   const [selectGender, setSelectGender] = useState('None');
   const [selectPartial, setSelectPartial] = useState('None');
   const [isClicked, setIsClicked] = useState(true);
   const [isClickedPartial, setIsClickedPartial] = useState(true);
-  const [itemSearched, setItemSearched] = useState('');
   const onPressProfile = () => {
     console.log('Profile button pressed');
   };

@@ -17,7 +17,6 @@ import {
   faLight,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
-import KhareedarButton from '../components/KhareedarButton';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import Bar from '../components/ProgressBar';
 
