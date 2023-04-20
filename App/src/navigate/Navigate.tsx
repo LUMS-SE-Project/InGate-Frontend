@@ -26,6 +26,7 @@ const Navigate = () => {
   //   <LoggedOutNavigate />
   // );
   // <UserNavigate />;
+  return <UserNavigate />;
 };
 
 export default Navigate;

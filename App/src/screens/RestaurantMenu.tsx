@@ -13,7 +13,7 @@ import {
   faCircleUser,
   faMagnifyingGlass,
   faBars,
-  faLeftLong
+  faLeftLong,
 } from '@fortawesome/free-solid-svg-icons';
 import MenuButton from '../components/MenuButton';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
@@ -145,8 +145,8 @@ const RestaurantMenu = (props: any) => {
               []
             )}
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => console.log('Khareedar button pressed')}
-              onDostPress={() => console.log('Dost button pressed')}
+              onKhareedarPress={() => navigation.navigate('Items')}
+              onDostPress={() => navigation.navigate('DostOrdersPage')}
             />
           </View>
         </View>
