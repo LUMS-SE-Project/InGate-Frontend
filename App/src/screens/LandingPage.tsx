@@ -1,11 +1,11 @@
 import React from 'react';
 import {Text, View, ImageBackground} from 'react-native';
 
-const LandingPage = ({navigation}): JSX.Element => {
-  setTimeout(() => {
-    // navigation.navigate('LoginPage');
-    navigation.navigate('ItemsPage');
-  }, 2000);
+export interface LandingPageProps {
+  
+}
+
+const LandingPage = (): JSX.Element => {
 
   return (
     <View className="min-h-screen min-w-screen flex justify-center align-center">

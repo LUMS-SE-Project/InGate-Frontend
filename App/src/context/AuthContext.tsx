@@ -17,21 +17,23 @@ export interface contextInterface {
   setLoading : (loading : boolean) => void;
   setUser : (user : User) => void;
   setToken : (token : string | null) => void;
+  setIsAuthenticated : (isAuthenticated : boolean) => void;
 }
 
 export const AuthContext = createContext<contextInterface>({
-  isAuthenticated: false,
-  token: null,
-  user: {
+  isAuthenticated : false,
+  token : null,
+  user : {
     username: '',
     name: '',
     email: '',
     isAdmin : false,
   },
-  loading: true,
-  setLoading: (loading : boolean) => {},
-  setUser: (user : User) => {},
-  setToken: (token : string | null) => {},
+  loading : true,
+  setLoading : (loading : boolean) => {},
+  setUser : (user : User) => {},
+  setToken : (token : string | null) => {},
+  setIsAuthenticated : (isAuthenticated : boolean) => {},
 });
 
 export interface AuthProviderProps {
@@ -60,9 +62,18 @@ export const AuthProvider = (props : AuthProviderProps) => {
       loading,
       setLoading,
       setUser, 
-      setToken
+      setToken,
+      setIsAuthenticated,
     };
-  }, [isAuthenticated, token, user, loading]);
+  }, [isAuthenticated, token, user, loading, setLoading, setUser, setToken, setIsAuthenticated]);
+
+  const clearStorage = async () => {
+    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('username');
+    await AsyncStorage.removeItem('name');
+    await AsyncStorage.removeItem('email');
+    await AsyncStorage.removeItem('isAdmin');
+  }
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -71,18 +82,17 @@ export const AuthProvider = (props : AuthProviderProps) => {
       const name = await AsyncStorage.getItem('name');
       const email = await AsyncStorage.getItem('email');
       const isAdmin = await AsyncStorage.getItem('isAdmin');
-      if (token) {
+      if (token && username && name && email && isAdmin) {
         setToken(token);
-        setIsAuthenticated(true);
-      }
-      if (username && name && email && isAdmin) {
         setUser({
           username,
           name,
           email,
           isAdmin : isAdmin === 'true' ? true : false,
-        });
+          })
+        setIsAuthenticated(true);
       }
+      setLoading(false)
     }
     checkAuth();
     if (token) {
@@ -91,17 +101,29 @@ export const AuthProvider = (props : AuthProviderProps) => {
           .then((response)=>{
             console.log("In Then for AuthContext",response.data);
             setUser(response.data);
+
           })
           .catch((err)=>{
             console.log("Error: ", err.code, err.message)
+            clearStorage();
+            setToken(null);
+            setUser({
+              username: '',
+              name: '',
+              email: '',
+              isAdmin : false,
+            });
+            setIsAuthenticated(false);
           });
           setLoading(false);
-        
+        }
+        getUser();
       }
-      getUser();
-    }
-
   }, [])
+
+  useEffect(()=>{
+    console.log("In AuthContext: ", isAuthenticated, token, user, loading);
+  }, [isAuthenticated, token, user, loading])
 
   return (
     <AuthContext.Provider value={ProviderValue}>

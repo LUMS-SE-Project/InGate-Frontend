@@ -1,6 +1,8 @@
 import {SafeAreaView} from 'react-native';
-
 import {NavigationContainer} from '@react-navigation/native';
+import {AuthProvider} from './src/context/AuthContext';
+import Navigate from './src/navigate/Navigate';
+function App(): JSX.Element {
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import LandingPage from './src/screens/LandingPage';
@@ -13,7 +15,6 @@ import RequestItem from './src/screens/RequestItemPage';
 import ItemsPage from './src/screens/Items';
 import AdminAccountActivation from './src/screens/AdminAccountActivation';
 import AdminBlockAccount from './src/screens/AdminBlockAccount';
-
 import PartialOrder from './src/screens/PartialOrder';
 import DostFeedback from './src/screens/DostFeedback';
 import KhareedarFeedback from './src/screens/KhareedarFeedback';
@@ -32,11 +33,13 @@ import {AuthContext, AuthProvider} from './src/context/AuthContext';
 const Stack = createNativeStackNavigator();
 
 function App() {
+
   return (
     <AuthProvider>
       <NavigationContainer>
         <SafeAreaView className="bg-[#3D63FF]" />
         <SafeAreaView className="min-h-screen min-w-screen flex justify-center align-middle bg-white">
+          <Navigate />
           <Stack.Navigator initialRouteName="AdminPortal">
             <Stack.Screen
               name="LandingPage"

@@ -1,21 +1,11 @@
-import React, {useState, useEffect, FC} from 'react';
-import {FaCheckCircle} from 'react-icons/fa';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
 import {
-  SafeAreaView,
   Text,
   View,
-  ImageBackground,
-  TextInput,
-  TouchableOpacity,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCheckCircle} from '@fortawesome/free-solid-svg-icons';
-// import {Picker} from '@react-native-picker/picker';
-import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
-const SignUpSuccessful: FC = () => {
+const SignUpSuccessful = () => {
   return (
     <View className="min-h-screen min-w-screen flex pt-16 bg-white items-center">
       <Text className="text-5xl font-Montserrat text-center text-CTA-primary px-14">

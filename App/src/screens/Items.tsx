@@ -1,26 +1,27 @@
-import React from 'react';
+import {useEffect} from 'react';
 import {
-  SafeAreaView,
-  Text,
+  Platform,
   View,
-  ImageBackground,
   TextInput,
-  Button,
-  TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faCircleUser,
-  faLight,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
-import Bar from '../components/ProgressBar';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const ItemsPage = ({navigation}) => {
+export interface ItemsProps {
+  navigation: NativeStackScreenProps<any, any>;
+}
+
+const ItemsPage = (props : ItemsProps) => {
+
+  const {navigation} = props;
+  
   const handleButtonPress = () => {
     console.log('Button pressed');
   };

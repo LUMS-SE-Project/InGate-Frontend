@@ -13,17 +13,7 @@ import {
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
-  faLock,
-  faAirFreshener,
-  faAnchor,
-  faSolid,
-  faCircleXmark,
-  faSharp,
-  fas,
-  faCircleCheck,
-  faCartShopping,
   faCircleUser,
-  faLight,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
