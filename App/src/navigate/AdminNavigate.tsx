@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AdminPortal from '../screens/AdminPortal';
 import AdminAccountActivation from '../screens/AdminAccountActivation';
 import AdminBlockAccount from '../screens/AdminBlockAccount';
-import AdminItemRequest from '../screens/DostOrders2';
+import AdminItemRequest from '../screens/AdminItemRequest';
 
 export const AdminNavigate = () => {
 

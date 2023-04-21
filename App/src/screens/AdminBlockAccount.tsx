@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Platform,
   Text,
@@ -10,62 +10,49 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircleUser, faLeftLong} from '@fortawesome/free-solid-svg-icons';
 import AdminFooter from '../components/AdminFooter';
-const AdminBlockAccount = ({navigation} : any) => {
-  const [blockDeets, setBlockDeets] = useState('');
-  const [addComments, setAddComments] = useState('');
+import BlockCards from '../components/BlockCards';
+import instance from '../api/api';
+import {AuthContext} from '../context/AuthContext';
+
+const AdminBlockAccount = ({navigation}: any) => {
+  const [fluff, setFluff] = useState(0);
+  const {token} = useContext(AuthContext);
+  const [users, setUsers] = useState<any>([]);
+
+  useEffect(() => {
+    instance
+      .get('/admin/all-reported-users', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response: any) => {
+        console.log(response.data['all-reported-users']);
+
+        setUsers(response.data['all-reported-users']);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    instance
+      .get('/admin/all-reported-users', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response: any) => {
+        console.log(response.data['all-reported-users']);
+
+        setUsers(response.data['all-reported-users']);
+      })
+      .catch(err => console.log(err));
+  }, [fluff]);
 
   const [name, setName] = useState('Sarim');
   const [phoneNumber, setPhoneNumber] = useState('03210239865');
   const [email, setEmail] = useState('sarim.khan@gmail.com');
-  const data: any = [
-    {
-      name: 'sarim',
-      email: 'blabla@bla.com',
-      phone: '090078601',
-      explanation:
-        'MY NAME IS SARIM AND TO PARTYMY NAME IS SARIM AND I LIKE TO PARTYMY NAME IS SARIM AND I LIKE TO PARTY',
-    },
-    {
-      name: 'sarim',
-      email: 'blabla@bla.com',
-      phone: '090078601',
-      explanation: 'MY NAME IS SARIM AND I LIKE TO PARTY',
-    },
-    {
-      name: 'sarim',
-      email: 'blabla@bla.com',
-      phone: '090078601',
-      explanation: 'MY NAME IS SARIM AND I LIKE TO PARTY',
-    },
-    {
-      name: 'sarim',
-      email: 'blabla@bla.com',
-      phone: '090078601',
-      explanation: 'MY NAME IS SARIM AND I LIKE TO PARTY',
-    },
-    {
-      name: 'sarim',
-      email: 'blabla@bla.com',
-      phone: '090078601',
-      explanation: 'MY NAME IS SARIM AND I LIKE TO PARTY',
-    },
-    {
-      name: 'sarim',
-      email: 'blabla@bla.com',
-      phone: '090078601',
-      explanation: 'MY NAME IS SARIM AND I LIKE TO PARTY',
-    },
-    {
-      name: 'sarim',
-      email: 'blabla@bla.com',
-      phone: '090078601',
-      explanation: 'MY NAME IS SARIM AND I LIKE TO PARTY',
-    },
-  ];
 
-  const onPressSubmit = () => {
-    console.log('Block Details: ', blockDeets);
-  };
   const onPressProfile = () => {
     console.log('Profile button pressed');
   };
@@ -96,57 +83,13 @@ const AdminBlockAccount = ({navigation} : any) => {
           </View>
 
           <View className="h-auto bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white pt-3">
-            {data.map((element: any) => {
+            {users.map((element: any) => {
               return (
-                <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-auto placeholder-slate-900 mt-5">
-                  <View style={{display: 'flex', flexDirection: 'row'}}>
-                    <View style={{display: 'flex', flexDirection: 'column'}}>
-                      <Text className="w-36 text-base font-Questrial mt-4 ml-1">
-                        {element.name}
-                      </Text>
-                      <Text className="w-36 text-base font-Questrial mt-2 ml-1">
-                        {element.email}
-                      </Text>
-                      <Text className="w-36 text-base font-Questrial mt-2 ml-1">
-                        {element.phone}
-                      </Text>
-                    </View>
-                    <View
-                      style={{display: 'flex', flexDirection: 'column'}}
-                      className="ml-6">
-                      <Text className="w-36 text-base font-Questrial mt-4 ml-1">
-                        {element.name}
-                      </Text>
-                      <Text className="w-36 text-base font-Questrial mt-2 ml-1">
-                        {element.email}
-                      </Text>
-                      <Text className="w-36 text-base font-Questrial mt-2 ml-1">
-                        {element.phone}
-                      </Text>
-                    </View>
-                  </View>
-                  <Text className="text-base font-Questrial mt-4 ml-1">
-                    {element.explanation}
-                  </Text>
-                  <View
-                    style={{flexDirection: 'row', justifyContent: 'center'}}>
-                    <TouchableOpacity
-                      onPress={onPressSubmit}
-                      className="mb-4 shadow-2xl ml-1">
-                      <View
-                        style={{
-                          width: '100%',
-                          backgroundColor: '#F13737',
-                        }}
-                        className="h-12 rounded-2xl mt-5 shadow-2xl px-10"
-                        shadow-2xl>
-                        <Text className="text-xl font-Questrial text-center mt-2 text-white">
-                          Block
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
+                <BlockCards
+                  element={element}
+                  setFluff={setFluff}
+                  fluff={fluff}
+                />
               );
             })}
           </View>
@@ -160,7 +103,9 @@ const AdminBlockAccount = ({navigation} : any) => {
           }}>
           <AdminFooter
             onReportsPress={() => navigation.navigate('AdminBlockAccount')}
-            onActivationsPress={() => navigation.navigate('AdminAccountActivation')}
+            onActivationsPress={() =>
+              navigation.navigate('AdminAccountActivation')
+            }
           />
         </View>
       </ScrollView>

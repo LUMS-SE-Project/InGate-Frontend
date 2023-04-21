@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Platform,
   Text,
@@ -8,40 +8,63 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {
-  faCircleUser,
-  faLeftLong,
-} from '@fortawesome/free-solid-svg-icons';
-
+import {faCircleUser, faLeftLong} from '@fortawesome/free-solid-svg-icons';
 import AdminFooter from '../components/AdminFooter';
+import instance from '../api/api';
+import {AuthContext} from '../context/AuthContext';
+import ActivationCard from '../components/ActivationCard';
 
-const AdminAccountActivation = ({navigation} : any) => {
+const AdminAccountActivation = ({navigation}: any) => {
+  const {token} = useContext(AuthContext);
+  const [fluff, setFluff] = useState(0);
+  const [users, setUsers] = useState([]);
 
-  const [blockDeets, setBlockDeets] = useState('');
-  const [addComments, setAddComments] = useState('');
-
-  const [name, setName] = useState('Sarim');
-  const [phoneNumber, setPhoneNumber] = useState('03210239865');
-  const [email, setEmail] = useState('sarim.khan@gmail.com');
-  const data: any = [
-    {name: 'sarim', email: 'blabla@bla.com', phone: '090078601'},
-    {name: 'Raaahim', email: 'blabla@bla.com', phone: '090078601'},
-    {name: 'Kashif', email: 'blabla@bla.com', phone: '090078601'},
-    {name: 'AAshish', email: 'blabla@bla.com', phone: '090078601'},
-    {name: 'AAdil', email: 'blabla@bla.com', phone: '090078601'},
-    {name: 'Kabir', email: 'blabla@bla.com', phone: '090078601'},
-    {name: 'Jazlan', email: 'blabla@bla.com', phone: '090078601'},
-  ];
-
-  const onPressSubmit = () => {
-    console.log('Block Details: ', blockDeets);
-  };
   const onPressProfile = () => {
     console.log('Profile button pressed');
   };
+
   const onPressBack = () => {
     navigation.navigate('AdminPortal');
   };
+
+  useEffect(() => {
+    instance
+      .get('/admin/signupRequests', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        setUsers(response.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+
+  // get all accounts that need to be verified
+  useEffect(() => {
+    instance
+      .get('/admin/signupRequests', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(response => {
+        setUsers(response.data);
+        console.log(response.data)
+      })
+      .catch(err => console.log(err));
+
+  }, [fluff]);
+
+  const onPressAccept = (data: any) => {
+    console.log(`Accept button pressed for ${data.email}`);
+  }
+
+  const onPressReject = (data: any) => {
+    
+  }
+
 
   return (
     <KeyboardAvoidingView
@@ -66,53 +89,8 @@ const AdminAccountActivation = ({navigation} : any) => {
           </View>
 
           <View className="min-h-screen h-auto rounded-tr-3xl rounded-tl-3xl w-max bg-white pt-3">
-            {data.map((element: any) => {
-              return (
-                <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-auto placeholder-slate-900 mt-5">
-                  <Text className="text-base font-Questrial mt-4 ml-1">
-                    Name: {element.name}
-                  </Text>
-                  <Text className="text-base font-Questrial mt-2 ml-1">
-                    Email: {element.email}
-                  </Text>
-                  <Text className="text-base font-Questrial mt-2 ml-1">
-                    Phone Number: {element.phone}
-                  </Text>
-                  <View style={{flexDirection: 'row'}} className="pt-3">
-                    <TouchableOpacity
-                      onPress={onPressSubmit}
-                      className="mb-4 shadow-2xl ">
-                      <View
-                        style={{
-                          width: '100%',
-                          backgroundColor: '#F13737',
-                        }}
-                        className="h-12 rounded-2xl mt-5 shadow-2xl px-10"
-                        shadow-2xl>
-                        <Text className="text-xl font-Questrial text-center mt-2 text-white">
-                          Reject
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      onPress={onPressSubmit}
-                      className="mb-4 shadow-2xl ml-4">
-                      <View
-                        style={{
-                          width: '100%',
-                          backgroundColor: '#6B85F1',
-                        }}
-                        className="h-12 rounded-2xl mt-5 shadow-2xl px-10"
-                        shadow-2xl>
-                        <Text className="text-xl font-Questrial text-center mt-2 text-white">
-                          Accept
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              );
+            {users.map((element: any) => {
+              return <ActivationCard element={element} setFluff={setFluff} fluff={fluff}/>
             })}
           </View>
         </View>
@@ -125,7 +103,9 @@ const AdminAccountActivation = ({navigation} : any) => {
           }}>
           <AdminFooter
             onReportsPress={() => navigation.navigate('AdminBlockAccount')}
-            onActivationsPress={() => navigation.navigate('AdminAccountActivation')}
+            onActivationsPress={() =>
+              navigation.navigate('AdminAccountActivation')
+            }
           />
         </View>
       </ScrollView>
