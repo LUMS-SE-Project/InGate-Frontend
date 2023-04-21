@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {View, TextInput, ScrollView, KeyboardAvoidingView} from 'react-native';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
@@ -8,14 +8,23 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import DostButton from '../components/DostButton';
+import { AuthContext } from '../context/AuthContext';
+import instance from '../api/api';
+
 
 export interface OrdersProps {
+  whichDostOrder : string;
+  setWhichDostOrder : (whichDostOrder : string) => void;
   setOrderData: (OrderData: any) => void;
   setPage: (page: number) => void;
+  setOrderId: (orderId: string) => void;
 }
 
 const DostOrdersPage = (props: OrdersProps) => {
-  const {setOrderData, setPage} = props;
+  const {setOrderData, setPage, whichDostOrder, setWhichDostOrder, setOrderId} = props;
+
+  const {user, token} = useContext(AuthContext);
+  const [orders, setOrders] = useState<any>([]);
 
   const handleButtonPress = (item: any) => {
     console.log('Button pressed');
@@ -23,6 +32,24 @@ const DostOrdersPage = (props: OrdersProps) => {
     setPage(10);
 
   };
+
+
+  useEffect(()=>{
+    instance.get(
+      `/user/display-orders/${user.email}`,
+      {
+        headers : {
+          Authorization : `Bearer ${token}`
+        }
+      }
+    ).then((res)=>{
+      console.log(res.data)
+      setOrders(res.data["orders"])
+      console.log(orders)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }, [])
 
   // Dummy data for testing purposes
   const data = [
@@ -63,25 +90,27 @@ const DostOrdersPage = (props: OrdersProps) => {
 
             <View className=" min-h-screen  rounded-tr-3xl rounded-tl-3xl w-max   bg-white flex  ">
               <View>
-                {data.map(item => (
+                {orders.map((item : any) => (
                   <DostButton
+                    whichDostOrder={whichDostOrder}
+                    setWhichDostOrder={setWhichDostOrder}
                     setOrderData={setOrderData}
                     item={item}
                     setPage={setPage}
                     name={item.name}
                     typeAndMoney={item.typeAndMoney}
-
-                    handleCheckBoxClick={() => {
-                      setOrderData(item);
-                      setPage(11);
-                    }}
+                    setOrderId={setOrderId}
+                    // handleCheckBoxClick={() => {
+                    //   setOrderData(item);
+                    //   setPage(11);
+                    // }}
 
                   />
                 ))}
               </View>
             </View>
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => setPage(1)}
+              onKhareedarPress={() => setPage(0)}
               onDostPress={() => setPage(9)}
             />
           </View>

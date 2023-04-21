@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect ,useContext} from 'react';
 import {
   Text,
   View,
@@ -15,31 +15,33 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import SideBar from '../components/SideBar';
+import { AuthContext } from '../context/AuthContext';
 
 export interface Khareedar1Props {
   cart: [];
   setPage: (page: number) => void;
 }
 const KhareedarOrderDetails1 = (props: Khareedar1Props) => {
+  const {user} = useContext(AuthContext);
+
   const {cart, setPage} = props;
   const [sideBar, setSideBar] = useState(false);
+  const [total, setTotal ] = useState(0);
 
   const items: any = cart;
 
-  const data: any = [
-    {
-      restname: 'Zakir',
-      name: 'Kabir',
-      phoneNumber: '090078601',
-      ItemName: items,
-      location:
-        'Khyaban-e-Jinnah, opposite Sector U،, Phase 5 D.H.A, Lahore, Punjab 54792',
-    },
-  ];
+  useEffect(()=>{
+    let temp = 0;
+    items.forEach((item : any)=>{
+      if (item) {
+        console.log(`item.item_price * item.quantity = ${item.item_price * item.quantity}`)
+        temp = temp + (item.item_price * item.quantity)
+      }
+    })
+    setTotal(temp)
+  }, [])
 
   const onPressSideBar = () => {
-    console.log('here');
-
     setSideBar(true);
     console.log(sideBar);
   };
@@ -94,7 +96,7 @@ const KhareedarOrderDetails1 = (props: Khareedar1Props) => {
                 </Text>
                 <View>
                   <Text className="20 text-base font-Questrial mt-2 ml-1">
-                    {data[0].name}
+                    {user.name}
                   </Text>
                   <Text className="text-base font-Questrial mt-2 ml-1">
                     Customer Address
@@ -141,7 +143,7 @@ const KhareedarOrderDetails1 = (props: Khareedar1Props) => {
                             flexDirection: 'column',
                           }}>
                           <Text className="w-40 text-lg font-Questrial mt-2 ml-1">
-                            {item.name}
+                            {item["item_name"]}
                           </Text>
                         </View>
                         <View
@@ -150,7 +152,7 @@ const KhareedarOrderDetails1 = (props: Khareedar1Props) => {
                             flexDirection: 'column',
                           }}>
                           <Text className="w-20 text-lg font-Questrial mt-2 ml-2">
-                            {item.quantity}
+                            {item["quantity"]}
                           </Text>
                         </View>
                         <View
@@ -159,7 +161,7 @@ const KhareedarOrderDetails1 = (props: Khareedar1Props) => {
                             flexDirection: 'column',
                           }}>
                           <Text className="w-20 text-lg font-Questrial mt-2 ml-2">
-                            {item.typeAndMoney}
+                            {item["item_price"]}
                           </Text>
                         </View>
 
@@ -176,7 +178,7 @@ const KhareedarOrderDetails1 = (props: Khareedar1Props) => {
                   </View>
                   <View>
                     <Text className="text-lg text-CTA-primary font-Questrial mt-4 ml-20">
-                      Total Price
+                      {total}
                     </Text>
                   </View>
                 </View>
@@ -211,7 +213,7 @@ const KhareedarOrderDetails1 = (props: Khareedar1Props) => {
         )}
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => setPage(1)}
+            onKhareedarPress={() => setPage(0)}
             onDostPress={() => setPage(9)}
           />
         </View>

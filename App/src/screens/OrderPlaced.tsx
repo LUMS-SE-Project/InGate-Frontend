@@ -9,7 +9,7 @@ export interface OrderPlacedProps {
 const OrderPlaced = (props: OrderPlacedProps) => {
   const {setPage} = props;
   const onPressSubmit = () => {
-    setPage(7);
+    setPage(0);
   };
   return (
     <View className="min-h-screen min-w-screen flex pt-16 bg-white items-center">

@@ -1,8 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import RestaurantMenu from '../screens/RestaurantMenu';
-
-import React from 'react';
 import RequestItem from '../screens/RequestItemPage';
 import PartialOrder from '../screens/PartialOrder';
 import KhareedarOrderDetails1 from '../screens/KhareedarOrderDetails1';
@@ -16,6 +14,7 @@ import OrderCompleted from '../screens/OrderCompleted';
 import OrderFailed from '../screens/OrderFailed';
 import KhareedarFeedback from '../screens/KhareedarFeedback';
 import UserFlow from '../screens/UserFlow';
+import CustomerLandingPage from '../screens/CustomerLandingPage';
 export const UserNavigate = () => {
   const Stack = createNativeStackNavigator();
 
@@ -27,6 +26,7 @@ export const UserNavigate = () => {
 
   return (
     <Stack.Navigator initialRouteName="UserFlow">
+      <Stack.Screen name="CustomerLandingPage" component={CustomerLandingPage} />
       <Stack.Screen name="Restaurant" component={RestaurantMenu} />
       <Stack.Screen name="UserFlow" component={UserFlow} />
       <Stack.Screen name="Items" component={ItemsPage} />
@@ -40,7 +40,6 @@ export const UserNavigate = () => {
       <Stack.Screen name="OrderFailed" component={OrderFailed} />
       <Stack.Screen name="KhareedarFeedback" component={KhareedarFeedback} />
 
-
       <Stack.Screen
         name="KhareedarOrderDetails1"
         component={KhareedarOrderDetails1}
@@ -49,7 +48,6 @@ export const UserNavigate = () => {
         name="KhareedarOrderDetails2"
         component={KhareedarOrderDetails2}
       />
-
     </Stack.Navigator>
   );
 };

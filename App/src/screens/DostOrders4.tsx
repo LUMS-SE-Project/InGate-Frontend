@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -17,42 +17,66 @@ import {
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
+import instance from '../api/api';
+import {AuthContext} from '../context/AuthContext';
 export interface Orders1Props {
   orderData: (OrderData: any) => void;
   setPage: (page: number) => void;
+  whichDostOrder: string;
 }
 const DostOrders4 = (props: Orders1Props) => {
-  const {orderData, setPage} = props;
+  const {orderData, setPage, whichDostOrder} = props;
 
-  const [name, setName] = useState('Sarim');
-  const [phoneNumber, setPhoneNumber] = useState('03210239865');
-  const [email, setEmail] = useState('sarim.khan@gmail.com');
-  const items: any = [
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
-    {name: 'Drinks', quantity: '2', price: '20$'},
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
-    {name: 'Drinks', quantity: '2', price: '20$'},
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
-  ];
-  const data: any = [
-    {
-      restname: 'Zakir',
-      name: 'Kabir',
-      phoneNumber: '090078601',
-      ItemName: items,
-      location:
-        'Khyaban-e-Jinnah, opposite Sector U،, Phase 5 D.H.A, Lahore, Punjab 54792',
-    },
-  ];
+  const {token} = useContext(AuthContext);
+  const [orderDetails, setOrderDetails] = useState<any>([]);
+  const [restDeets, setRestDeets] = useState<any>({});
+
+  useEffect(() => {
+    console.log(`Order ID is ${whichDostOrder}`);
+    instance
+      .get(`/user/get-order-detail/${whichDostOrder}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(res => {
+        console.log('hello');
+
+        // console.log(res.data["order"]["items"])
+        setOrderDetails(res.data['order']['items']);
+        setRestDeets(res.data['order']);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   const onPressSuccess = () => {
+    console.log("kabir");
+    
+    console.log(restDeets["_id"]);
+    
+    instance
+      .put(
+        '/user/complete-order',
+        {
+          order_id: restDeets["_id"],
+        }
+        ,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      .then(res => {
+        console.log('hello', res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
     setPage(12);
-  };
-  const onPressFailure = () => {
-    setPage(13);
   };
 
   return (
@@ -85,110 +109,78 @@ const DostOrders4 = (props: Orders1Props) => {
           {/* INSERT A PROFILE BUTTON HERE */}
 
           <View className="h-auto bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white pt-3">
-            {data.map((element: any) => {
-              return (
-                <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-auto placeholder-slate-900 mt-5 pb-8">
-                  <View
-                    className=""
-                    style={{display: 'flex', flexDirection: 'row'}}>
-                    <View
-                      className=""
-                      style={{display: 'flex', flexDirection: 'column'}}>
-                      <Text className="w-36 text-3xl text-CTA-primary font-Questrial mt-4 ml-1">
-                        {element.restname}
-                      </Text>
-                      <Text className="w-36 text-lg font-Questrial mt-10 ml-1">
-                        Name: {element.name}
-                      </Text>
-                      <Text className="text-lg font-Questrial mt-2 ml-1">
-                        Phone: {element.phoneNumber}
-                      </Text>
-                    </View>
-                    <View
-                      className="mt-3 ml-20"
-                      style={{display: 'flex', flexDirection: 'column'}}>
-                      <FontAwesomeIcon
-                        icon={faBurger}
-                        size={80}
-                        color={'#6B85F1'}
-                      />
-                    </View>
-                  </View>
-                  <Text className="text-lg font-Questrial mt-2 ml-1">
-                    Location: {element.location}
+            <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-auto placeholder-slate-900 mt-5 pb-8">
+              <View
+                className=""
+                style={{display: 'flex', flexDirection: 'row'}}>
+                <View
+                  className=""
+                  style={{display: 'flex', flexDirection: 'column'}}>
+                  <Text className="w-36 text-3xl text-CTA-primary font-Questrial mt-4 ml-1">
+                    {restDeets.order_location}
                   </Text>
-                  <View
-                    className="pt-6"
-                    style={{display: 'flex', flexDirection: 'row'}}>
-                    <View style={{display: 'flex', flexDirection: 'column'}}>
-                      <Text className="w-40 text-xl text-CTA-primary font-Questrial mt-2 ml-1">
-                        Item Name
-                      </Text>
-                    </View>
-                    <View style={{display: 'flex', flexDirection: 'column'}}>
-                      <Text className="w-20 text-xl text-CTA-primary font-Questrial mt-2 ml">
-                        Qty
-                      </Text>
-                    </View>
-                    <View style={{display: 'flex', flexDirection: 'column'}}>
-                      <Text className="w-20 text-xl text-CTA-primary font-Questrial mt-2">
-                        Price
-                      </Text>
+                  <Text className="w-78 text-lg font-Questrial  ml-1">
+                    Email: {restDeets.order_email}
+                  </Text>
+                  <Text className="w-78 text-lg font-Questrial  ml-1">
+                    Delivery Location: {restDeets.delivery_location}
+                  </Text>
+                  <Text className="text-lg font-Questrial  ml-1">
+                    Phone: {restDeets.order_number}
+                  </Text>
+                </View>
+              </View>
+              <View
+                className="pt-6"
+                style={{display: 'flex', flexDirection: 'row'}}>
+                <View style={{display: 'flex', flexDirection: 'column'}}>
+                  <Text className="w-40 text-xl text-CTA-primary font-Questrial mt-2 ml-1">
+                    Item Name
+                  </Text>
+                </View>
+                <View style={{display: 'flex', flexDirection: 'column'}}>
+                  <Text className="w-20 text-xl text-CTA-primary font-Questrial mt-2 ml">
+                    Qty
+                  </Text>
+                </View>
+                <View style={{display: 'flex', flexDirection: 'column'}}>
+                  <Text className="w-20 text-xl text-CTA-primary font-Questrial mt-2">
+                    Price
+                  </Text>
+                </View>
+              </View>
+              {orderDetails.map((item: any) => {
+                return (
+                  <View>
+                    <View style={{display: 'flex', flexDirection: 'row'}}>
+                      <View style={{display: 'flex', flexDirection: 'column'}}>
+                        <Text className="w-40 text-lg font-Questrial mt-2 ml-1">
+                          {item.item_name}
+                        </Text>
+                      </View>
+                      <View style={{display: 'flex', flexDirection: 'column'}}>
+                        <Text className="w-20 text-lg font-Questrial mt-2 ml-2">
+                          {item.quantity}
+                        </Text>
+                      </View>
+                      <View style={{display: 'flex', flexDirection: 'column'}}>
+                        <Text className="w-20 text-lg font-Questrial mt-2 ml-2">
+                          {item.item_price}
+                        </Text>
+                      </View>
                     </View>
                   </View>
-                  {items.map((item: any) => {
-                    return (
-                      <View>
-                        <View style={{display: 'flex', flexDirection: 'row'}}>
-                          <View
-                            style={{display: 'flex', flexDirection: 'column'}}>
-                            <Text className="w-40 text-lg font-Questrial mt-2 ml-1">
-                              {item.name}
-                            </Text>
-                          </View>
-                          <View
-                            style={{display: 'flex', flexDirection: 'column'}}>
-                            <Text className="w-20 text-lg font-Questrial mt-2 ml-2">
-                              {item.quantity}
-                            </Text>
-                          </View>
-                          <View
-                            style={{display: 'flex', flexDirection: 'column'}}>
-                            <Text className="w-20 text-lg font-Questrial mt-2 ml-2">
-                              {item.price}
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                    );
-                  })}
-                </View>
-              );
-            })}
+                );
+              })}
+            </View>
           </View>
         </View>
         <View
           style={{flexDirection: 'row', justifyContent: 'center'}}
           className="pt-2 mb-2">
           <TouchableOpacity
-            onPress={onPressFailure}
-            className="mb-4 shadow-2xl ml-1">
-            <View
-              style={{
-                // width: "100%",
-                backgroundColor: '#F13737',
-              }}
-              className="h-20 w-40 rounded-2xl mt-5 shadow-2xl px-8"
-              shadow-2xl>
-              <Text className="text-lg font-Questrial text-center mt-2 text-white">
-                Couldn't{'\n'}Complete
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
             onPress={onPressSuccess}
-            className="mb-4 shadow-2xl ml-7">
+            className="mb-4 shadow-2xl">
             <View
               style={{
                 width: '100%',
@@ -205,7 +197,7 @@ const DostOrders4 = (props: Orders1Props) => {
 
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => setPage(1)}
+            onKhareedarPress={() => setPage(0)}
             onDostPress={() => setPage(9)}
           />
         </View>

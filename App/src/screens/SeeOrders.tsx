@@ -21,36 +21,39 @@ import React from 'react';
 import SideBar from '../components/SideBar';
 import instance from '../api/api';
 import { AuthContext } from '../context/AuthContext';
+import Orders from '../components/Orders';
 
 // export interface ItemsProps {
 //   navigation: NativeStackScreenProps<any, any>;
 // }
 
 export interface ItemsProps {
+  allOrders: any;
+  setAllOrders: (allOrders: any) => void;
+  whichOrder: number;
+  setWhichOrder: (whichOrder: number) => void;
   setPage: (page: number) => void;
-  setLocationSelected: (locationSelected: string) => void;
 }
 
-const ItemsPage = (props: ItemsProps) => {
+const SeeOrders = (props: ItemsProps) => {
+    const {setPage, allOrders, setAllOrders, whichOrder, setWhichOrder} = props;
+  const {token, user} = useContext(AuthContext);
 
-  const {token} = useContext(AuthContext);
-
-  const {setPage, setLocationSelected} = props;
-  const [restaurants, setRestaurants] = useState([]);
   const [sideBar, setSideBar] = useState(false);
-
+  const [orders, setOrders] = useState([]);
 
   useEffect(()=>{
     instance.get(
-      '/user/all-locations',
+     `/user/my-orders/${user.email}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     ).then((response)=>{
-      console.log(response.data["all-locations"])
-      setRestaurants(response.data["all-locations"])
+      console.log(response.data)
+      setOrders(response.data["orders"])
+      setAllOrders(response.data["orders"])
     }).catch((err)=>{
       console.log(err)
     })
@@ -91,11 +94,15 @@ const ItemsPage = (props: ItemsProps) => {
 
             <View className=" min-h-screen  rounded-tr-3xl rounded-tl-3xl w-max   bg-white flex  ">
               <View>
-                {restaurants.map((item: any) => {
+                {orders.map((item: any) => {
                   return (
-                    <KhareedarButton
-                      setLocationSelected={setLocationSelected}
-                      name={item.location_name}
+                    <Orders
+                      name={item.order_location}
+                      number = {item.order_number}
+                      partial_order = {item.partial_order}
+                      accepted = {item.accepted}
+                      total_price = {item.total_price}
+                      setWhichOrder={setWhichOrder}
                       setPage={setPage}
                     />
                   );
@@ -122,4 +129,4 @@ const ItemsPage = (props: ItemsProps) => {
   );
 };
 
-export default ItemsPage;
+export default SeeOrders;

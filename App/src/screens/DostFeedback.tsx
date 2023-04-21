@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Text,
   View,
@@ -8,6 +8,8 @@ import {
   ScrollView,
 } from 'react-native';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
+import instance from '../api/api';
+import {AuthContext} from '../context/AuthContext';
 
 export interface FeedbackProps {
   reason: string;
@@ -16,24 +18,77 @@ export interface FeedbackProps {
   setReason: (reason: string) => void;
   setAdditional: (additional: string) => void;
   setBlock: (block: boolean) => void;
+  orderId: string;
+  
 }
 
 const DostFeedback = (props: FeedbackProps) => {
-  const {reason, additional, setPage, setReason, setAdditional, setBlock} =
-    props;
-  const [blockDeets, setBlockDeets] = useState('');
-  const [addComments, setAddComments] = useState('');
+  const {
+    reason,
+    additional,
+    setPage,
+    setReason,
+    setAdditional,
+    setBlock,
+    orderId
+  } = props;
 
-  const [name, setName] = useState('Sarim');
-  const [phoneNumber, setPhoneNumber] = useState('03210239865');
+  const {user, token} = useContext(AuthContext);
+  const [orderDetails, setOrderDetails] = useState<any>([]);
+  const [restDeets, setRestDeets] = useState<any>({});
+
+  useEffect(() => {
+    console.log(`Order ID is ${orderId}`);
+    instance
+      .get(`/user/get-order-detail/${orderId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(res => {
+        console.log('hello');
+
+        // console.log(res.data["order"]["items"])
+        setOrderDetails(res.data['order']['items']);
+        setRestDeets(res.data['order']);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   const onPressBlock = () => {
     setBlock(true);
-    setPage(1);
+
+    instance
+      .post(
+        '/user/report-user',
+        {
+          reporter_email: user.email,
+          reportee_email: restDeets["order_email"],
+          situation: reason,
+          additional_comments: additional,
+          approved_by_admin: 0
+        }
+        ,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      )
+      .then(res => {
+        console.log('hello', res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    setPage(0);
   };
   const onPressContinue = () => {
     setBlock(false);
-    setPage(1);
+
+    setPage(0);
   };
 
   return (
@@ -48,16 +103,16 @@ const DostFeedback = (props: FeedbackProps) => {
             Dost Feedback
           </Text>
           <View className="h-auto rounded-tr-3xl rounded-tl-3xl w-max bg-white">
-            <View>
+          <View>
               <Text className="text-2xl font-Questrial text-CTA-primary pl-8 mt-10 mb-2">
                 Dost Details
               </Text>
               <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-36 placeholder-slate-900">
                 <Text className="text-base font-Questrial mt-4 mb-2 ml-1">
-                  Name: {name}
+                  Email: {restDeets.order_email}
                 </Text>
                 <Text className="text-base font-Questrial mt-2 mb-2 ml-1">
-                  Phone Number: {phoneNumber}
+                  Phone Number: {restDeets.order_number}
                 </Text>
               </View>
             </View>
@@ -130,7 +185,7 @@ const DostFeedback = (props: FeedbackProps) => {
 
             <View>
               <KhareedarDostBottomButtons
-                onKhareedarPress={() => setPage(1)}
+                onKhareedarPress={() => setPage(0)}
                 onDostPress={() => setPage(9)}
               />
             </View>

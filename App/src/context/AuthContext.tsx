@@ -19,6 +19,7 @@ export interface contextInterface {
   setUser : (user : User) => void;
   setToken : (token : string | null) => void;
   setIsAuthenticated : (isAuthenticated : boolean) => void;
+  logout : () => void;
 }
 
 export const AuthContext = createContext<contextInterface>({
@@ -35,6 +36,7 @@ export const AuthContext = createContext<contextInterface>({
   setUser : (user : User) => {},
   setToken : (token : string | null) => {},
   setIsAuthenticated : (isAuthenticated : boolean) => {},
+  logout : () => {},
 });
 
 export interface AuthProviderProps {
@@ -55,6 +57,26 @@ export const AuthProvider = (props : AuthProviderProps) => {
   });
   const [loading, setLoading] = useState<boolean>(true);
 
+  const clearStorage = async () => {
+    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('username');
+    await AsyncStorage.removeItem('name');
+    await AsyncStorage.removeItem('email');
+    await AsyncStorage.removeItem('isAdmin');
+  }
+
+  const logout = async () => {
+    await clearStorage();
+    setToken(null);
+    setUser({
+      username: '',
+      name: '',
+      email: '',
+      isAdmin : false,
+    });
+    setIsAuthenticated(false);
+  }
+
   const ProviderValue = useMemo<contextInterface>(() => {
     return {
       isAuthenticated,
@@ -65,16 +87,11 @@ export const AuthProvider = (props : AuthProviderProps) => {
       setUser, 
       setToken,
       setIsAuthenticated,
+      logout,
     };
-  }, [isAuthenticated, token, user, loading, setLoading, setUser, setToken, setIsAuthenticated]);
+  }, [isAuthenticated, token, user, loading, setLoading, setUser, setToken, setIsAuthenticated, logout]);
 
-  const clearStorage = async () => {
-    await AsyncStorage.removeItem('token');
-    await AsyncStorage.removeItem('username');
-    await AsyncStorage.removeItem('name');
-    await AsyncStorage.removeItem('email');
-    await AsyncStorage.removeItem('isAdmin');
-  }
+
 
   useEffect(() => {
     const checkAuth = async () => {

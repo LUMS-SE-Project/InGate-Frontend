@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
+  Platform,
   Text,
   View,
   TextInput,
@@ -19,9 +20,12 @@ import {
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import {FlatList} from 'react-native-gesture-handler';
 import SideBar from '../components/SideBar';
+import { AuthContext } from '../context/AuthContext';
+import instance from '../api/api';
 
 export interface PartialProps {
   custLocation: string;
+  cart: any;
   setPage: (page: number) => void;
   setPartial: (partial: boolean) => void;
   setCustLocation: (custLocation: string) => void;
@@ -29,8 +33,10 @@ export interface PartialProps {
 }
 
 const PartialOrder = (props: PartialProps) => {
-  const {custLocation, setPage, setPartial, setCustLocation, setGenderPref} =
+  const {custLocation, cart,  setPage, setPartial, setCustLocation, setGenderPref} =
     props;
+
+  const {token, user} = useContext(AuthContext);
 
   const [sideBar, setSideBar] = useState(false);
   const [selectGender, setSelectGender] = useState('None');
@@ -41,12 +47,46 @@ const PartialOrder = (props: PartialProps) => {
     console.log('Profile button pressed');
   };
   const onPressBack = () => {
-    console.log('back Button pressed');
     setPage(4);
   };
-  const onPressSubmit = () => {
-    console.log('Order Placed');
-    setPage(6);
+  const onPressSubmit = async () => {
+    console.log(cart)
+    const sendingCart : any = [];
+
+    cart.forEach((item: any) => {
+      sendingCart.push({
+        item_name: item.item_name,
+        item_price: item.item_price,
+        item_description: item.item_desription,
+        item_location: custLocation,
+        quantity: item.quantity,
+      });
+    })
+
+    instance.post(
+      '/user/place-order',
+      {
+        items : sendingCart,
+        gender_preference : selectGender,
+        partial_order : selectPartial,
+        order_email : user.email,
+        delivery_location : custLocation,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then((res)=>{
+      console.log(res.data)
+      setPage(6);
+    }).catch((err)=>{
+      console.log(err)
+    })
+
+
+
+    
   };
   const options = [
     {id: 1, name: 'Yes'},
@@ -57,6 +97,7 @@ const PartialOrder = (props: PartialProps) => {
     {id: 2, name: 'Female'},
     {id: 3, name: 'None'},
   ];
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -249,7 +290,7 @@ const PartialOrder = (props: PartialProps) => {
               marginBottom: 25,
             }}>
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => setPage(1)}
+              onKhareedarPress={() => setPage(0)}
               onDostPress={() => setPage(9)}
             />
           </View>
