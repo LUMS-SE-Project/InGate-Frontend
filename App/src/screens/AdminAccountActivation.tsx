@@ -106,6 +106,9 @@ const AdminAccountActivation = ({navigation}: any) => {
             onActivationsPress={() =>
               navigation.navigate('AdminAccountActivation')
             }
+            onActivationsPress={() =>
+              navigation.navigate('AdminAccountActivation')
+            }
           />
         </View>
       </ScrollView>

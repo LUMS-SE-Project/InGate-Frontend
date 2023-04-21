@@ -1,10 +1,18 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
 
-const KhareedarButton = ({onPress, name, typeAndMoney}) => {
+const KhareedarButton = ({
+  setLocationSelected,
+  name,
+  typeAndMoney,
+  setPage,
+}) => {
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={() => {
+        setLocationSelected(name);
+        setPage(2);
+      }}
       style={{
         width: '90%',
         height: 60,

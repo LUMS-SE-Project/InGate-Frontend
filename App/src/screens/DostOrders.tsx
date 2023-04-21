@@ -1,36 +1,32 @@
 import React, {useState} from 'react';
-import {
-  View,
-  TextInput,
-  Button,
-  TouchableOpacity,
-  ScrollView,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {View, TextInput, ScrollView, KeyboardAvoidingView} from 'react-native';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faCircleUser,
   faMagnifyingGlass,
-  faBurger,
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import DostButton from '../components/DostButton';
-// import Bar from '../components/ProgressBar';
 
-const DostOrdersPage = ({navigation}) => {
-  const [colourChange, setColourChange] = useState(true);
-  const handleButtonPress = () => {
+export interface OrdersProps {
+  setOrderData: (OrderData: any) => void;
+  setPage: (page: number) => void;
+}
+
+const DostOrdersPage = (props: OrdersProps) => {
+  const {setOrderData, setPage} = props;
+
+  const handleButtonPress = (item: any) => {
     console.log('Button pressed');
+    setOrderData(item);
+    setPage(10);
+
   };
 
   // Dummy data for testing purposes
   const data = [
-    {id: 1, name: 'Restaurant A', typeAndMoney: 'Food Type 1, $10'},
-    {id: 2, name: 'Restaurant B', typeAndMoney: 'Food Type 2, $15'},
-    {id: 3, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 4, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 5, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
+    {id: 1, name: 'Zakir', typeAndMoney: 'Rs 1030'},
   ];
 
   return (
@@ -69,21 +65,24 @@ const DostOrdersPage = ({navigation}) => {
               <View>
                 {data.map(item => (
                   <DostButton
-                    key={item.id}
-                    onPress={handleButtonPress}
+                    setOrderData={setOrderData}
+                    item={item}
+                    setPage={setPage}
                     name={item.name}
                     typeAndMoney={item.typeAndMoney}
-                    handleCheckBoxClick={() => console.log('check box clicked')}
+
+                    handleCheckBoxClick={() => {
+                      setOrderData(item);
+                      setPage(11);
+                    }}
+
                   />
                 ))}
               </View>
             </View>
-            {/* <View className='h-7 bg-white'>
-              <></>
-            </View> */}
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => console.log('Khareedar button pressed')}
-              onDostPress={() => console.log('Dost button pressed')}
+              onKhareedarPress={() => setPage(1)}
+              onDostPress={() => setPage(9)}
             />
           </View>
         </View>

@@ -1,27 +1,36 @@
 import React, {useState, useEffect} from 'react';
 import {
-  SafeAreaView,
   Text,
   View,
-  ImageBackground,
   TextInput,
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-// import {Picker} from '@react-native-picker/picker';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
-const KhareedarFeedback = () => {
-  const [blockDeets, setBlockDeets] = useState('');
-  const [addComments, setAddComments] = useState('');
-  // const [bgColor, setBgColor] = useState('');
+export interface FeedbackProps {
+  reason: string;
+  additional: string;
+  setPage: (page: number) => void;
+  setReason: (reason: string) => void;
+  setAdditional: (additional: string) => void;
+  setBlock: (block: boolean) => void;
+}
 
+const KhareedarFeedback = (props: FeedbackProps) => {
+  const {reason, additional, setPage, setReason, setAdditional, setBlock} =
+    props;
   const [name, setName] = useState('Sarim');
   const [phoneNumber, setPhoneNumber] = useState('03210239865');
 
-  const onPressSubmit = () => {
-    console.log('Block Details: ', blockDeets);
+  const onPressBlock = () => {
+    setBlock(true);
+    setPage(9);
+  };
+  const onPressContinue = () => {
+    setBlock(false);
+    setPage(9);
   };
 
   return (
@@ -64,8 +73,8 @@ const KhareedarFeedback = () => {
                   className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-24 placeholder-slate-900"
                   placeholder="Enter your roll number"
                   multiline
-                  value={blockDeets}
-                  onChangeText={blockDeets => setBlockDeets(blockDeets)}
+                  value={reason}
+                  onChangeText={reason1 => setReason(reason1)}
                 />
               </View>
             </View>
@@ -80,19 +89,19 @@ const KhareedarFeedback = () => {
                   className="shadow-2xl mx-8 rounded-xl bg-gray-100 px-4 h-24 placeholder-slate-900"
                   placeholder="Enter your roll number"
                   multiline
-                  value={addComments}
-                  onChangeText={addComments => setAddComments(addComments)}
+                  value={additional}
+                  onChangeText={additional1 => setAdditional(additional1)}
                 />
               </View>
             </View>
             <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
-                onPress={blockDeets == '' ? () => {} : onPressSubmit}
+                onPress={reason == '' ? () => {} : onPressBlock}
                 className="mt-10 mb-10 shadow-2xl">
                 <View
                   style={{
                     width: '100%',
-                    backgroundColor: blockDeets == '' ? '#9C9C9C' : '#F13737',
+                    backgroundColor: reason == '' ? '#9C9C9C' : '#F13737',
                   }}
                   className="h-12 mx-9 rounded-2xl mt-5 shadow-2xl px-4"
                   shadow-2xl>
@@ -103,12 +112,12 @@ const KhareedarFeedback = () => {
               </TouchableOpacity>
 
               <TouchableOpacity
-                onPress={blockDeets == '' ? onPressSubmit : () => {}}
+                onPress={reason == '' ? onPressContinue : () => {}}
                 className="mt-10  mb-10 shadow-2xl px-4">
                 <View
                   style={{
                     width: '100%',
-                    backgroundColor: blockDeets == '' ? '#6B85F1' : '#9C9C9C',
+                    backgroundColor: reason == '' ? '#6B85F1' : '#9C9C9C',
                   }}
                   className="h-12 mx-9 rounded-2xl mt-5 shadow-2xl px-4"
                   shadow-2xl>
@@ -122,8 +131,8 @@ const KhareedarFeedback = () => {
         </View>
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => console.log('Khareedar button pressed')}
-            onDostPress={() => console.log('Dost button pressed')}
+            onKhareedarPress={() => setPage(1)}
+            onDostPress={() => setPage(9)}
           />
         </View>
       </ScrollView>

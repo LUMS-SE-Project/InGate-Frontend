@@ -1,30 +1,28 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import {faCircleXmark} from '@fortawesome/free-solid-svg-icons';
 
-export interface OrderPlacedProps {
+export interface FailProps {
   setPage: (page: number) => void;
 }
-const OrderPlaced = (props: OrderPlacedProps) => {
+
+const OrderFailed = (props: FailProps) => {
   const {setPage} = props;
+
   const onPressSubmit = () => {
-    setPage(7);
+    setPage(14);
   };
   return (
     <View className="min-h-screen min-w-screen flex pt-16 bg-white items-center">
       <Text className="text-5xl font-Montserrat text-center text-CTA-primary">
-        Order Placed
+        Order Failed
       </Text>
       <View className="p-6 mt-16">
-        <FontAwesomeIcon icon={faCheckCircle} size={200} color={'green'} />
+        <FontAwesomeIcon icon={faCircleXmark} size={200} color={'red'} />
       </View>
       <Text className="text-xl font-Montserrat text-center pt-16 text-CTA-primary px-14">
-        Your order has been placed.{'\n'}
-        We are looking for a dost to accept your order.
-      </Text>
-      <Text className="text-xl font-Montserrat text-center pt-16 text-CTA-primary px-14">
-        Check back in a few minutes
+        Order could not be completed.
       </Text>
       <TouchableOpacity
         onPress={onPressSubmit}
@@ -41,4 +39,4 @@ const OrderPlaced = (props: OrderPlacedProps) => {
   );
 };
 
-export default OrderPlaced;
+export default OrderFailed;

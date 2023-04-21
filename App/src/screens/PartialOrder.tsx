@@ -13,14 +13,28 @@ import {
   faAngleUp,
   faCircleUser,
   faLeftLong,
+  faBars,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import {FlatList} from 'react-native-gesture-handler';
+import SideBar from '../components/SideBar';
 
-const PartialOrder = ({navigation}) => {
+export interface PartialProps {
+  custLocation: string;
+  setPage: (page: number) => void;
+  setPartial: (partial: boolean) => void;
+  setCustLocation: (custLocation: string) => void;
+  setGenderPref: (genderPref: string) => void;
+}
+
+const PartialOrder = (props: PartialProps) => {
+  const {custLocation, setPage, setPartial, setCustLocation, setGenderPref} =
+    props;
+
+  const [sideBar, setSideBar] = useState(false);
   const [selectGender, setSelectGender] = useState('None');
-  const [selectPartial, setSelectPartial] = useState('None');
+  const [selectPartial, setSelectPartial] = useState<any>('None');
   const [isClicked, setIsClicked] = useState(true);
   const [isClickedPartial, setIsClickedPartial] = useState(true);
   const onPressProfile = () => {
@@ -28,14 +42,20 @@ const PartialOrder = ({navigation}) => {
   };
   const onPressBack = () => {
     console.log('back Button pressed');
+    setPage(4);
   };
   const onPressSubmit = () => {
     console.log('Order Placed');
-    navigation.navigate('OrderPlaced');
+    setPage(6);
   };
   const options = [
     {id: 1, name: 'Yes'},
     {id: 2, name: 'No'},
+  ];
+  const optionsGender = [
+    {id: 1, name: 'Male'},
+    {id: 2, name: 'Female'},
+    {id: 3, name: 'None'},
   ];
   return (
     <KeyboardAvoidingView
@@ -64,17 +84,16 @@ const PartialOrder = ({navigation}) => {
                 />
               </View>
               <TouchableOpacity
-                className="ml-2 mr-1 mb-9 mt-6 pt-1 rounded-xl"
-                onPress={onPressProfile}>
-                <FontAwesomeIcon
-                  icon={faCircleUser}
-                  size={30}
-                  color={'white'}
-                />
+                onPress={() => {
+                  setSideBar(true);
+                }}>
+                <View className="ml-5 mr-1 mb-9 mt-12 pt-1 rounded-xl">
+                  <FontAwesomeIcon icon={faBars} size={30} color={'white'} />
+                </View>
               </TouchableOpacity>
             </View>
 
-            <View className="h-4/5 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
+            <View className="h-auto rounded-tr-3xl rounded-tl-3xl w-max bg-white">
               <Text className="text-CTA-primary mt-8 ml-10 mb-2 text-2xl">
                 Partial Order
               </Text>
@@ -115,6 +134,11 @@ const PartialOrder = ({navigation}) => {
                           <View className="mt-3 bg-gray-200 rounded-lg text-2xl ">
                             <TouchableOpacity
                               onPress={() => {
+                                if (item.name === 'Yes') {
+                                  setPartial(true);
+                                } else if (item.name === 'No') {
+                                  setPartial(false);
+                                }
                                 setSelectPartial(item.name);
                                 setIsClickedPartial(true);
                               }}>
@@ -164,13 +188,14 @@ const PartialOrder = ({navigation}) => {
                     []
                   ) : (
                     <FlatList
-                      data={options}
+                      data={optionsGender}
                       renderItem={({item, index}) => {
                         return (
                           <View className="mt-3 bg-gray-200 rounded-lg text-2xl ">
                             <TouchableOpacity
                               onPress={() => {
                                 setSelectGender(item.name);
+                                setGenderPref(item.name);
                                 setIsClicked(true);
                               }}>
                               <Text className="text-xl py-3 px-3 w-64 text-black ">
@@ -184,11 +209,22 @@ const PartialOrder = ({navigation}) => {
                   )}
                 </View>
               </View>
+              <View className="mb-10">
+                <Text className="text-2xl font-Questrial  text-CTA-primary  pl-11  mb-2">
+                  Delivery Address
+                </Text>
+                <TextInput
+                  className="shadow-2xl mx-10 rounded-xl bg-gray-200 px-4  h-12 placeholder-slate-900"
+                  placeholder="Enter your address"
+                  value={custLocation}
+                  onChangeText={address => setCustLocation(address)}
+                />
+              </View>
               <TouchableOpacity
                 onPress={onPressSubmit}
                 className="my-5 shadow-2xl">
                 <View
-                  className="bg-CTA-primary h-14 mx-24 rounded-3xl  shadow-2xl"
+                  className="bg-CTA-primary h-14 mx-24 rounded-3xl  mb-5 shadow-2xl"
                   shadow-2xl>
                   <Text className="text-3xl font-Questrial text-center mt-3 text-white">
                     Place Order
@@ -197,15 +233,24 @@ const PartialOrder = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
+          {/* This is the side bar functionality */}
+          {sideBar ? (
+            <SideBar
+              onClosePress={() => {
+                setSideBar(false);
+              }}
+            />
+          ) : (
+            []
+          )}
           <View
             style={{
-              position: 'absolute',
               bottom: 0,
               marginBottom: 25,
             }}>
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => console.log('Khareedar button pressed')}
-              onDostPress={() => console.log('Dost button pressed')}
+              onKhareedarPress={() => setPage(1)}
+              onDostPress={() => setPage(9)}
             />
           </View>
         </View>

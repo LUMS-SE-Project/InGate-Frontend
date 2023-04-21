@@ -96,8 +96,10 @@ const AdminItemRequest = ({navigation} : any) => {
             bottom: 25,
           }}>
           <AdminFooter
-            onReportsPress={() => console.log('Reports button pressed')}
-            onActivationsPress={() => console.log('Activation button pressed')}
+            onReportsPress={() => navigation.navigate('AdminBlockAccount')}
+            onActivationsPress={() =>
+              navigation.navigate('AdminAccountActivation')
+            }
           />
         </View>
       </ScrollView>
