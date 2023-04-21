@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   Text,
   View,
@@ -10,35 +10,47 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBurger, faLeftLong} from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
+import instance from '../api/api';
+import { AuthContext } from '../context/AuthContext';
 
 export interface OrdersProps {
   orderData: (OrderData: any) => void;
   setPage: (page: number) => void;
+  whichDostOrder : string;
 }
 
 const DostOrders3 = (props:OrdersProps) => {
-  const {orderData, setPage} = props;
+  const {orderData, setPage, whichDostOrder} = props;
+  const {token} = useContext(AuthContext);
+  const [orderDetails, setOrderDetails] = useState<any>([])
+  const [restDeets, setRestDeets] = useState<any>({})
 
-  const [name, setName] = useState('Sarim');
-  const [phoneNumber, setPhoneNumber] = useState('03210239865');
-  const [email, setEmail] = useState('sarim.khan@gmail.com');
-  const items: any = [
-    {name: 'Malai Boti', quantity: '2', price: 'Rs 800'},
-    {name: 'Chicken Tikka', quantity: '1', price: 'Rs 230'},
-  ];
-  const data: any = [
-    {
-      restname: 'Zakir',
-      name: 'Jazlan',
-      phoneNumber: '090078601',
-      ItemName: items,
-      location:
-        'LUMS',
-    },
-  ];
+
+  const [items, setItems] = useState([]);
+
+  useEffect(()=>{
+    console.log(`Order ID is ${whichDostOrder}`)
+    instance.get(
+      `/user/get-order-detail/${whichDostOrder}`,
+      {
+        headers : {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    ).then((res)=>{
+      console.log('hello');
+      
+      // console.log(res.data["order"]["items"])
+      setOrderDetails(res.data["order"]["items"])
+      setRestDeets(res.data["order"])
+      
+    }).catch((err)=>{
+      console.log(err)
+    }
+    )
+  }, [])
 
   const onPressBack = () => {
-    console.log('back Button pressed');
     setPage(9);
   };
 
@@ -60,8 +72,6 @@ const DostOrders3 = (props:OrdersProps) => {
           </View>
 
           <View className="h-auto rounded-tr-3xl rounded-tl-3xl w-max bg-white pt-3">
-            {data.map((element: any) => {
-              return (
                 <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 mb-5 px-4 h-auto placeholder-slate-900 mt-5 pb-8">
                   <View
                     className=""
@@ -70,29 +80,20 @@ const DostOrders3 = (props:OrdersProps) => {
                       className=""
                       style={{display: 'flex', flexDirection: 'column'}}>
                       <Text className="w-36 text-3xl text-CTA-primary font-Questrial mt-4 ml-1">
-                        {element.restname}
+                        {restDeets.order_location}
                       </Text>
-                      <Text className="w-36 text-lg font-Questrial mt-10 ml-1">
-                        Name: {element.name}
+                      <Text className="w-78 text-lg font-Questrial  ml-1">
+                        Email: {restDeets.order_email}
                       </Text>
-                      <Text className="text-lg font-Questrial mt-2 ml-1">
-                        Phone: {element.phoneNumber}
+                      <Text className="w-78 text-lg font-Questrial  ml-1">
+                        Delivery Location: {restDeets.delivery_location}
                       </Text>
-                    </View>
-                    <View
-                      className="mt-3 ml-20"
-                      style={{display: 'flex', flexDirection: 'column'}}>
-                      <FontAwesomeIcon
-                        icon={faBurger}
-                        size={80}
-                        color={'#6B85F1'}
-                      />
+                      <Text className="text-lg font-Questrial  ml-1">
+                        Phone: {restDeets.order_number}
+                      </Text>
                     </View>
                   </View>
-
-                  <Text className="text-lg font-Questrial mt-2 ml-1">
-                    Location: {element.location}
-                  </Text>
+                    
 
                   <View
                     className="pt-6"
@@ -113,14 +114,14 @@ const DostOrders3 = (props:OrdersProps) => {
                       </Text>
                     </View>
                   </View>
-                  {items.map((item: any) => {
+                  {orderDetails.map((item: any) => {
                     return (
                       <View>
                         <View style={{display: 'flex', flexDirection: 'row'}}>
                           <View
                             style={{display: 'flex', flexDirection: 'column'}}>
                             <Text className="w-40 text-lg font-Questrial mt-2 ml-1">
-                              {item.name}
+                              {item.item_name}
                             </Text>
                           </View>
                           <View
@@ -132,7 +133,7 @@ const DostOrders3 = (props:OrdersProps) => {
                           <View
                             style={{display: 'flex', flexDirection: 'column'}}>
                             <Text className="w-20 text-lg font-Questrial mt-2 ml-2">
-                              {item.price}
+                              {item.item_price}
                             </Text>
                           </View>
                         </View>
@@ -140,14 +141,12 @@ const DostOrders3 = (props:OrdersProps) => {
                     );
                   })}
                 </View>
-              );
-            })}
           </View>
         </View>
         <View className='w-3/4 h-72'></View>
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => setPage(1)}
+            onKhareedarPress={() => setPage(0)}
             onDostPress={() => setPage(9)}
           />
         </View>

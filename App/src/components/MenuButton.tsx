@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {TouchableOpacity, Text, View, TextInput} from 'react-native';
 import {useState} from 'react';
 
-const MenuButton = ({name, typeAndMoney, item}) => {
+const MenuButton = ({name, price, description, item, AddToCart, RemoveFromCart}: any) => {
   const [value, setValue] = useState(item.quantity);
+
+  useEffect(()=>{
+
+
+
+  }, [])
+
+  useEffect(()=>{
+    setValue(item.quantity)
+  }, [])
+
 
   const onDecrement = () => {
     setValue(value - 1);
-    item.quantity = value;
+    RemoveFromCart(item);
   };
   const onIncrement = () => {
     setValue(value + 1);
-    item.quantity = value;
+    AddToCart(item);
   };
+
+
   return (
     <View
       style={{
         width: '90%',
-        height: 60,
+        height: 'auto',
         backgroundColor: 'rgb(229, 231, 235)',
         borderRadius: 20,
         justifyContent: 'center',
@@ -29,7 +42,7 @@ const MenuButton = ({name, typeAndMoney, item}) => {
         flexDirection: 'row',
       }}>
       <View className="w-48">
-        <Text style={{fontSize: 24, paddingLeft: 10, paddingTop: 0}}>
+        <Text style={{fontSize: 24, paddingLeft: 5, paddingTop: 0}}>
           {name}
         </Text>
         <Text
@@ -37,9 +50,17 @@ const MenuButton = ({name, typeAndMoney, item}) => {
             fontSize: 16,
             paddingLeft: 10,
             paddingTop: 5,
-            paddingBottom: 20,
           }}>
-          {typeAndMoney}
+          {description}
+        </Text>
+        <Text
+          style={{
+            fontSize: 16,
+            paddingLeft: 10,
+            paddingTop: 5,
+            paddingBottom: 10,
+          }}>
+          Rs. {price}
         </Text>
       </View>
       <View className="flex-row pt-3">

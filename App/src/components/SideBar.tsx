@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {TouchableOpacity, View, Text} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
@@ -10,8 +10,12 @@ import {
   faTriangleExclamation,
   faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
+import { AuthContext } from '../context/AuthContext';
 
 const SideBar = ({onClosePress}: any) => {
+
+  const {logout} = useContext(AuthContext);
+
   const onHomePress = () => {
     console.log('Home');
   };
@@ -23,6 +27,7 @@ const SideBar = ({onClosePress}: any) => {
   };
   const onLogoutPress = () => {
     console.log('Logout');
+    logout();
   };
   return (
     <View className="absolute bg-CTA-primary w-64 right-0 top-0 h-full rounded-l-lg">

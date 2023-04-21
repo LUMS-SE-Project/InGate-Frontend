@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import {
   Platform,
   View,
@@ -18,30 +18,56 @@ import MenuButton from '../components/MenuButton';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import React from 'react';
 import SideBar from '../components/SideBar';
+import instance from '../api/api';
+import {AuthContext} from '../context/AuthContext';
 
 export interface RestaurantProps {
   cart: [];
   setPage: (page: number) => void;
   setLocationSelected: (locationSelected: string) => void;
   setCart: (cart: {}) => void;
+  AddToCart : (item : any) => void;
+  RemoveFromCart : (item : any) => void;
 }
 
 const RestaurantMenu = (props: any) => {
-  const {cart, setPage, setLocationSelected, setCart} = props;
+  const {token} = useContext(AuthContext);
+
+  const {cart, setPage, locationSelected, setCart, AddToCart, RemoveFromCart} = props;
   const [sideBar, setSideBar] = useState(false);
+  const [menu, setMenu] = useState([]);
 
   const handleButtonPress = () => {
     console.log('Button pressed');
   };
 
+
+  useEffect(()=>{
+    instance.get(
+      `/user/displayitems/${locationSelected}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then((response)=>{
+      const items : any = [];
+      response.data["displayItems"].forEach((item:any)=>{
+
+        // try and find the item in the cart
+        const index = cart.findIndex((cartItem: any) => cartItem.item_name === item["item_name"]);
+
+        items.push({
+          item_name: item["item_name"],
+          item_price: item["item_price"],
+          item_desription: item['item_desription'],
+          quantity: index !== -1 ? cart[index].quantity : 0,
+        })
+      })
+      setMenu(items)
+    }).catch((err)=>{console.log(err)})
+  }, [])
   // Dummy data for testing purposes
-  const data = [
-
-    {id: 1, name: 'chicken roll', typeAndMoney: 200, quantity: 0},
-    {id: 2, name: 'Pizza', typeAndMoney: 300, quantity: 0},
-    {id: 3, name: 'BIryani', typeAndMoney: 500, quantity: 0},
-
-  ];
   const onPressSideBar = () => {
     console.log('here');
 
@@ -53,13 +79,11 @@ const RestaurantMenu = (props: any) => {
     setPage(1);
   };
   const onPressRequestItem = () => {
-    console.log('pressed');
-    setCart(data);
+    // setCart(menu);
     setPage(3);
   };
   const onPressCart = () => {
-    console.log('pressed');
-    setCart(data);
+    // setCart(menu);
     setPage(4);
   };
   return (
@@ -101,12 +125,14 @@ const RestaurantMenu = (props: any) => {
             <View className=" min-h-screen  rounded-tr-3xl rounded-tl-3xl w-max   bg-white flex  ">
               {/* mapping the restaurant items here */}
               <View>
-                {data.map(item => (
+                {menu.map(item => (
                   <MenuButton
-                    key={item.id}
-                    name={item.name}
-                    typeAndMoney={item.typeAndMoney}
+                    name={item["item_name"]}
+                    price={item["item_price"]}
+                    description={item["item_desription"]}
                     item={item}
+                    AddToCart={AddToCart}
+                    RemoveFromCart={RemoveFromCart}
                   />
                 ))}
               </View>
@@ -142,7 +168,7 @@ const RestaurantMenu = (props: any) => {
               []
             )}
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => setPage(1)}
+              onKhareedarPress={() => setPage(0)}
               onDostPress={() => setPage(9)}
             />
           </View>

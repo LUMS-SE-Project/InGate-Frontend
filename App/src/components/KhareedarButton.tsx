@@ -4,15 +4,15 @@ import {TouchableOpacity, Text} from 'react-native';
 const KhareedarButton = ({
   setLocationSelected,
   name,
-  typeAndMoney,
   setPage,
-}) => {
+} : any) => {
   return (
     <TouchableOpacity
       onPress={() => {
         setLocationSelected(name);
         setPage(2);
       }}
+      className='text-center'
       style={{
         width: '90%',
         height: 60,
@@ -25,17 +25,8 @@ const KhareedarButton = ({
         marginBottom: 10,
         marginTop: 15,
       }}>
-      <Text style={{fontSize: 24, paddingLeft: 10, paddingTop: 20}}>
+      <Text style={{fontSize: 24, paddingLeft: 10, paddingTop: 20, paddingBottom: 40}}>
         {name}
-      </Text>
-      <Text
-        style={{
-          fontSize: 16,
-          paddingLeft: 10,
-          paddingTop: 5,
-          paddingBottom: 20,
-        }}>
-        {typeAndMoney}
       </Text>
     </TouchableOpacity>
   );

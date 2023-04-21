@@ -17,28 +17,53 @@ export interface Khareedar2Props {
   cart: [];
   custLocation: string;
   locationSelected: string;
+  whichOrder: number;
+  allOrders: any;
   setPage: (page: number) => void;
 }
 
 const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
-  const {partial, genderPref, cart, custLocation, locationSelected, setPage} =
+  const {partial, genderPref, cart, custLocation, locationSelected, setPage, whichOrder, allOrders} =
     props;
   const [sideBar, setSideBar] = useState(false);
   const [name, setName] = useState('Sarim');
   const [phoneNumber, setPhoneNumber] = useState('03210239865');
   const [email, setEmail] = useState('sarim.khan@gmail.com');
-  const items: any = cart;
-  const data: any = [
-    {
-      restname: locationSelected,
-      name: 'Kabir',
-      phoneNumber: '090078601',
-      location: custLocation,
-    },
-  ];
+  const [items, setItems] = useState([]);
+  const [total, setTotal ] = useState(0);
+
+  const  [orderToDisplay, setOrderToDisplay] = useState<any>({});
+
+  const calculateTotal = async () => {
+    let temp = 0;
+    items.forEach((item : any)=>{
+      if (item) {
+        temp = temp + (item.item_price * item.quantity)
+      }
+    })
+    setTotal(temp)
+  }
+
+  useEffect(()=>{
+    const display = allOrders.filter((order:any) => order.order_number === whichOrder)
+    setOrderToDisplay(display[0])
+    console.log("Order to display", orderToDisplay)
+    setItems(display[0]["items"])
+  }, [])
+
+  useEffect(()=>{
+    if (items.length > 0) {
+      calculateTotal()
+    }
+  }, [items])
+
+
+  useEffect(()=>{
+
+  }, [])
 
   const onPressSubmit = () => {
-    setPage(8);
+    orderToDisplay["accepted"] ? setPage(8) : setPage(15);
   };
 
   return (
@@ -71,16 +96,16 @@ const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
                 </Text>
                 <View>
                   <Text className="20 text-base font-Questrial mt-2 ml-1">
-                    Order Being delivered
+                    { orderToDisplay["accepted"] ? "Delivered" : "Not Delivered"}
                   </Text>
                   <Text className="text-base font-Questrial mt-2 ml-1">
-                    {custLocation}
+                    Gender Preferences : {orderToDisplay["gender_preferences"] ? orderToDisplay["gender_preferences"] : "None"}
                   </Text>
                   <Text className="text-base font-Questrial mt-2 ml-1">
-                    Dost Name
+                    Partial Delivery : {orderToDisplay["partial_delivery"] ? orderToDisplay["partial_delivery"] : "No"}
                   </Text>
                   <Text className="text-base font-Questrial mt-2 ml-1">
-                    Dost Phone Number
+                    Delivery Location : {orderToDisplay["delivery_location"]}
                   </Text>
                 </View>
               </View>
@@ -100,7 +125,6 @@ const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
                   <View style={{display: 'flex', flexDirection: 'column'}}>
                     <Text className="w-20 text-xl text-CTA-primary font-Questrial mt-2 ml">
                       Qty
-
                     </Text>
                   </View>
                   <View style={{display: 'flex', flexDirection: 'column'}}>
@@ -119,7 +143,7 @@ const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
                             flexDirection: 'column',
                           }}>
                           <Text className="w-40 text-lg font-Questrial mt-2 ml-1">
-                            {item.name}
+                            {item["item_name"]}
                           </Text>
                         </View>
                         <View
@@ -128,7 +152,7 @@ const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
                             flexDirection: 'column',
                           }}>
                           <Text className="w-20 text-lg font-Questrial mt-2 ml-2">
-                            {item.quantity}
+                            {item["quantity"]}
                           </Text>
                         </View>
                         <View
@@ -137,9 +161,10 @@ const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
                             flexDirection: 'column',
                           }}>
                           <Text className="w-20 text-lg font-Questrial mt-2 ml-2">
-                            {item.typeAndMoney}
+                            {item["item_price"]}
                           </Text>
                         </View>
+
 
                       </View>
                     </View>
@@ -153,7 +178,7 @@ const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
                   </View>
                   <View>
                     <Text className="text-lg text-CTA-primary font-Questrial mt-4 ml-20">
-                      Total Price
+                      {total}
                     </Text>
                   </View>
                 </View>
@@ -188,7 +213,7 @@ const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
         )}
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => setPage(1)}
+            onKhareedarPress={() => setPage(0)}
             onDostPress={() => setPage(9)}
           />
         </View>

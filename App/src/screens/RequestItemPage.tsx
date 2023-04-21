@@ -10,6 +10,7 @@ import {TextInput, TouchableOpacity} from 'react-native';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faBars, faLeftLong} from '@fortawesome/free-solid-svg-icons';
+import SideBar from '../components/SideBar';
 
 export interface RequestProps {
   setPage: (page: number) => void;
@@ -19,6 +20,7 @@ const RequestItem = (props: RequestProps) => {
   const {setPage} = props;
   const [itemName, setItemName] = useState('');
   const [location, setLocation] = useState('');
+  const [sideBar, setSideBar] = useState(false);
 
   const onPressRequestItem = () => {
     console.log('pressed');
@@ -85,7 +87,7 @@ const RequestItem = (props: RequestProps) => {
               </TouchableOpacity>
             </View>
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => setPage(1)}
+              onKhareedarPress={() => setPage(0)}
               onDostPress={() => setPage(9)}
             />
           </View>
