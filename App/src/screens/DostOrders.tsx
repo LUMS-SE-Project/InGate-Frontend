@@ -21,15 +21,12 @@ const DostOrdersPage = (props: OrdersProps) => {
     console.log('Button pressed');
     setOrderData(item);
     setPage(10);
+
   };
 
   // Dummy data for testing purposes
   const data = [
-    {id: 1, name: 'Restaurant A', typeAndMoney: 'Food Type 1, $10'},
-    {id: 2, name: 'Restaurant B', typeAndMoney: 'Food Type 2, $15'},
-    {id: 3, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 4, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 5, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
+    {id: 1, name: 'Zakir', typeAndMoney: 'Rs 1030'},
   ];
 
   return (
@@ -73,10 +70,12 @@ const DostOrdersPage = (props: OrdersProps) => {
                     setPage={setPage}
                     name={item.name}
                     typeAndMoney={item.typeAndMoney}
+
                     handleCheckBoxClick={() => {
                       setOrderData(item);
                       setPage(11);
                     }}
+
                   />
                 ))}
               </View>

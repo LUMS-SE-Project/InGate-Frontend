@@ -32,8 +32,10 @@ export interface ItemsProps {
 const ItemsPage = (props: ItemsProps) => {
   const {setPage, setLocationSelected} = props;
 
+
   const [sideBar, setSideBar] = useState(false);
   const data = [
+
     {id: 1, name: 'Zakir', typeAndMoney: 'Food Type 1, $10'},
     {id: 2, name: 'PDC', typeAndMoney: 'Food Type 2, $15'},
     {id: 3, name: 'khoka', typeAndMoney: 'Food Type 3, $20'},

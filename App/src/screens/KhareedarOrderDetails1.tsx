@@ -25,6 +25,7 @@ const KhareedarOrderDetails1 = (props: Khareedar1Props) => {
   const [sideBar, setSideBar] = useState(false);
 
   const items: any = cart;
+
   const data: any = [
     {
       restname: 'Zakir',
@@ -161,6 +162,8 @@ const KhareedarOrderDetails1 = (props: Khareedar1Props) => {
                             {item.typeAndMoney}
                           </Text>
                         </View>
+
+
                       </View>
                     </View>
                   );

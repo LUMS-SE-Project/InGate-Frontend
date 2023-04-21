@@ -23,23 +23,17 @@ const DostOrders3 = (props:OrdersProps) => {
   const [phoneNumber, setPhoneNumber] = useState('03210239865');
   const [email, setEmail] = useState('sarim.khan@gmail.com');
   const items: any = [
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
-    {name: 'Drinks', quantity: '2', price: '20$'},
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
-    {name: 'Drinks', quantity: '2', price: '20$'},
-    {name: 'Biscuits', quantity: '1', price: '10$'},
-    {name: 'Chips', quantity: '6', price: '70$'},
+    {name: 'Malai Boti', quantity: '2', price: 'Rs 800'},
+    {name: 'Chicken Tikka', quantity: '1', price: 'Rs 230'},
   ];
   const data: any = [
     {
-      restname: 'Jammin',
-      name: 'Kabir',
+      restname: 'Zakir',
+      name: 'Jazlan',
       phoneNumber: '090078601',
       ItemName: items,
       location:
-        'Khyaban-e-Jinnah, opposite Sector U،, Phase 5 D.H.A, Lahore, Punjab 54792',
+        'LUMS',
     },
   ];
 
@@ -150,7 +144,7 @@ const DostOrders3 = (props:OrdersProps) => {
             })}
           </View>
         </View>
-
+        <View className='w-3/4 h-72'></View>
         <View>
           <KhareedarDostBottomButtons
             onKhareedarPress={() => setPage(1)}

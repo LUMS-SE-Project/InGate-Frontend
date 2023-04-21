@@ -100,6 +100,7 @@ const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
                   <View style={{display: 'flex', flexDirection: 'column'}}>
                     <Text className="w-20 text-xl text-CTA-primary font-Questrial mt-2 ml">
                       Qty
+
                     </Text>
                   </View>
                   <View style={{display: 'flex', flexDirection: 'column'}}>
@@ -139,6 +140,7 @@ const KhareedarOrderDetails2 = (props: Khareedar2Props) => {
                             {item.typeAndMoney}
                           </Text>
                         </View>
+
                       </View>
                     </View>
                   );

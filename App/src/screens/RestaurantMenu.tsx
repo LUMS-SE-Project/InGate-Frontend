@@ -36,9 +36,11 @@ const RestaurantMenu = (props: any) => {
 
   // Dummy data for testing purposes
   const data = [
+
     {id: 1, name: 'chicken roll', typeAndMoney: 200, quantity: 0},
     {id: 2, name: 'Pizza', typeAndMoney: 300, quantity: 0},
     {id: 3, name: 'BIryani', typeAndMoney: 500, quantity: 0},
+
   ];
   const onPressSideBar = () => {
     console.log('here');

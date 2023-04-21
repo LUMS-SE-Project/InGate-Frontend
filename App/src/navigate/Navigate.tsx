@@ -28,6 +28,7 @@ const Navigate = () => {
   // );
   // <UserNavigate />;
   
+
 };
 
 export default Navigate;

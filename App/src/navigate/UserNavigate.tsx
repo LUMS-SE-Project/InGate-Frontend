@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import RestaurantMenu from '../screens/RestaurantMenu';
 
-
+import React from 'react';
 import RequestItem from '../screens/RequestItemPage';
 import PartialOrder from '../screens/PartialOrder';
 import KhareedarOrderDetails1 from '../screens/KhareedarOrderDetails1';
