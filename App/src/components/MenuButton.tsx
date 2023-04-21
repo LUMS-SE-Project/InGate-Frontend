@@ -1,13 +1,17 @@
 import React from 'react';
 import {TouchableOpacity, Text, View, TextInput} from 'react-native';
 import {useState} from 'react';
-const MenuButton = ({onPress, name, typeAndMoney}) => {
-  const [value, setValue] = useState(0);
+
+const MenuButton = ({name, typeAndMoney, item}) => {
+  const [value, setValue] = useState(item.quantity);
+
   const onDecrement = () => {
     setValue(value - 1);
+    item.quantity = value;
   };
   const onIncrement = () => {
     setValue(value + 1);
+    item.quantity = value;
   };
   return (
     <View

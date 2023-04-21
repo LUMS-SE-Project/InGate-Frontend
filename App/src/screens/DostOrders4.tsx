@@ -12,27 +12,17 @@ import {
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
-  faLock,
-  faAirFreshener,
-  faAnchor,
-  faSolid,
-  faCircleXmark,
-  faSharp,
-  fas,
-  faCircleCheck,
-  faCartShopping,
   faCircleUser,
-  faLight,
   faBurger,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
-// import {Picker} from '@react-native-picker/picker';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
-
-const DostOrders4 = ({navigation}) => {
-  const [blockDeets, setBlockDeets] = useState('');
-  const [addComments, setAddComments] = useState('');
-  // const [bgColor, setBgColor] = useState('');
+export interface Orders1Props {
+  orderData: (OrderData: any) => void;
+  setPage: (page: number) => void;
+}
+const DostOrders4 = (props: Orders1Props) => {
+  const {orderData, setPage} = props;
 
   const [name, setName] = useState('Sarim');
   const [phoneNumber, setPhoneNumber] = useState('03210239865');
@@ -59,10 +49,10 @@ const DostOrders4 = ({navigation}) => {
   ];
 
   const onPressSuccess = () => {
-    navigation.navigate('OrderCompleted');
+    setPage(12);
   };
   const onPressFailure = () => {
-    navigation.navigate('OrderFailed');
+    setPage(13);
   };
 
   return (
@@ -215,8 +205,8 @@ const DostOrders4 = ({navigation}) => {
 
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => navigation.navigate('Items')}
-            onDostPress={() => navigation.navigate('DostOrdersPage')}
+            onKhareedarPress={() => setPage(1)}
+            onDostPress={() => setPage(9)}
           />
         </View>
       </ScrollView>

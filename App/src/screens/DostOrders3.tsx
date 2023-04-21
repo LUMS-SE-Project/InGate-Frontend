@@ -1,34 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import {
-  SafeAreaView,
   Text,
   View,
-  ImageBackground,
-  TextInput,
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
 
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {
-  faLock,
-  faAirFreshener,
-  faAnchor,
-  faSolid,
-  faCircleXmark,
-  faSharp,
-  fas,
-  faBurger,
-  faLeftLong,
-} from '@fortawesome/free-solid-svg-icons';
-// import {Picker} from '@react-native-picker/picker';
+import {faBurger, faLeftLong} from '@fortawesome/free-solid-svg-icons';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
-const DostOrders3 = ({navigation}) => {
-  const [blockDeets, setBlockDeets] = useState('');
-  const [addComments, setAddComments] = useState('');
-  // const [bgColor, setBgColor] = useState('');
+export interface OrdersProps {
+  orderData: (OrderData: any) => void;
+  setPage: (page: number) => void;
+}
+
+const DostOrders3 = (props:OrdersProps) => {
+  const {orderData, setPage} = props;
 
   const [name, setName] = useState('Sarim');
   const [phoneNumber, setPhoneNumber] = useState('03210239865');
@@ -50,7 +39,7 @@ const DostOrders3 = ({navigation}) => {
 
   const onPressBack = () => {
     console.log('back Button pressed');
-    navigation.navigate('DostOrdersPage');
+    setPage(9);
   };
 
   return (
@@ -70,7 +59,7 @@ const DostOrders3 = ({navigation}) => {
             </Text>
           </View>
 
-          <View className="h-auto bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white pt-3">
+          <View className="h-auto rounded-tr-3xl rounded-tl-3xl w-max bg-white pt-3">
             {data.map((element: any) => {
               return (
                 <View className="shadow-2xl mx-8 rounded-xl bg-gray-100 mb-5 px-4 h-auto placeholder-slate-900 mt-5 pb-8">
@@ -158,8 +147,8 @@ const DostOrders3 = ({navigation}) => {
         <View className='w-3/4 h-72'></View>
         <View>
           <KhareedarDostBottomButtons
-            onKhareedarPress={() => navigation.navigate('Items')}
-            onDostPress={() => navigation.navigate('DostOrdersPage')}
+            onKhareedarPress={() => setPage(1)}
+            onDostPress={() => setPage(9)}
           />
         </View>
       </ScrollView>

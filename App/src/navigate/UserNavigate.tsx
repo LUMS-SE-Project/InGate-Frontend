@@ -15,6 +15,7 @@ import DostOrdersPage from '../screens/DostOrders';
 import OrderCompleted from '../screens/OrderCompleted';
 import OrderFailed from '../screens/OrderFailed';
 import KhareedarFeedback from '../screens/KhareedarFeedback';
+import UserFlow from '../screens/UserFlow';
 export const UserNavigate = () => {
   const Stack = createNativeStackNavigator();
 
@@ -25,8 +26,9 @@ export const UserNavigate = () => {
   };
 
   return (
-    <Stack.Navigator initialRouteName="Items">
+    <Stack.Navigator initialRouteName="UserFlow">
       <Stack.Screen name="Restaurant" component={RestaurantMenu} />
+      <Stack.Screen name="UserFlow" component={UserFlow} />
       <Stack.Screen name="Items" component={ItemsPage} />
       <Stack.Screen name="RequestItem" component={RequestItem} />
       <Stack.Screen name="PartialOrder" component={PartialOrder} />
