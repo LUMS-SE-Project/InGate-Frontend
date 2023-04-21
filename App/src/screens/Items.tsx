@@ -20,47 +20,26 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import SideBar from '../components/SideBar';
 
+// export interface ItemsProps {
+//   navigation: NativeStackScreenProps<any, any>;
+// }
+
 export interface ItemsProps {
-  navigation: NativeStackScreenProps<any, any>;
+  setPage: (page: number) => void;
+  setLocationSelected: (locationSelected: string) => void;
 }
 
 const ItemsPage = (props: ItemsProps) => {
-  const {navigation} = props;
+  const {setPage, setLocationSelected} = props;
+
   const [sideBar, setSideBar] = useState(false);
-
-  const handleButtonPress = () => {
-    console.log('Button pressed');
-  };
-
-  // Dummy data for testing purposes
   const data = [
-    {id: 1, name: 'Restaurant A', typeAndMoney: 'Food Type 1, $10'},
-    {id: 2, name: 'Restaurant B', typeAndMoney: 'Food Type 2, $15'},
-    {id: 3, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 4, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 5, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 6, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 7, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 8, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 9, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 10, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 11, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 12, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 13, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 14, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 15, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 16, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 17, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 18, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 19, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 120, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
+    {id: 1, name: 'Zakir', typeAndMoney: 'Food Type 1, $10'},
+    {id: 2, name: 'PDC', typeAndMoney: 'Food Type 2, $15'},
+    {id: 3, name: 'khoka', typeAndMoney: 'Food Type 3, $20'},
+    {id: 4, name: 'Fusion', typeAndMoney: 'Food Type 3, $20'},
+    {id: 5, name: 'Jammin', typeAndMoney: 'Food Type 3, $20'},
   ];
-  const onPressSideBar = () => {
-    console.log('here');
-
-    setSideBar(true);
-    console.log(sideBar);
-  };
 
   return (
     <KeyboardAvoidingView
@@ -97,14 +76,16 @@ const ItemsPage = (props: ItemsProps) => {
 
             <View className=" min-h-screen  rounded-tr-3xl rounded-tl-3xl w-max   bg-white flex  ">
               <View>
-                {data.map(item => (
-                  <KhareedarButton
-                    key={item.id}
-                    onPress={handleButtonPress}
-                    name={item.name}
-                    typeAndMoney={item.typeAndMoney}
-                  />
-                ))}
+                {data.map((item: any) => {
+                  return (
+                    <KhareedarButton
+                      setLocationSelected={setLocationSelected}
+                      name={item.name}
+                      typeAndMoney={item.typeAndMoney}
+                      setPage={setPage}
+                    />
+                  );
+                })}
               </View>
             </View>
             {sideBar ? (
@@ -117,8 +98,8 @@ const ItemsPage = (props: ItemsProps) => {
               []
             )}
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => navigation.navigate('Items')}
-              onDostPress={() => navigation.navigate('DostOrdersPage')}
+              onKhareedarPress={() => setPage(1)}
+              onDostPress={() => setPage(9)}
             />
           </View>
         </View>

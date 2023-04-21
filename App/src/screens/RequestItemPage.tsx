@@ -8,18 +8,25 @@ import {
 } from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
-const RequestItem = (props: any) => {
-  const {navigation} = props;
+import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
+import {faBars, faLeftLong} from '@fortawesome/free-solid-svg-icons';
+
+export interface RequestProps {
+  setPage: (page: number) => void;
+}
+
+const RequestItem = (props: RequestProps) => {
+  const {setPage} = props;
   const [itemName, setItemName] = useState('');
   const [location, setLocation] = useState('');
 
-  const onPressSubmit = () => {
-    console.log('Item Name:', itemName);
-    console.log('Item Location:', location);
-  };
   const onPressRequestItem = () => {
     console.log('pressed');
-    navigation.navigate('Restaurant');
+    setPage(2);
+  };
+  const onPressBack = () => {
+    console.log('back Button pressed');
+    setPage(2);
   };
   return (
     <KeyboardAvoidingView
@@ -30,10 +37,16 @@ const RequestItem = (props: any) => {
         style={{backgroundColor: '#fff'}}>
         <View className="bg-CTA-primary">
           <View className="min-h-screen min-w-screen flex justify-center align-middle">
-            <Text className="text-5xl font-Montserrat text-center text-white pb-8 pt-8">
-              Request Item
-            </Text>
-            <View className="h-4/5 bg-slate-800 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
+            <View className="flex-row">
+              <TouchableOpacity className="mt-10 ml-6" onPress={onPressBack}>
+                <FontAwesomeIcon icon={faLeftLong} size={27} color={'white'} />
+              </TouchableOpacity>
+              <Text className="text-4xl font-Montserrat text-center text-white ml-9 pb-8 pt-8">
+                Request Item
+              </Text>
+            </View>
+
+            <View className="h-4/5 rounded-tr-3xl rounded-tl-3xl w-max bg-white">
               <View>
                 <Text className="text-2xl font-Questrial  text-CTA-primary pt-10 pl-8 mt-10 mb-2">
                   Item Name
@@ -60,7 +73,7 @@ const RequestItem = (props: any) => {
               <View className="h-10">
                 <></>
               </View>
-              
+
               <TouchableOpacity
                 onPress={onPressRequestItem}
                 className="mt-10 shadow-2xl bg-CTA-primary mx-10  rounded-xl">
@@ -72,8 +85,8 @@ const RequestItem = (props: any) => {
               </TouchableOpacity>
             </View>
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => console.log('Khareedar button pressed')}
-              onDostPress={() => console.log('Dost button pressed')}
+              onKhareedarPress={() => setPage(1)}
+              onDostPress={() => setPage(9)}
             />
           </View>
         </View>

@@ -1,16 +1,15 @@
 import React, {useState, useEffect} from 'react';
-
-import Icon from 'react-native-vector-icons/FontAwesome';
-
 import {Text, View, TouchableOpacity} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCheckCircle} from '@fortawesome/free-solid-svg-icons';
-// import {Picker} from '@react-native-picker/picker';
-import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
 
-const OrderPlaced: FC = ({navigation}) => {
+export interface OrderPlacedProps {
+  setPage: (page: number) => void;
+}
+const OrderPlaced = (props: OrderPlacedProps) => {
+  const {setPage} = props;
   const onPressSubmit = () => {
-    navigation.navigate('KhareedarOrderDetails2');
+    setPage(7);
   };
   return (
     <View className="min-h-screen min-w-screen flex pt-16 bg-white items-center">

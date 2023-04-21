@@ -10,19 +10,24 @@ import {
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
-  faCircleUser,
   faMagnifyingGlass,
   faBars,
   faLeftLong,
 } from '@fortawesome/free-solid-svg-icons';
 import MenuButton from '../components/MenuButton';
 import KhareedarDostBottomButtons from '../components/KhareedarDostBottomButtons';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import SideBar from '../components/SideBar';
 
+export interface RestaurantProps {
+  cart: [];
+  setPage: (page: number) => void;
+  setLocationSelected: (locationSelected: string) => void;
+  setCart: (cart: {}) => void;
+}
+
 const RestaurantMenu = (props: any) => {
-  const {navigation} = props;
+  const {cart, setPage, setLocationSelected, setCart} = props;
   const [sideBar, setSideBar] = useState(false);
 
   const handleButtonPress = () => {
@@ -31,26 +36,9 @@ const RestaurantMenu = (props: any) => {
 
   // Dummy data for testing purposes
   const data = [
-    {id: 1, name: 'Item name A', typeAndMoney: 'Food Type 1, $10'},
-    {id: 2, name: 'Restaurant B', typeAndMoney: 'Food Type 2, $15'},
-    {id: 3, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 4, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 5, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 6, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 7, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 8, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    {id: 9, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 10, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 11, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 12, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 13, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 14, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 15, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 16, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 17, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 18, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 19, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
-    // {id: 120, name: 'Restaurant C', typeAndMoney: 'Food Type 3, $20'},
+    {id: 1, name: 'chicken roll', typeAndMoney: 200, quantity: 0},
+    {id: 2, name: 'Pizza', typeAndMoney: 300, quantity: 0},
+    {id: 3, name: 'BIryani', typeAndMoney: 500, quantity: 0},
   ];
   const onPressSideBar = () => {
     console.log('here');
@@ -60,14 +48,17 @@ const RestaurantMenu = (props: any) => {
   };
   const onPressBack = () => {
     console.log('back Button pressed');
+    setPage(1);
   };
   const onPressRequestItem = () => {
     console.log('pressed');
-    navigation.navigate('RequestItem');
+    setCart(data);
+    setPage(3);
   };
   const onPressCart = () => {
     console.log('pressed');
-    navigation.navigate('KhareedarOrderDetails1');
+    setCart(data);
+    setPage(4);
   };
   return (
     <KeyboardAvoidingView
@@ -106,16 +97,18 @@ const RestaurantMenu = (props: any) => {
             </View>
 
             <View className=" min-h-screen  rounded-tr-3xl rounded-tl-3xl w-max   bg-white flex  ">
+              {/* mapping the restaurant items here */}
               <View>
                 {data.map(item => (
                   <MenuButton
                     key={item.id}
-                    onPress={handleButtonPress}
                     name={item.name}
                     typeAndMoney={item.typeAndMoney}
+                    item={item}
                   />
                 ))}
               </View>
+              {/* All the items selected will be pushed to the cart by using this */}
               <TouchableOpacity
                 onPress={onPressCart}
                 className="mt-10 shadow-2xl bg-CTA-primary mx-10  rounded-xl">
@@ -125,6 +118,7 @@ const RestaurantMenu = (props: any) => {
                   </Text>
                 </View>
               </TouchableOpacity>
+              {/* If the user wants to order something separately */}
               <TouchableOpacity
                 onPress={onPressRequestItem}
                 className="mt-10 shadow-2xl bg-CTA-primary mx-10 mb-5 rounded-xl">
@@ -135,6 +129,7 @@ const RestaurantMenu = (props: any) => {
                 </View>
               </TouchableOpacity>
             </View>
+            {/* This is the side bar functionality */}
             {sideBar ? (
               <SideBar
                 onClosePress={() => {
@@ -145,8 +140,8 @@ const RestaurantMenu = (props: any) => {
               []
             )}
             <KhareedarDostBottomButtons
-              onKhareedarPress={() => navigation.navigate('Items')}
-              onDostPress={() => navigation.navigate('DostOrdersPage')}
+              onKhareedarPress={() => setPage(1)}
+              onDostPress={() => setPage(9)}
             />
           </View>
         </View>

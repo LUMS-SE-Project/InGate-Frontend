@@ -4,10 +4,20 @@ import {TouchableOpacity, Text} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faCircleCheck} from '@fortawesome/free-solid-svg-icons';
 
-const DostButton = ({onPress, name, typeAndMoney, handleCheckBoxClick}) => {
+const DostButton = ({
+  setOrderData,
+  item,
+  setPage,
+  name,
+  typeAndMoney,
+  handleCheckBoxClick,
+}) => {
   return (
     <TouchableOpacity
-      onPress={onPress}
+      onPress={() => {
+        setOrderData(item);
+        setPage(10);
+      }}
       style={{
         width: '90%',
         height: 60,
