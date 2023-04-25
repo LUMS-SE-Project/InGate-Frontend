@@ -31,8 +31,8 @@ const LoginPage = ({navigation, route}) => {
       url: 'http://139.59.59.116/login',
       data: formData,
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
     })
       .then(async res => {
