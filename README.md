@@ -58,7 +58,7 @@ const routes = [
 ];
 
 ```
-## To run the prhect
+## To run the project
 
 To run the project, do the following
 
