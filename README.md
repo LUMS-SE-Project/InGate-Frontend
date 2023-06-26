@@ -1,4 +1,16 @@
-# InGate Frontend
+# Welcome to InGate's Frontend Repository
+
+## About InGate
+
+InGate started off as a course project for CS360 - Software Engineering. It is a cross-platform app written in React Native with Tailwind. All active issues are listed in the issues tab of the repository. 
+
+InGate aims to be an app providing services and employment to university students. Students can sign up to deliver orders or place them, all from the same app.
+
+### Contributing
+
+If you wish to contribute to this app, please fork this repository, and create a PR. List all changes you have made in the PR.
+
+## Component Guide
 
 To add a component, go to `src/components` and create a new file `<component name>.ts` and add the following code:
 
@@ -46,6 +58,7 @@ const routes = [
 ];
 
 ```
+## To run the prhect
 
 To run the project, do the following
 
